@@ -1,13 +1,13 @@
-package com.example.springboot;
+package info.alexhocevarsmith.boulderingdb;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringbootApplication {
+public class BoulderingdbApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootApplication.class, args);
+		SpringApplication.run(BoulderingdbApplication.class, args);
 	}
 
 }
