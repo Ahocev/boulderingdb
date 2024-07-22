@@ -1,0 +1,126 @@
+body {
+    font-family: "Helvetica";
+    margin: 0;
+    padding: 20px 20px 20px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.responsive-image {
+    width: 90%;
+    height: auto;
+    margin-top: 10px;
+}
+.popular-section {
+    width: 90%;
+    margin-top: 30px;
+}
+.popular-title {
+    text-align: left;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    font-weight: bold;
+}
+.flex-box {
+    border: 1px solid black;
+    padding: 10px;
+    margin: 10px 0;
+    position: relative;
+}
+.flex-box a {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.flex-box a:hover {
+    color: inherit;
+}
+.flex-box img {
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+.flex-box:hover img {
+    filter: grayscale(0%);
+}
+.flex-box-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 2;
+}
+.flex-box-subtitle {
+    margin-bottom: 5px;
+    position: relative;
+    z-index: 2;
+}
+.boulderDetails {
+    margin-top: 20px;
+    position: relative;
+    z-index: 2;
+}
+.title-link {
+    text-decoration: none;
+    color: inherit;
+}
+.title-link:hover {
+    color: inherit;
+}
+.form-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    margin-top: 50px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 0; /* 90-degree corners */
+}
+
+.form-control {
+    border-radius: 0; /* 90-degree corners for input fields */
+}
+
+.btn-primary {
+    width: 100%;
+    background-color: black; /* Black background for the submit button */
+    border: none;
+    border-radius: 0; /* 90-degree corners */
+}
+
+.btn-primary:hover {
+    background-color: #333; /* Darker shade on hover */
+}
+.is-invalid {
+    border-color: #dc3545;
+}
+.is-valid {
+    border-color: #28a745;
+}
+.invalid-feedback {
+    display: block;
+    color: #dc3545;
+}
+.already {
+    text-align: center;
+    padding: 20px;
+}
+.formTag {
+    text-align: center;
+}
+.title-link {
+    text-decoration: none;
+    color: inherit;
+}
+.title-link:hover {
+    color: inherit;
+}
