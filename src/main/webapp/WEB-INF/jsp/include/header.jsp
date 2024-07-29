@@ -74,13 +74,13 @@
 <header class="header">
     <div class="nav-links">
         <a href="#search">SEARCH</a>
-        <a href="/login">LOGIN</a>
-        <a href="/register">REGISTER</a>
+        <a href="/account/login">LOGIN</a>
+        <a href="/account/register">REGISTER</a>
         <a href="#profile">MY PROFILE</a>
     </div>
     <div class="dropdown">
         <button class="icon-button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="pub/media/Midnight-Lightening.jpeg" alt="Icon">
+            <img src="/pub/media/Midnight-Lightening.jpeg" alt="Icon">
         </button>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
             <li><a class="dropdown-item" href="#browse">Browse</a></li>

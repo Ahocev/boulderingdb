@@ -124,3 +124,8 @@ body {
 .title-link:hover {
     color: inherit;
 }
+.text-danger {
+    margin-top: -8px;
+    margin-bottom: 0;
+    padding: 0;
+}
