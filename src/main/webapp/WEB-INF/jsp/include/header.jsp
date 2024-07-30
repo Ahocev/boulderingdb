@@ -1,4 +1,9 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!doctype html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -74,17 +79,34 @@
 <header class="header">
     <div class="nav-links">
         <a href="#search">SEARCH</a>
-        <a href="/account/login">LOGIN</a>
-        <a href="/account/register">REGISTER</a>
-        <a href="#profile">MY PROFILE</a>
+        <sec:authorize access="isAuthenticated()">
+            <a href="/account/logout">LOGOUT</a>
+        </sec:authorize>
+        <sec:authorize access="!isAuthenticated()">
+            <a href="/account/login">LOGIN</a>
+            <a href="/account/register">REGISTER</a>
+        </sec:authorize>
+        <sec:authorize access="hasAnyAuthority('ADMIN')">
+        <a href="/admin/dashboard">ADMIN</a>
+        </sec:authorize>
+
     </div>
     <div class="dropdown">
         <button class="icon-button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
             <img src="/pub/media/Midnight-Lightening.jpeg" alt="Icon">
         </button>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" href="#browse">Browse</a></li>
-            <li><a class="dropdown-item" href="#boulder-input">Boulder Input Form</a></li>
+            <li>
+                <a class="dropdown-item" href="#browse">BROWSE DB</a>
+            </li>
+            <sec:authorize access="isAuthenticated()">
+                <li>
+                    <a class="dropdown-item" href="#profile">MY PROFILE</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="#boulder-input">ADD A BOULDER</a>
+                </li>
+            </sec:authorize>
         </ul>
     </div>
 </header>

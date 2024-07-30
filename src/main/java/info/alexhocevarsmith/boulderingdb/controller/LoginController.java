@@ -84,6 +84,9 @@ public class LoginController {
         } else {
 
             userService.createUser(form);
+
+            response.setViewName("redirect:/");
+
         }
 
         return response;
