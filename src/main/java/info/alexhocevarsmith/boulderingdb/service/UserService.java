@@ -33,7 +33,7 @@ public class UserService {
         user.setPassword(encryptedPassword);
 
         user.setCreateDate(new Date());
-        
+
         userDao.save(user);
 
         return user;

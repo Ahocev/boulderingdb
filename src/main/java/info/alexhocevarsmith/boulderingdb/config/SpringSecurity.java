@@ -14,6 +14,8 @@ public class SpringSecurity {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
+        http.csrf(csrf -> csrf.disable());
+
         // this section says allow all pages EXCEPT the ones that are in the AntPathRequestMatcher
         // anything in AntPathRequestMatcher will require the user to be authenticated
         http.authorizeRequests()
@@ -25,6 +27,11 @@ public class SpringSecurity {
         http.formLogin(formLogin -> formLogin
                 .loginPage("/account/login")
                 .loginProcessingUrl("/account/loginProcessingURL"));
+
+        http.logout(formLogout -> formLogout
+                .invalidateHttpSession(true)
+                .logoutUrl("/account/logout")
+                .logoutSuccessUrl("/"));
 
         return http.build();
     }
