@@ -3,7 +3,9 @@ package info.alexhocevarsmith.boulderingdb.controller;
 import info.alexhocevarsmith.boulderingdb.database.dao.UserDAO;
 import info.alexhocevarsmith.boulderingdb.database.entity.User;
 import info.alexhocevarsmith.boulderingdb.form.RegisterAccountFormBean;
+import info.alexhocevarsmith.boulderingdb.security.AuthenticatedUserUtilities;
 import info.alexhocevarsmith.boulderingdb.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private AuthenticatedUserUtilities authenticatedUserUtilities;
 
     @GetMapping("/register")
     public ModelAndView createAccount() {
@@ -63,7 +68,7 @@ public class LoginController {
     }
 
     @PostMapping("/register")
-    public ModelAndView createAccountSubmit(@Valid RegisterAccountFormBean form, BindingResult bindingResult) {
+    public ModelAndView createAccountSubmit(@Valid RegisterAccountFormBean form, BindingResult bindingResult, HttpSession session) {
         ModelAndView response = new ModelAndView("auth/register");
 
         if (form.getUserId() == null ){
@@ -84,7 +89,7 @@ public class LoginController {
         } else {
 
             userService.createUser(form);
-
+            authenticatedUserUtilities.manualAuthentication(session, form.getEmail(), form.getPassword());
             response.setViewName("redirect:/");
 
         }
