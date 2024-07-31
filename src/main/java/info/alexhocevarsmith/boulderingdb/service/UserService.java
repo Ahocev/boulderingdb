@@ -41,13 +41,20 @@ public class UserService {
 
         userDao.save(user);
 
-        UserRole userRole = new UserRole();
-        userRole.setRoleName("USER");
-        userRole.setUserId(user.getId());
-
-        userRoleDao.save(userRole);
-
         return user;
 
     }
+
+    public UserRole createUserRole(Integer userId, String roleName) {
+        UserRole userRole = new UserRole();
+
+        userRole.setUserId(userId);
+        userRole.setRoleName(roleName);
+        userRole.setCreateDate(new Date());
+
+        userRoleDao.save(userRole);
+        return userRole;
+    }
+
+
 }
