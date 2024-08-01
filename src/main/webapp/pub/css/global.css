@@ -129,3 +129,53 @@ body {
     margin-bottom: 0;
     padding: 0;
 }
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+.boulder-profile .divider {
+    border-bottom: 1px solid black;
+    margin: 20px 0;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.beta-header {
+    cursor: pointer;
+    display: inline-block;
+}
+
+.boulder-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.boulder-details {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.boulder-profile .row {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.boulder-placeholder {
+    align-content: center;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    padding: 5px;
+}
+
+.beta-section .collapse {
+    display: none;
+}
+
+.beta-section .collapse.show {
+    display: block;
+}
