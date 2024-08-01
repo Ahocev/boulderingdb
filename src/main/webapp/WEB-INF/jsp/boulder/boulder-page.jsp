@@ -5,11 +5,23 @@
 
 <div class="container my-4 boulder-profile" style="max-width: 90%;">
     <div class="row">
-        <!-- Top left box with the large image -->
+        <!-- Left column with the large image and placeholder images -->
         <div class="col-md-6 d-flex flex-column">
-            <img id="mainImage" src="/pub/media/TheMandala.jpeg" alt="The Mandala" class="img-fluid boulder-image">
+            <img id="mainImage" src="/pub/media/TheMandala.jpeg" alt="The Mandala" class="img-fluid boulder-image mb-4">
+            <div id="placeholderContainer" class="d-flex position-relative" style="overflow: visible;">
+                <div class="scroll-button left" onclick="scrollLeftCustom()">&#9664;</div>
+                <div class="boulder-placeholder-container">
+                    <img src="/pub/media/HighPlains.jpeg" alt="Placeholder 1" class="img-fluid boulder-placeholder" onclick="swapImages(this)">
+                </div>
+                <div class="boulder-placeholder-container">
+                    <img src="/pub/media/Queen.jpeg" alt="Placeholder 2" class="img-fluid boulder-placeholder" onclick="swapImages(this)">
+                </div>
+                <div class="boulder-placeholder-container hidden">
+                    <img src="/pub/media/Swarm.jpeg" alt="Placeholder 3" class="img-fluid boulder-placeholder" onclick="swapImages(this)">
+                </div>
+            </div>
         </div>
-        <!-- Top right box with the boulder details -->
+        <!-- Right column with the boulder details and BETA section -->
         <div class="col-md-6 d-flex flex-column">
             <h2 class="boulder-name">The Mandala</h2>
             <p class="boulder-grade text-muted">v12</p>
@@ -22,32 +34,11 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio.
                 </p>
             </div>
-        </div>
-    </div>
-    <div class="row mt-4 position-relative">
-        <!-- Bottom left box with the three placeholder images within flex boxes -->
-        <div class="col-md-6 d-flex flex-column position-relative" style="height: 200px;">
-            <div id="placeholderContainer" class="d-flex position-absolute" style="top: 0; width: 95%; overflow: hidden;">
-                <div class="boulder-placeholder-container">
-                    <img src="/pub/media/HighPlains.jpeg" alt="Placeholder 1" class="img-fluid boulder-placeholder" onclick="swapImages(this)">
-                </div>
-                <div class="boulder-placeholder-container">
-                    <img src="/pub/media/Queen.jpeg" alt="Placeholder 2" class="img-fluid boulder-placeholder" onclick="swapImages(this)">
-                </div>
-                <div class="boulder-placeholder-container hidden">
-                    <img src="/pub/media/Swarm.jpeg" alt="Placeholder 3" class="img-fluid boulder-placeholder" onclick="swapImages(this)">
-                </div>
-            </div>
-            <div class="scroll-button left" onclick="scrollLeftCustom()">&#9664;</div>
-            <div class="scroll-button right" onclick="scrollRight()">&#9654;</div>
-        </div>
-        <!-- Bottom right box with the BETA section -->
-        <div class="col-md-6 d-flex flex-column">
             <div class="divider"></div>
-            <div class="beta-section mt-2">
-                <h3 class="beta-header" data-bs-toggle="collapse" data-bs-target="#betaContent" aria-expanded="false" aria-controls="betaContent">
-                    BETA <img src="/pub/media/down-arrow.png" alt="Down Arrow" class="img-fluid" style="width: 27px; height: 27px;">
-                </h3>
+            <div class="beta-section mt-0">
+                <button class="btn btn-black" data-bs-toggle="collapse" data-bs-target="#betaContent" aria-expanded="false" aria-controls="betaContent">
+                    BETA
+                </button>
                 <div class="collapse" id="betaContent">
                     <p class="mt-3">Detailed beta information goes here...</p>
                     <p class="mt-3">Additional beta information...</p>
@@ -67,9 +58,12 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         adjustPlaceholderDisplay();
+        setScrollButtonPosition();
         document.getElementById('mainImage').addEventListener('click', function() {
             showOverlay(this.src);
         });
+
+        window.addEventListener('resize', setScrollButtonPosition);
     });
 
     function adjustPlaceholderDisplay() {
@@ -93,9 +87,30 @@
                             img.parentElement.style.flex = '1';
                         });
                     }
+                    setScrollButtonPosition(); // Ensure the position is set after loading images
                 }
             };
         });
+    }
+
+    function setScrollButtonPosition() {
+        var placeholderContainer = document.querySelector('.boulder-placeholder-container');
+        var scrollButton = document.querySelector('.scroll-button.left');
+
+        if (placeholderContainer && scrollButton) {
+            var containerHeight = placeholderContainer.clientHeight;
+            var offset = placeholderContainer.offsetTop + (containerHeight / 2);
+
+            if (containerHeight > 0) {
+                console.log('Container Height:', containerHeight); // Debug log
+                console.log('Offset:', offset); // Debug log
+                scrollButton.style.top = `${offset}px`;
+            } else {
+                setTimeout(setScrollButtonPosition, 100); // Retry after a short delay
+            }
+        } else {
+            console.log('Elements not found'); // Debug log
+        }
     }
 
     function swapImages(placeholder) {
@@ -115,21 +130,6 @@
             visiblePlaceholders[0].classList.add('hidden');
 
             // Move the hidden image to the first position and make it visible
-            hiddenPlaceholder.classList.remove('hidden');
-            container.appendChild(hiddenPlaceholder);
-        }
-    }
-
-    function scrollRight() {
-        var container = document.getElementById('placeholderContainer');
-        var visiblePlaceholders = container.querySelectorAll('.boulder-placeholder-container:not(.hidden)');
-        var hiddenPlaceholder = container.querySelector('.hidden');
-
-        if (visiblePlaceholders.length > 1) {
-            // Hide the first visible placeholder and move it to the hidden state
-            visiblePlaceholders[0].classList.add('hidden');
-
-            // Move the hidden image to the last position and make it visible
             hiddenPlaceholder.classList.remove('hidden');
             container.appendChild(hiddenPlaceholder);
         }
