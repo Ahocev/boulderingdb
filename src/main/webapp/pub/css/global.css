@@ -154,10 +154,30 @@ body {
 }
 
 .boulder-details {
-    margin-top: 20px;
+    margin-top: 0px;
     width: 100%;
 }
 
+.boulder-profile .row {
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.boulder-placeholder {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    padding: 5px;
+}
+
+.beta-section .collapse {
+    display: none;
+}
+
+.beta-section .collapse.show {
+    display: block;
+}
 .boulder-profile .row {
     max-width: 100%;
     margin-left: auto;
