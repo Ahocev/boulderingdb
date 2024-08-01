@@ -97,7 +97,7 @@
         </button>
         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
             <li>
-                <a class="dropdown-item" href="#browse">BROWSE DB</a>
+                <a class="dropdown-item" href="/boulder/browse">BROWSE DB</a>
             </li>
             <sec:authorize access="isAuthenticated()">
                 <li>
