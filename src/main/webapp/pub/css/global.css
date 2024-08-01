@@ -164,11 +164,16 @@ body {
     margin-right: auto;
 }
 
+.boulder-placeholder-container {
+    flex: 1 0 45%; /* Flex-grow, flex-shrink, flex-basis */
+    margin: 5px; /* Add margin for padding between images */
+    height: 100%;
+}
+
 .boulder-placeholder {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
-    padding: 5px;
 }
 
 .beta-section .collapse {
@@ -178,24 +183,67 @@ body {
 .beta-section .collapse.show {
     display: block;
 }
-.boulder-profile .row {
-    max-width: 100%;
-    margin-left: auto;
-    margin-right: auto;
+
+.scroll-button {
+    position: absolute;
+    top: 65%;
+    transform: translateY(-50%);
+    background-color: transparent;
+    color: black;
+    border: none;
+    font-size: 25px; /* Adjust size as needed */
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px; /* Adjust size as needed */
+    height: 30px; /* Adjust size as needed */
 }
 
-.boulder-placeholder {
-    align-content: center;
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    padding: 5px;
+.scroll-button.left {
+    left: -9px; /* Adjust to ensure it's clickable */
 }
 
-.beta-section .collapse {
+.scroll-button.right {
+    right: 0;
+}
+
+.hidden {
     display: none;
 }
 
-.beta-section .collapse.show {
+.overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay-content {
+    max-width: 90%;
+    max-height: 90%;
+    margin: auto;
     display: block;
+}
+
+.closebtn {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
 }

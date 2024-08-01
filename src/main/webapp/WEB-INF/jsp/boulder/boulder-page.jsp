@@ -7,7 +7,7 @@
     <div class="row">
         <!-- Top left box with the large image -->
         <div class="col-md-6 d-flex flex-column">
-            <img src="/pub/media/TheMandala.jpeg" alt="The Mandala" class="img-fluid boulder-image">
+            <img id="mainImage" src="/pub/media/TheMandala.jpeg" alt="The Mandala" class="img-fluid boulder-image">
         </div>
         <!-- Top right box with the boulder details -->
         <div class="col-md-6 d-flex flex-column">
@@ -27,17 +27,19 @@
     <div class="row mt-4 position-relative">
         <!-- Bottom left box with the three placeholder images within flex boxes -->
         <div class="col-md-6 d-flex flex-column position-relative" style="height: 200px;">
-            <div class="d-flex position-absolute" style="top: 0; width: 95%;">
-                <div class="flex-fill">
-                    <img src="/pub/media/TheMandala.jpeg" alt="Placeholder 1" class="img-fluid boulder-placeholder">
+            <div id="placeholderContainer" class="d-flex position-absolute" style="top: 0; width: 95%; overflow: hidden;">
+                <div class="boulder-placeholder-container">
+                    <img src="/pub/media/HighPlains.jpeg" alt="Placeholder 1" class="img-fluid boulder-placeholder" onclick="swapImages(this)">
                 </div>
-                <div class="flex-fill">
-                    <img src="/pub/media/TheMandala.jpeg" alt="Placeholder 2" class="img-fluid boulder-placeholder">
+                <div class="boulder-placeholder-container">
+                    <img src="/pub/media/Queen.jpeg" alt="Placeholder 2" class="img-fluid boulder-placeholder" onclick="swapImages(this)">
                 </div>
-                <div class="flex-fill">
-                    <img src="/pub/media/TheMandala.jpeg" alt="Placeholder 3" class="img-fluid boulder-placeholder">
+                <div class="boulder-placeholder-container hidden">
+                    <img src="/pub/media/Swarm.jpeg" alt="Placeholder 3" class="img-fluid boulder-placeholder" onclick="swapImages(this)">
                 </div>
             </div>
+            <div class="scroll-button left" onclick="scrollLeftCustom()">&#9664;</div>
+            <div class="scroll-button right" onclick="scrollRight()">&#9654;</div>
         </div>
         <!-- Bottom right box with the BETA section -->
         <div class="col-md-6 d-flex flex-column">
@@ -55,5 +57,95 @@
         </div>
     </div>
 </div>
+<div id="imageOverlay" class="overlay hidden">
+    <span class="closebtn" onclick="closeOverlay()">&times;</span>
+    <img class="overlay-content" id="overlayImage">
+</div>
 
 <jsp:include page="../include/footer.jsp" />
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        adjustPlaceholderDisplay();
+        document.getElementById('mainImage').addEventListener('click', function() {
+            showOverlay(this.src);
+        });
+    });
+
+    function adjustPlaceholderDisplay() {
+        var placeholders = document.querySelectorAll('.boulder-placeholder');
+        var nativeSizes = [];
+
+        placeholders.forEach(function(img) {
+            var imgObj = new Image();
+            imgObj.src = img.src;
+            imgObj.onload = function() {
+                nativeSizes.push({ width: imgObj.width, height: imgObj.height });
+                if (nativeSizes.length === placeholders.length) {
+                    var allSameSize = nativeSizes.every(function(size) {
+                        return size.width === nativeSizes[0].width && size.height === nativeSizes[0].height;
+                    });
+
+                    if (!allSameSize) {
+                        placeholders[2].parentElement.classList.add('hidden');
+                    } else {
+                        placeholders.forEach(function(img) {
+                            img.parentElement.style.flex = '1';
+                        });
+                    }
+                }
+            };
+        });
+    }
+
+    function swapImages(placeholder) {
+        var mainImage = document.getElementById('mainImage');
+        var tempSrc = mainImage.src;
+        mainImage.src = placeholder.src;
+        placeholder.src = tempSrc;
+    }
+
+    function scrollLeftCustom() {
+        var container = document.getElementById('placeholderContainer');
+        var visiblePlaceholders = container.querySelectorAll('.boulder-placeholder-container:not(.hidden)');
+        var hiddenPlaceholder = container.querySelector('.hidden');
+
+        if (visiblePlaceholders.length > 1) {
+            // Hide the first visible placeholder and move it to the hidden state
+            visiblePlaceholders[0].classList.add('hidden');
+
+            // Move the hidden image to the first position and make it visible
+            hiddenPlaceholder.classList.remove('hidden');
+            container.appendChild(hiddenPlaceholder);
+        }
+    }
+
+    function scrollRight() {
+        var container = document.getElementById('placeholderContainer');
+        var visiblePlaceholders = container.querySelectorAll('.boulder-placeholder-container:not(.hidden)');
+        var hiddenPlaceholder = container.querySelector('.hidden');
+
+        if (visiblePlaceholders.length > 1) {
+            // Hide the first visible placeholder and move it to the hidden state
+            visiblePlaceholders[0].classList.add('hidden');
+
+            // Move the hidden image to the last position and make it visible
+            hiddenPlaceholder.classList.remove('hidden');
+            container.appendChild(hiddenPlaceholder);
+        }
+    }
+
+    function showOverlay(src) {
+        var overlay = document.getElementById('imageOverlay');
+        var overlayImage = document.getElementById('overlayImage');
+        overlayImage.src = src;
+        overlay.classList.remove('hidden');
+        overlay.style.display = 'flex';
+    }
+
+    function closeOverlay() {
+        var overlay = document.getElementById('imageOverlay');
+        overlay.classList.add('hidden');
+        overlay.style.display = 'none';
+    }
+</script>
