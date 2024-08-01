@@ -30,61 +30,10 @@
         .header {
             width: 100%;
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-end;
             align-items: center;
             padding: 10px 20px;
         }
-
-        .left-section {
-            display: flex;
-            align-items: center;
-            padding-left: 85px;
-        }
-
-        .search-input {
-            border: none; /* Remove borders */
-            outline: none; /* Remove outline */
-            background: none; /* Remove background */
-            padding-left: 0;
-            padding-right: 0;
-            text-align: left;
-            width: 100%;
-        }
-
-        .search-input::placeholder {
-            color: inherit; /* Ensure placeholder inherits the color */
-            opacity: 1; /* Make sure the placeholder is fully opaque */
-            text-align: left;
-
-        }
-
-        .search-input:focus {
-            border: 1px solid #000; /* Add border on focus */
-            background: white; /* Add background on focus */
-            padding-left: 10px; /* Add padding on focus */
-            text-align: left;
-            text-indent: 0px;
-        }
-
-        .search-input:focus::placeholder {
-            opacity: 0; /* Hide placeholder text on focus */
-        }
-
-        .form-outline {
-            width: 500px; /* Widen the input field */
-        }
-
-        .form-control {
-            font-family: "Helvetica"; /* Ensure the same font is used for input fields */
-            border-radius: 0; /* Set corners to 90 degrees */
-        }
-
-        .right-section {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
         .nav-links {
             display: flex;
             gap: 20px;
@@ -123,17 +72,13 @@
             width: 50px;
             height: 50px;
         }
-
     </style>
 
 </head>
 <body>
 <header class="header">
-    <div class="left-section">
-        <input type="search" id="form1" class="form-control search-input form-outline" placeholder="SEARCH" aria-label="Search" />
-    </div>
-    <div class="right-section">
         <div class="nav-links">
+            <a href="#search">SEARCH</a>
             <sec:authorize access="isAuthenticated()">
                 <a href="/account/logout">LOGOUT</a>
             </sec:authorize>
