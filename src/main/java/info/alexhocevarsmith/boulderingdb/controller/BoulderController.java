@@ -18,4 +18,11 @@ public class BoulderController {
 
     }
 
+    @GetMapping("/browse")
+    public ModelAndView browse() {
+
+        return new ModelAndView("boulder/browse");
+
+    }
+
 }
