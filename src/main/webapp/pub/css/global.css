@@ -130,10 +130,6 @@ body {
     padding: 0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-}
-
 .boulder-profile .divider {
     border-bottom: 1px solid black;
     margin: 20px 0;
@@ -147,7 +143,7 @@ body {
     color: white !important;
     border: none !important;
     border-radius: 0 !important; /* 90-degree corners */
-    font-family: Helvetica, Arial, sans-serif !important; /* Helvetica font */
+    font-family: Helvetica !important; /* Helvetica font */
     font-size: 1.25rem !important; /* Same size as <h3> */
     padding: 0.25rem 0.75rem !important; /* Padding for the button */
 }
