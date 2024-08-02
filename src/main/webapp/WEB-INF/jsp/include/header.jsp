@@ -100,7 +100,7 @@
                 </li>
                 <sec:authorize access="isAuthenticated()">
                     <li>
-                        <a class="dropdown-item" href="#profile">MY PROFILE</a>
+                        <a class="dropdown-item" href="/account/profile">MY PROFILE</a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="#boulder-input">ADD A BOULDER</a>
