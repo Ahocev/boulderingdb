@@ -98,4 +98,11 @@ public class LoginController {
 
         return response;
     }
+
+    @GetMapping("/profile")
+    public ModelAndView boulderPage() {
+
+        return new ModelAndView("auth/profile");
+
+    }
 }
