@@ -7,127 +7,151 @@
     <form action="/account/register" method="post">
         <div class="formTag">
             <h1>Register</h1>
+            <h6 class="text-muted">Please enter as much info as possible so that we can create a great database together.</h6>
         </div>
 
-        <!--Email-->
-        <div class="mb-3">
-            <label for="emailId" class="form-label">Email*</label>
-            <input type="text" id="emailId" name="email"
-                   class="form-control <c:if test="${bindingResult.hasFieldErrors('email')}">is-invalid</c:if>"
-                   value="${form.email}">
-        </div>
-        <c:if test="${bindingResult.hasFieldErrors('email')}">
-            <div class="row align-items-center justify-content-center">
-                <div class="mb-3">
+        <div class="row">
+            <!-- Email -->
+            <div class="col-md-6 mb-3">
+                <label for="emailId" class="form-label">Email*</label>
+                <input type="text" id="emailId" name="email"
+                       class="form-control <c:if test="${bindingResult.hasFieldErrors('email')}">is-invalid</c:if>"
+                       value="${form.email}">
+                <c:if test="${bindingResult.hasFieldErrors('email')}">
                     <div class="text-danger">
                         <c:forEach items="${bindingResult.getFieldErrors('email')}" var="error">
                             ${error.defaultMessage}<br>
                         </c:forEach>
                     </div>
-                </div>
+                </c:if>
             </div>
-        </c:if>
 
-
-        <div class="mb-3">
-            <label for="firstName" class="form-label">First Name*</label>
-            <input type="text" class="form-control" id="firstName" aria-describedby="firstNameHelp">
-            <div id="firstNameHelp" class="form-text"></div>
-        </div>
-        <div class="mb-3">
-            <label for="lastName" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="lastName" aria-describedby="lastNameHelp">
-            <div id="lastNameHelp" class="form-text"></div>
-        </div>
-        <div class="mb-3">
-            <label for="state" class="form-label">State</label>
-            <select class="form-select" id="state">
-                <option value="">Select your state</option>
-                <option value="AL">AL</option>
-                <option value="AK">AK</option>
-                <option value="AZ">AZ</option>
-                <option value="AR">AR</option>
-                <option value="CA">CA</option>
-                <option value="CO">CO</option>
-                <option value="CT">CT</option>
-                <option value="DE">DE</option>
-                <option value="FL">FL</option>
-                <option value="GA">GA</option>
-                <option value="HI">HI</option>
-                <option value="ID">ID</option>
-                <option value="IL">IL</option>
-                <option value="IN">IN</option>
-                <option value="IA">IA</option>
-                <option value="KS">KS</option>
-                <option value="KY">KY</option>
-                <option value="LA">LA</option>
-                <option value="ME">ME</option>
-                <option value="MD">MD</option>
-                <option value="MA">MA</option>
-                <option value="MI">MI</option>
-                <option value="MN">MN</option>
-                <option value="MS">MS</option>
-                <option value="MO">MO</option>
-                <option value="MT">MT</option>
-                <option value="NE">NE</option>
-                <option value="NV">NV</option>
-                <option value="NH">NH</option>
-                <option value="NJ">NJ</option>
-                <option value="NM">NM</option>
-                <option value="NY">NY</option>
-                <option value="NC">NC</option>
-                <option value="ND">ND</option>
-                <option value="OH">OH</option>
-                <option value="OK">OK</option>
-                <option value="OR">OR</option>
-                <option value="PA">PA</option>
-                <option value="RI">RI</option>
-                <option value="SC">SC</option>
-                <option value="SD">SD</option>
-                <option value="TN">TN</option>
-                <option value="TX">TX</option>
-                <option value="UT">UT</option>
-                <option value="VT">VT</option>
-                <option value="VA">VA</option>
-                <option value="WA">WA</option>
-                <option value="WV">WV</option>
-                <option value="WI">WI</option>
-                <option value="WY">WY</option>
-            </select>
-            <div id="stateHelp" class="form-text"></div>
+            <!-- Name -->
+            <div class="col-md-6 mb-3">
+                <label for="name" class="form-label">Name*</label>
+                <input type="text" class="form-control" id="name" aria-describedby="nameHelp">
+                <div id="nameHelp" class="form-text"></div>
+            </div>
         </div>
 
-        <!-- password input field -->
-        <div class="row align-items-center justify-content-center pt-3">
-            <div class="mb-3">
-                <label for="passwordId" class="col-form-label">Password</label>
+        <div class="row">
+            <!-- Password -->
+            <div class="col-md-6 mb-3">
+                <label for="passwordId" class="form-label">Password*</label>
                 <input type="text"
                        id="passwordId"
                        name="password"
                        class="form-control <c:if test="${bindingResult.hasFieldErrors('password')}">is-invalid</c:if>"
                        value="${form.password}">
-            </div>
-        </div>
-        <c:if test="${bindingResult.hasFieldErrors('password')}">
-            <div class="row align-items-center justify-content-center">
-                <div class="mb-3">
+                <c:if test="${bindingResult.hasFieldErrors('password')}">
                     <div class="text-danger">
                         <c:forEach items="${bindingResult.getFieldErrors('password')}" var="error">
                             ${error.defaultMessage}<br>
                         </c:forEach>
                     </div>
-                </div>
+                </c:if>
             </div>
-        </c:if>
 
-        <!--Submit Form-->
+            <!-- Age -->
+            <div class="col-md-6 mb-3">
+                <label for="age" class="form-label">Age</label>
+                <input type="text" class="form-control" id="age" aria-describedby="ageHelp">
+                <div id="ageHelp" class="form-text"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Ape Index -->
+            <div class="col-md-6 mb-3">
+                <label for="apeIndex" class="form-label">Ape Index</label>
+                <select class="form-select" id="apeIndex">
+                    <option value="">select your ape index</option>
+                    <option value="-5">-5</option>
+                    <option value="-4">-4</option>
+                    <option value="-3">-3</option>
+                    <option value="-2">-2</option>
+                    <option value="-1">-1</option>
+                    <option value="0">0</option>
+                    <option value="+1">+1</option>
+                    <option value="+2">+2</option>
+                    <option value="+3">+3</option>
+                    <option value="+4">+4</option>
+                    <option value="+5">+5</option>
+                    <option value="+6">+6</option>
+                    <option value="+7">+7</option>
+                    <option value="+8">+8</option>
+                </select>
+                <div id="apeHelp" class="form-text"></div>
+            </div>
+
+            <!-- Gender -->
+            <div class="col-md-6 mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <select class="form-select" id="gender">
+                    <option value="">select your gender</option>
+                    <option value="Non-binary">Non-binary</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <div id="genderHelp" class="form-text"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Height -->
+            <div class="col-md-6 mb-3">
+                <label for="height" class="form-label">Height</label>
+                <input type="text" class="form-control" id="height" aria-describedby="heightHelp">
+                <div id="heightHelp" class="form-text"></div>
+            </div>
+
+            <!-- Style -->
+            <div class="col-md-6 mb-3">
+                <label for="style" class="form-label">Style</label>
+                <input type="text" class="form-control" id="style" aria-describedby="styleHelp">
+                <div id="styleHelp" class="form-text"></div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Favorite Area -->
+            <div class="col-md-6 mb-3">
+                <label for="favoriteArea" class="form-label">Favorite Area</label>
+                <input type="text" class="form-control" id="favoriteArea" aria-describedby="favoriteAreaHelp">
+                <div id="favoriteAreaHelp" class="form-text"></div>
+            </div>
+
+            <!-- Favorite Boulder Problem -->
+            <div class="col-md-6 mb-3">
+                <label for="favoriteBoulderProblem" class="form-label">Favorite Boulder Problem</label>
+                <input type="text" class="form-control" id="favoriteBoulderProblem" aria-describedby="favoriteBoulderProblemHelp">
+                <div id="favoriteBoulderProblemHelp" class="form-text"></div>
+            </div>
+        </div>
+
+        <!-- About -->
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <label for="about" class="form-label">About</label>
+                <textarea class="form-control" id="about" aria-describedby="aboutHelp" rows="3"></textarea>
+                <div id="aboutHelp" class="form-text"></div>
+            </div>
+        </div>
+
+        <!-- Profile Picture Upload -->
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <label for="profilePic" class="form-label">Profile Picture</label>
+                <input type="file" id="profilePic" name="file" class="form-control">
+            </div>
+        </div>
+
+        <!-- Submit Form -->
         <button type="submit" class="btn btn-primary">Submit</button>
         <div class="already"> Already have an account?
             <a href="/account/login">Login</a>
         </div>
-
     </form>
-</div>
 </div>
 
 <jsp:include page="../include/footer.jsp" />
