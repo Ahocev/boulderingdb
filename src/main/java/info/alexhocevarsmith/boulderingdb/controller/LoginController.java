@@ -88,8 +88,6 @@ public class LoginController {
 
         } else {
 
-            userService.createUser(form);
-
             User user = userService.createUser(form);
             userService.createUserRole(user.getId(), "USER");
 
