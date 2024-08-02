@@ -3,6 +3,139 @@
 
 <link href="/pub/css/global.css" rel="stylesheet">
 
+<style>
+
+    .boulder-placeholder-container {
+        margin: 8px; /* Add margin for padding between images */
+        position: relative;
+        height: auto;
+        box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+    }
+
+    .boulder-placeholder {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    .beta-section .collapse {
+        display: none;
+    }
+
+    .beta-section .collapse.show {
+        display: block;
+    }
+
+    .scroll-button {
+        position: absolute;
+        top: 50%; /* Start at the middle */
+        transform: translateY(-50%);
+        background-color: transparent;
+        color: black;
+        border: none;
+        font-size: 20px; /* Adjust size as needed */
+        cursor: pointer;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px; /* Adjust size as needed */
+        height: 40px; /* Adjust size as needed */
+    }
+
+    .scroll-button.left {
+        left: -25px; /* Adjust to ensure it's clickable */
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .overlay {
+        position: fixed;
+        display: none;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #placeholderContainer {
+        overflow: visible; /* Allow content to bleed out */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .boulder-profile .divider {
+        border-bottom: 1px solid black;
+        margin: 20px 0;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .btn-black {
+        background-color: black !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 0 !important; /* 90-degree corners */
+        font-family: Helvetica !important; /* Helvetica font */
+        font-size: 1.25rem !important; /* Same size as <h3> */
+        padding: 0.25rem 0.75rem !important; /* Padding for the button */
+    }
+
+    .btn-black:hover {
+        background-color: #333 !important;
+        color: white !important;
+    }
+
+    .boulder-image {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        margin-bottom: 8px !important;
+    }
+
+    .boulder-details {
+        margin-top: 0px;
+        width: 100%;
+    }
+
+    .boulder-profile .row {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .overlay-content {
+        max-width: 90%;
+        max-height: 90%;
+        margin: auto;
+        display: block;
+    }
+
+    .closebtn {
+        position: absolute;
+        top: 20px;
+        right: 35px;
+        color: #fff;
+        font-size: 40px;
+        cursor: pointer;
+    }
+
+    .container {
+        overflow: visible; /* Ensure parent container allows overflow */
+    }
+
+</style>
+
 <div class="container my-4 boulder-profile" style="max-width: 90%;">
     <div class="row">
         <!-- Left column with the large image and placeholder images -->
@@ -87,30 +220,9 @@
                             img.parentElement.style.flex = '1';
                         });
                     }
-                    setScrollButtonPosition(); // Ensure the position is set after loading images
                 }
             };
         });
-    }
-
-    function setScrollButtonPosition() {
-        var placeholderContainer = document.querySelector('.boulder-placeholder-container');
-        var scrollButton = document.querySelector('.scroll-button.left');
-
-        if (placeholderContainer && scrollButton) {
-            var containerHeight = placeholderContainer.clientHeight;
-            var offset = placeholderContainer.offsetTop + (containerHeight / 2);
-
-            if (containerHeight > 0) {
-                console.log('Container Height:', containerHeight); // Debug log
-                console.log('Offset:', offset); // Debug log
-                scrollButton.style.top = `${offset}px`;
-            } else {
-                setTimeout(setScrollButtonPosition, 100); // Retry after a short delay
-            }
-        } else {
-            console.log('Elements not found'); // Debug log
-        }
     }
 
     function swapImages(placeholder) {
