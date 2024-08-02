@@ -191,12 +191,9 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         adjustPlaceholderDisplay();
-        setScrollButtonPosition();
         document.getElementById('mainImage').addEventListener('click', function() {
             showOverlay(this.src);
         });
-
-        window.addEventListener('resize', setScrollButtonPosition);
     });
 
     function adjustPlaceholderDisplay() {
