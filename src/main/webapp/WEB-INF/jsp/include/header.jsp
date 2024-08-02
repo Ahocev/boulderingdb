@@ -78,7 +78,7 @@
 <body>
 <header class="header">
         <div class="nav-links">
-            <a href="#search">SEARCH</a>
+            <a href="/boulder/search">SEARCH</a>
             <sec:authorize access="isAuthenticated()">
                 <a href="/account/logout">LOGOUT</a>
             </sec:authorize>
@@ -103,7 +103,7 @@
                         <a class="dropdown-item" href="/account/profile">MY PROFILE</a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#boulder-input">ADD A BOULDER</a>
+                        <a class="dropdown-item" href="/boulder/boulder-input">ADD A BOULDER</a>
                     </li>
                 </sec:authorize>
             </ul>
