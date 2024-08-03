@@ -19,16 +19,17 @@ public class BoulderService {
     @Autowired
     private BoulderProblemDAO boulderProblemDAO;
 
-    public void addBoulderProblem(AddBoulderFormBean form) {
+    public BoulderProblem addBoulderProblem(AddBoulderFormBean form) {
 
         // Check if the location already exists
-        Location location = locationDAO.findByCountryAndStateAndClimbingArea(form.getCountry(), form.getState(), form.getClimbingArea());
+        Location location = locationDAO.findByCountryAndStateAndClimbingAreaAndNearestCity(form.getCountry(), form.getState(), form.getClimbingArea(), form.getNearestCity());
 
         if (location == null) {
             // Create a new location if it doesn't exist
             location = new Location();
             location.setCountry(form.getCountry());
             location.setState(form.getState());
+            location.setNearestCity(form.getNearestCity());
             location.setClimbingArea(form.getClimbingArea());
             locationDAO.save(location);
         }
@@ -47,6 +48,6 @@ public class BoulderService {
         boulderProblem.setLocation(location);
 
         // Save the BoulderProblem
-        boulderProblemDAO.save(boulderProblem);
+        return boulderProblemDAO.save(boulderProblem);
     }
 }
