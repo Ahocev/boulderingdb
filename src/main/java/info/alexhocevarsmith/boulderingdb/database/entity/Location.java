@@ -30,12 +30,16 @@ public class Location {
     @Column(name = "state")
     private String state;
 
-    @Column(name = "latitude", precision = 9, scale = 6)
-    private Double latitude;
+    @Column(name = "climbing_area")
+    private String climbingArea;
 
-    @Column(name = "longitude", precision = 9, scale = 6)
-    private Double longitude;
+//    @Column(name = "latitude", precision = 9, scale = 6)
+//    private Double latitude;
+//
+//    @Column(name = "longitude", precision = 9, scale = 6)
+//    private Double longitude;
 
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     private List<BoulderProblem> boulderProblems = new ArrayList<>();
+
 }
