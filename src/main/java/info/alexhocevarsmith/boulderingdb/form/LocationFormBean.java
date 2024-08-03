@@ -16,6 +16,8 @@ public class LocationFormBean {
     @NotEmpty(message = "Climbing Area is required.")
     private String climbingArea;
 
+    private String nearestCity;
+
     @NotEmpty(message = "State is required.")
     private String state;
 
