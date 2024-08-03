@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface BoulderProblemDAO extends JpaRepository<BoulderProblem, Long> {
 
+    BoulderProblem findByBoulderProblemNameIgnoreCase(String boulderProblemName);
+
     List<BoulderProblem> findByLocationId(Integer locationId);
 
     List<BoulderProblem> findByZoneName(String zoneName);
