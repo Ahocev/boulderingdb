@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface LocationDAO extends JpaRepository<Location, Long> {
 
-    Location findByCountryAndStateAndClimbingArea(String country, String state, String climbingArea);
+    Location findByCountryAndStateAndClimbingAreaAndNearestCity(String country, String state, String nearestCity, String climbingArea);
 
     List<Location> findByCountry(String country);
 
-    List<Location> findByCity(String city);
+    List<Location> findByNearestCity(String nearestCity);
 
     Location findById(Integer id);
 }
