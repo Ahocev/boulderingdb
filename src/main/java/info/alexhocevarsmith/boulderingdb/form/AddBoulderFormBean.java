@@ -34,9 +34,6 @@ public class AddBoulderFormBean {
     @NotEmpty(message = "Country is required.")
     private String country;
 
-    @NotEmpty(message = "Climbing Area is required.")
-    private String climbingArea;
-
     private String state;
 
     private String nearestCity;

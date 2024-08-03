@@ -22,7 +22,7 @@ public class BoulderService {
     public BoulderProblem addBoulderProblem(AddBoulderFormBean form) {
 
         // Check if the location already exists
-        Location location = locationDAO.findByCountryAndStateAndClimbingAreaAndNearestCity(form.getCountry(), form.getState(), form.getClimbingArea(), form.getNearestCity());
+        Location location = locationDAO.findByCountryAndStateAndNearestCity(form.getCountry(), form.getState(), form.getNearestCity());
 
         if (location == null) {
             // Create a new location if it doesn't exist
@@ -30,7 +30,6 @@ public class BoulderService {
             location.setCountry(form.getCountry());
             location.setState(form.getState());
             location.setNearestCity(form.getNearestCity());
-            location.setClimbingArea(form.getClimbingArea());
             locationDAO.save(location);
         }
 

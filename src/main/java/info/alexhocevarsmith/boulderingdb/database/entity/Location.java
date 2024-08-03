@@ -30,9 +30,6 @@ public class Location {
     @Column(name = "state")
     private String state;
 
-    @Column(name = "climbing_area")
-    private String climbingArea;
-
 //    @Column(name = "latitude", precision = 9, scale = 6)
 //    private Double latitude;
 //
