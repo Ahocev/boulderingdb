@@ -31,4 +31,7 @@ public class User {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Comment> comments = new ArrayList<>();
+
 }

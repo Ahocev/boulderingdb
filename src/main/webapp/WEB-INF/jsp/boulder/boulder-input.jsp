@@ -128,7 +128,7 @@
         <div class="row">
             <!-- Rating -->
             <div class="col-md-6 mb-3">
-                <label for="rating" class="form-label">Rating</label>
+                <label for="rating" class="form-label">Rating (Stars)</label>
                 <div>
                     <input type="radio" id="rating1" name="rating" value="1" ${form.rating == 1 ? 'checked' : ''}>
                     <label for="rating1">1</label>

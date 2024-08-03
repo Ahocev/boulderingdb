@@ -108,7 +108,7 @@
             <!-- Style -->
             <div class="col-md-6 mb-3">
                 <label for="style" class="form-label">Style</label>
-                <input type="text" class="form-control" id="style" aria-describedby="styleHelp">
+                <input type="text" class="form-control" placeholder="what style are you best at?" id="style" aria-describedby="styleHelp">
                 <div id="styleHelp" class="form-text"></div>
             </div>
         </div>
