@@ -31,8 +31,8 @@ public class BoulderProblem {
     @Column(name = "boulder_name")
     private String boulderName;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "boulder_problem_name")
+    private String boulderProblemName;
 
     @Column(name = "rating")
     private Integer rating;
