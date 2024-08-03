@@ -101,6 +101,7 @@ body {
 .btn-primary:hover {
     background-color: #333; /* Darker shade on hover */
 }
+
 .is-invalid {
     border-color: #dc3545;
 }

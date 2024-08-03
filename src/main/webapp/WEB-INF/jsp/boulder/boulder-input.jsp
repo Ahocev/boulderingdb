@@ -4,6 +4,42 @@
 
 <link href="/pub/css/global.css" rel="stylesheet">
 
+<style>
+
+    .form-container {
+        background: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 700px;
+        width: 100%;
+        border: 1px solid black;
+        border-radius: 0; /* 90-degree corners */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center child elements horizontally */
+    }
+
+    .form-control {
+        border-radius: 0; /* 90-degree corners for input fields */
+    }
+
+    .btn-primary {
+        background-color: black; /* Black background for the submit button */
+        border: none;
+        border-radius: 0; /* 90-degree corners */
+        width: 105%; /* Fixed width */
+        margin-left: 25px;
+    }
+
+    .btn-primary:hover {
+        background-color: #333; /* Darker shade on hover */
+    }
+
+</style>
+
+
 <div class="form-container">
     <form action="/boulder/submit" method="post">
         <div class="formTag">
@@ -45,21 +81,6 @@
         </div>
 
         <div class="row">
-            <!-- Climbing Area -->
-            <div class="col-md-6 mb-3">
-                <label for="climbingArea" class="form-label">Climbing Area</label>
-                <input type="text" id="climbingArea" name="climbingArea"
-                       class="form-control <c:if test="${bindingResult.hasFieldErrors('climbingArea')}">is-invalid</c:if>"
-                       value="${form.climbingArea}">
-                <c:if test="${bindingResult.hasFieldErrors('climbingArea')}">
-                    <div class="text-danger">
-                        <c:forEach items="${bindingResult.getFieldErrors('climbingArea')}" var="error">
-                            ${error.defaultMessage}<br>
-                        </c:forEach>
-                    </div>
-                </c:if>
-            </div>
-
             <!-- State -->
             <div class="col-md-6 mb-3">
                 <label for="state" class="form-label">State</label>
@@ -118,9 +139,7 @@
                     <option value="TN" <c:if test="${form.state == 'WY'}">selected</c:if>>TN</option>
                 </select>
             </div>
-        </div>
 
-        <div class="row">
             <!-- Nearest City -->
             <div class="col-md-6 mb-3">
                 <label for="nearestCity" class="form-label">Nearest City</label>
@@ -135,7 +154,9 @@
                     </div>
                 </c:if>
             </div>
+        </div>
 
+        <div class="row">
             <!-- Zone Name -->
             <div class="col-md-6 mb-3">
                 <label for="zoneName" class="form-label">Zone Name</label>
@@ -150,9 +171,7 @@
                     </div>
                 </c:if>
             </div>
-        </div>
 
-        <div class="row">
             <!-- Boulder Name -->
             <div class="col-md-6 mb-3">
                 <label for="boulderName" class="form-label">Boulder Name</label>
@@ -269,12 +288,11 @@
 
         <div class="row">
 
-
             <!-- History -->
             <div class="row">
                 <div class="col-md-12 mb-3">
                     <label for="history" class="form-label">History</label>
-                    <textarea
+                    <textarea style="width: 104%;"
                             class="form-control <c:if test="${bindingResult.hasFieldErrors('history')}">is-invalid</c:if>"
                             id="history" name="history" aria-describedby="historyHelp"
                             rows="3">${form.history}</textarea>
@@ -292,7 +310,7 @@
             <div class="row mb-3">
                 <div class="col-md-12">
                     <label for="showcaseImgUrl" class="form-label">Showcase Image URL</label>
-                    <input type="file" id="showcaseImgUrl" name="showcaseImgUrl"
+                    <input type="file" id="showcaseImgUrl" name="showcaseImgUrl" style="width: 104%;"
                            class="form-control <c:if test="${bindingResult.hasFieldErrors('showcaseImgUrl')}">is-invalid</c:if>">
                     <c:if test="${bindingResult.hasFieldErrors('showcaseImgUrl')}">
                         <div class="text-danger">
@@ -305,7 +323,11 @@
             </div>
 
             <!-- Submit Form -->
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-primary col-md-12">Submit</button>
+                </div>
+            </div>
     </form>
 </div>
 </div>
