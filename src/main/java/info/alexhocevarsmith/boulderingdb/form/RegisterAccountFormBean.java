@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -37,6 +38,8 @@ public class RegisterAccountFormBean {
 
     @Length(max = 2000, message = "About section must be less than 2000 characters.")
     private String about;
+
+    private MultipartFile profileImg;
 
     @Length(max = 255, message = "Profile image URL must be less than 255 characters.")
     private String profileImgUrl;
