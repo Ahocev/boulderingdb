@@ -1,7 +1,9 @@
 package info.alexhocevarsmith.boulderingdb.controller;
 
 import info.alexhocevarsmith.boulderingdb.database.dao.BoulderProblemDAO;
+import info.alexhocevarsmith.boulderingdb.database.dao.LocationDAO;
 import info.alexhocevarsmith.boulderingdb.database.entity.BoulderProblem;
+import info.alexhocevarsmith.boulderingdb.database.entity.Location;
 import info.alexhocevarsmith.boulderingdb.form.AddBoulderFormBean;
 import info.alexhocevarsmith.boulderingdb.form.RegisterAccountFormBean;
 import info.alexhocevarsmith.boulderingdb.service.BoulderService;
@@ -14,8 +16,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Slf4j
@@ -28,6 +34,9 @@ public class BoulderController {
 
     @Autowired
     private BoulderService boulderService;
+
+    @Autowired
+    private LocationDAO locationDAO;
 
     @GetMapping("/boulder-page")
     public ModelAndView boulderPage() {
@@ -70,12 +79,6 @@ public class BoulderController {
     public ModelAndView submitBoulderProblem(@Valid AddBoulderFormBean form, BindingResult bindingResult) {
         ModelAndView response = new ModelAndView();
 
-        // Check if the BoulderProblem name already exists
-        BoulderProblem existingBoulderProblem = boulderProblemDAO.findByBoulderProblemNameIgnoreCase(form.getBoulderProblemName());
-        if (existingBoulderProblem != null) {
-            bindingResult.rejectValue("boulderProblemName", "boulderProblemName", "This Boulder Problem name already exists.");
-        }
-
         if (bindingResult.hasErrors()) {
             for (ObjectError error : bindingResult.getAllErrors()) {
                 log.debug("Validation error : " + ((FieldError) error).getField() + " = " + error.getDefaultMessage());
@@ -87,10 +90,35 @@ public class BoulderController {
             return response;
         }
 
-         BoulderProblem boulderProblem = boulderService.addBoulderProblem(form);
-         response.setViewName("redirect:/boulder/boulder-page?id=" + boulderProblem.getId());
-        return response;
+        // Check if the BoulderProblem name already exists
+        BoulderProblem existingBoulderProblem = boulderProblemDAO.findByBoulderProblemNameIgnoreCase(form.getBoulderProblemName());
+        if (existingBoulderProblem != null) {
+            bindingResult.rejectValue("boulderProblemName", "boulderProblemName", "This Boulder Problem name already exists.");
+        }
 
+        // Handle the file upload first
+        if (!form.getShowcaseImg().isEmpty()) {
+            log.debug(form.getShowcaseImg().getOriginalFilename());
+            log.debug("The file size is: " + form.getShowcaseImg().getSize());
+            log.debug(form.getShowcaseImg().getContentType());
+
+            String savedFilename = "./src/main/webapp/pub/media/" + form.getShowcaseImg().getOriginalFilename();
+
+            try {
+                Files.copy(form.getShowcaseImg().getInputStream(), Paths.get(savedFilename), StandardCopyOption.REPLACE_EXISTING);
+            } catch (Exception e) {
+                log.error("Unable to finish reading file", e);
+            }
+
+            String url = "/pub/media/" + form.getShowcaseImg().getOriginalFilename();
+            form.setShowcaseImgUrl(url);
+
+        }
+
+        // Save the form data using BoulderService
+        BoulderProblem boulderProblem = boulderService.addBoulderProblem(form);
+        response.setViewName("redirect:/boulder/boulder-page?id=" + boulderProblem.getId());
+        return response;
     }
 
 }
