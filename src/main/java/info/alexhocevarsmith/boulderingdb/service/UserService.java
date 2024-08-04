@@ -54,10 +54,10 @@ public class UserService {
         return user;
     }
 
-    public UserRole createUserRole(Integer userId, String roleName) {
+    public UserRole createUserRole(User user, String roleName) {
         UserRole userRole = new UserRole();
 
-        userRole.setUserId(userId);
+        userRole.setUser(user);
         userRole.setRoleName(roleName);
         userRole.setCreateDate(new Date());
 
