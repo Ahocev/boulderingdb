@@ -29,7 +29,7 @@ public class UserService {
 
         User user = userDao.findById(form.getUserId());
         if (user == null) {
-            user = new User ();
+            user = new User();
         }
 
         user.setEmail(form.getEmail());
@@ -38,11 +38,20 @@ public class UserService {
         user.setPassword(encryptedPassword);
 
         user.setCreateDate(new Date());
+        user.setName(form.getName());
+        user.setAge(form.getAge());
+        user.setApeIndex(form.getApeIndex());
+        user.setHeight(form.getHeight());
+        user.setGender(form.getGender());
+        user.setAbout(form.getAbout());
+        user.setProfileImgUrl(form.getProfileImgUrl());
+        user.setStyle(form.getStyle());
+        user.setFavoriteArea(form.getFavoriteArea());
+        user.setFavoriteBoulderProblem(form.getFavoriteBoulderProblem());
 
         userDao.save(user);
 
         return user;
-
     }
 
     public UserRole createUserRole(Integer userId, String roleName) {
@@ -55,6 +64,4 @@ public class UserService {
         userRoleDao.save(userRole);
         return userRole;
     }
-
-
 }
