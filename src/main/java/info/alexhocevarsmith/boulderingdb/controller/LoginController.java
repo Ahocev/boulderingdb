@@ -72,9 +72,9 @@ public class LoginController {
     public ModelAndView createAccountSubmit(@Valid RegisterAccountFormBean form, BindingResult bindingResult, HttpSession session) {
         ModelAndView response = new ModelAndView("auth/register");
 
-        if (form.getUserId() == null ){
+        if (form.getUserId() == null) {
             User u = userDao.findByEmailIgnoreCase(form.getEmail());
-            if ( u != null ) {
+            if (u != null) {
                 bindingResult.rejectValue("email", "email", "This email is already in use.");
             }
         }
@@ -87,6 +87,7 @@ public class LoginController {
             response.addObject("bindingResult", bindingResult);
             response.addObject("form", form);
 
+            return response;
         }
 
         if (!form.getProfileImg().isEmpty()) {
@@ -105,17 +106,16 @@ public class LoginController {
             String url = "/pub/media/" + form.getProfileImg().getOriginalFilename();
             form.setProfileImgUrl(url);
 
-        } else {
-
-            User user = userService.createUser(form);
-            userService.createUserRole(user.getId(), "USER");
-
-            authenticatedUserUtilities.manualAuthentication(session, form.getEmail(), form.getPassword());
-            response.setViewName("redirect:/");
-
         }
 
+        User user = userService.createUser(form);
+        userService.createUserRole(user, "USER");
+
+        authenticatedUserUtilities.manualAuthentication(session, form.getEmail(), form.getPassword());
+        response.setViewName("redirect:/");
+
         return response;
+
     }
 
     @GetMapping("/profile")
