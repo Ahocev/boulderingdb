@@ -55,7 +55,7 @@
                        class="form-control <c:if test="${bindingResult.hasFieldErrors('boulderProblemName')}">is-invalid</c:if>"
                        value="${form.boulderProblemName}">
                 <c:if test="${bindingResult.hasFieldErrors('boulderProblemName')}">
-                    <div class="text-danger">
+                    <div class="text-danger mt-1">
                         <c:forEach items="${bindingResult.getFieldErrors('boulderProblemName')}" var="error">
                             ${error.defaultMessage}<br>
                         </c:forEach>
@@ -70,7 +70,7 @@
                        class="form-control <c:if test="${bindingResult.hasFieldErrors('country')}">is-invalid</c:if>"
                        value="${form.country}">
                 <c:if test="${bindingResult.hasFieldErrors('country')}">
-                    <div class="text-danger">
+                    <div class="text-danger mt-1">
                         <c:forEach items="${bindingResult.getFieldErrors('country')}" var="error">
                             ${error.defaultMessage}<br>
                         </c:forEach>
@@ -137,6 +137,13 @@
                     <option value="TN" <c:if test="${form.state == 'WI'}">selected</c:if>>TN</option>
                     <option value="TN" <c:if test="${form.state == 'WY'}">selected</c:if>>TN</option>
                 </select>
+                <c:if test="${bindingResult.hasFieldErrors('state')}">
+                    <div class="text-danger mt-1">
+                        <c:forEach items="${bindingResult.getFieldErrors('state')}" var="error">
+                            ${error.defaultMessage}<br>
+                        </c:forEach>
+                    </div>
+                </c:if>
             </div>
 
             <!-- Nearest City -->
@@ -146,7 +153,7 @@
                        class="form-control <c:if test="${bindingResult.hasFieldErrors('nearestCity')}">is-invalid</c:if>"
                        value="${form.nearestCity}">
                 <c:if test="${bindingResult.hasFieldErrors('nearestCity')}">
-                    <div class="text-danger">
+                    <div class="text-danger mt-1">
                         <c:forEach items="${bindingResult.getFieldErrors('nearestCity')}" var="error">
                             ${error.defaultMessage}<br>
                         </c:forEach>
@@ -163,7 +170,7 @@
                        class="form-control <c:if test="${bindingResult.hasFieldErrors('zoneName')}">is-invalid</c:if>"
                        value="${form.zoneName}">
                 <c:if test="${bindingResult.hasFieldErrors('zoneName')}">
-                    <div class="text-danger">
+                    <div class="text-danger mt-1">
                         <c:forEach items="${bindingResult.getFieldErrors('zoneName')}" var="error">
                             ${error.defaultMessage}<br>
                         </c:forEach>
@@ -178,7 +185,7 @@
                        class="form-control <c:if test="${bindingResult.hasFieldErrors('boulderName')}">is-invalid</c:if>"
                        value="${form.boulderName}">
                 <c:if test="${bindingResult.hasFieldErrors('boulderName')}">
-                    <div class="text-danger">
+                    <div class="text-danger mt-1">
                         <c:forEach items="${bindingResult.getFieldErrors('boulderName')}" var="error">
                             ${error.defaultMessage}<br>
                         </c:forEach>
@@ -193,7 +200,7 @@
                        class="form-control <c:if test="${bindingResult.hasFieldErrors('firstAscensionist')}">is-invalid</c:if>"
                        value="${form.firstAscensionist}">
                 <c:if test="${bindingResult.hasFieldErrors('firstAscensionist')}">
-                    <div class="text-danger">
+                    <div class="text-danger mt-1">
                         <c:forEach items="${bindingResult.getFieldErrors('firstAscensionist')}" var="error">
                             ${error.defaultMessage}<br>
                         </c:forEach>
@@ -212,7 +219,7 @@
                     <label class="form-check-label" for="repeated"></label>
                 </div>
                 <c:if test="${bindingResult.hasFieldErrors('repeated')}">
-                    <div class="text-danger">
+                    <div class="text-danger mt-1">
                         <c:forEach items="${bindingResult.getFieldErrors('repeated')}" var="error">
                             ${error.defaultMessage}<br>
                         </c:forEach>
@@ -247,7 +254,7 @@
                     <option value="V17" <c:if test="${form.grade == 'V17'}">selected</c:if>>V17</option>
                 </select>
                 <c:if test="${bindingResult.hasFieldErrors('grade')}">
-                    <div class="text-danger">
+                    <div class="text-danger mt-1">
                         <c:forEach items="${bindingResult.getFieldErrors('grade')}" var="error">
                             ${error.defaultMessage}<br>
                         </c:forEach>
@@ -276,7 +283,7 @@
                     <label for="rating5">5</label>
                 </div>
                 <c:if test="${bindingResult.hasFieldErrors('rating')}">
-                    <div class="text-danger">
+                    <div class="text-danger mt-1">
                         <c:forEach items="${bindingResult.getFieldErrors('rating')}" var="error">
                             ${error.defaultMessage}<br>
                         </c:forEach>
@@ -296,7 +303,7 @@
                             id="history" name="history" aria-describedby="historyHelp"
                             rows="3">${form.history}</textarea>
                     <c:if test="${bindingResult.hasFieldErrors('history')}">
-                        <div class="text-danger">
+                        <div class="text-danger mt-1">
                             <c:forEach items="${bindingResult.getFieldErrors('history')}" var="error">
                                 ${error.defaultMessage}<br>
                             </c:forEach>
