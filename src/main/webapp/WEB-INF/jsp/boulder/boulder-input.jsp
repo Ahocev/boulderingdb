@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <jsp:include page="../include/header.jsp"/>
 
 <link href="/pub/css/global.css" rel="stylesheet">
@@ -41,7 +40,7 @@
 
 
 <div class="form-container">
-    <form action="/boulder/submit" method="post">
+    <form action="/boulder/submit" method="post" enctype="multipart/form-data">
         <div class="formTag">
             <h1>Add Boulder Problem</h1>
             <h6 class="text-muted">Please enter as much info as possible so that we can create a great database
@@ -309,16 +308,8 @@
             <!-- Showcase Image URL -->
             <div class="row mb-3">
                 <div class="col-md-12">
-                    <label for="showcaseImgUrl" class="form-label">Showcase Image URL</label>
-                    <input type="file" id="showcaseImgUrl" name="showcaseImgUrl" style="width: 104%;"
-                           class="form-control <c:if test="${bindingResult.hasFieldErrors('showcaseImgUrl')}">is-invalid</c:if>">
-                    <c:if test="${bindingResult.hasFieldErrors('showcaseImgUrl')}">
-                        <div class="text-danger">
-                            <c:forEach items="${bindingResult.getFieldErrors('showcaseImgUrl')}" var="error">
-                                ${error.defaultMessage}<br>
-                            </c:forEach>
-                        </div>
-                    </c:if>
+                    <label for="showcaseImg" class="form-label">Showcase Image</label>
+                    <input type="file" id="showcaseImg" name="showcaseImg" style="width: 104%;" class="form-control">
                 </div>
             </div>
 
@@ -328,8 +319,9 @@
                     <button type="submit" class="btn btn-primary col-md-12">Submit</button>
                 </div>
             </div>
+        </div>
     </form>
 </div>
-</div>
+
 
 <jsp:include page="../include/footer.jsp"/>
