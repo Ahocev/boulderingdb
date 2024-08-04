@@ -29,4 +29,8 @@ public class UserRole {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createDate;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }
