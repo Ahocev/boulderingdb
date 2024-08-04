@@ -16,6 +16,10 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
 @Slf4j
 @Controller
 @RequestMapping("/account")
@@ -82,6 +86,24 @@ public class LoginController {
 
             response.addObject("bindingResult", bindingResult);
             response.addObject("form", form);
+
+        }
+
+        if (!form.getProfileImg().isEmpty()) {
+            log.debug(form.getProfileImg().getOriginalFilename());
+            log.debug("The file size is: " + form.getProfileImg().getSize());
+            log.debug(form.getProfileImg().getContentType());
+
+            String savedFilename = "./src/main/webapp/pub/media/" + form.getProfileImg().getOriginalFilename();
+
+            try {
+                Files.copy(form.getProfileImg().getInputStream(), Paths.get(savedFilename), StandardCopyOption.REPLACE_EXISTING);
+            } catch (Exception e) {
+                log.error("Unable to finish reading file", e);
+            }
+
+            String url = "/pub/media/" + form.getProfileImg().getOriginalFilename();
+            form.setProfileImgUrl(url);
 
         } else {
 
