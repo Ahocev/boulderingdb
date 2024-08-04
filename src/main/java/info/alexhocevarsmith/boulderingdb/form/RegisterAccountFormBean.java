@@ -24,12 +24,14 @@ public class RegisterAccountFormBean {
     @Length(max = 200, message = "Name must be less than 200 characters.")
     private String name;
 
+    @NotNull(message = "Cannot be null.")
     @Min(value = 0, message = "Age must be a positive integer.")
     private Integer age;
 
     @Length(max = 50, message = "Ape index must be less than 50 characters.")
     private String apeIndex;
 
+    @NotNull(message = "Cannot be null.")
     @Min(value = 0, message = "Height must be a positive number.")
     private Float height;
 
