@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Min;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -28,6 +29,8 @@ public class AddBoulderFormBean {
     private Boolean repeated;
 
     private String history;
+
+    private MultipartFile showcaseImg;
 
     private String showcaseImgUrl;
 
