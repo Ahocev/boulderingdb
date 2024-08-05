@@ -143,13 +143,17 @@
         border-radius: 50%;
     }
 
+    header {
+        margin-top: 28px !important; /* Adjust the value as needed */
+    }
+
 </style>
 
 <div class="container my-4 boulder-profile" style="max-width: 90%;">
     <div class="row">
         <!-- Left column with the large image and placeholder images -->
         <div class="col-md-6 d-flex flex-column">
-            <img id="mainImage" src="/pub/media/josh-climbing2.jpeg" alt="The Mandala"
+            <img id="profileImgUrl" src="${user.profileImgUrl}" alt="${user.name}"
                  class="img-fluid boulder-image mb-4 circular-border">
             <div id="placeholderContainer" class="d-flex position-relative" style="overflow: visible;">
                 <div class="scroll-button left" onclick="scrollLeftCustom()">&#9664;</div>
@@ -169,35 +173,35 @@
         </div>
         <!-- Right column with the boulder details and BETA section -->
         <div class="col-md-6 d-flex flex-column">
-            <h2 class="boulder-name">Josh Schwab</h2>
+            <h2 class="name">${user.name}</h2>
             <div class="divider"></div>
             <div class="boulder-details">
-                <p>
-                    Age:
+                <p class="age">
+                    Age: ${user.age}
                 </p>
-                <p>
-                    Height:
+                <p class="height">
+                    Height: ${user.height}
                 </p>
-                <p>
-                    Gender:
+                <p class="gender">
+                    Gender: ${user.gender}
                 </p>
-                <p>
-                    Ape Index:
+                <p class="ape-index">
+                    Ape Index: ${user.apeIndex}
                 </p>
-                <p>
-                    Style:
+                <p class="style">
+                    Style: ${user.style}
                 </p>
-                <p>
-                    Favorite Area:
+                <p class="favorite-area">
+                    Favorite Area: ${user.favoriteArea}
                 </p>
-                <p>
-                    Favorite Boulder Problem:
+                <p class="favorite-boulder-problem">
+                    Favorite Boulder Problem: ${user.favoriteBoulderProblem}
                 </p>
             </div>
             <div class="divider"></div>
             <div class="boulder-details">
-                <p>
-                    About Me:
+                <p class="age">
+                    About Me: ${user.about}
                 </p>
             </div>
         </div>
@@ -214,7 +218,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         adjustPlaceholderDisplay();
-        document.getElementById('mainImage').addEventListener('click', function () {
+        document.getElementById('profileImgUrl').addEventListener('click', function () {
             showOverlay(this.src);
         });
     });
@@ -246,9 +250,9 @@
     }
 
     function swapImages(placeholder) {
-        var mainImage = document.getElementById('mainImage');
-        var tempSrc = mainImage.src;
-        mainImage.src = placeholder.src;
+        var profileImgUrl = document.getElementById('profileImgUrl');
+        var tempSrc = profileImgUrl.src;
+        profileImgUrl.src = placeholder.src;
         placeholder.src = tempSrc;
     }
 
