@@ -143,10 +143,6 @@
         border-radius: 50%;
     }
 
-    header {
-        margin-top: 28px !important; /* Adjust the value as needed */
-    }
-
 </style>
 
 <div class="container my-4 boulder-profile" style="max-width: 90%;">
