@@ -2,8 +2,10 @@ package info.alexhocevarsmith.boulderingdb.controller;
 
 import info.alexhocevarsmith.boulderingdb.database.dao.BoulderProblemDAO;
 import info.alexhocevarsmith.boulderingdb.database.dao.LocationDAO;
+import info.alexhocevarsmith.boulderingdb.database.dao.UserDAO;
 import info.alexhocevarsmith.boulderingdb.database.entity.BoulderProblem;
 import info.alexhocevarsmith.boulderingdb.database.entity.Location;
+import info.alexhocevarsmith.boulderingdb.database.entity.User;
 import info.alexhocevarsmith.boulderingdb.form.AddBoulderFormBean;
 import info.alexhocevarsmith.boulderingdb.form.RegisterAccountFormBean;
 import info.alexhocevarsmith.boulderingdb.service.BoulderService;
@@ -22,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -34,6 +37,9 @@ public class BoulderController {
 
     @Autowired
     private BoulderService boulderService;
+
+    @Autowired
+    private UserDAO userDAO;
 
     @Autowired
     private LocationDAO locationDAO;
@@ -67,11 +73,16 @@ public class BoulderController {
 
         response.addObject("search", search);
 
-        List<BoulderProblem> boulderProblems = null;
+        List<BoulderProblem> boulderProblems = new ArrayList<>();
+        List<User> users = new ArrayList<>();
+
         if (search != null && !search.isEmpty()) {
             boulderProblems = boulderProblemDAO.findAllByBoulderProblemNameContainingIgnoreCase(search);
+            users = userDAO.findAllByNameContainingIgnoreCase(search);
         }
+
         response.addObject("boulderProblems", boulderProblems);
+        response.addObject("users", users);
 
         return response;
     }
