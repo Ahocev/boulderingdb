@@ -119,6 +119,26 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
+		<!-- Spring Boot Starter Web: includes Spring MVC and other web-related dependencies -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<!-- Servlet API: provides HttpServletRequest, HttpServletResponse, etc. -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>6.1.11</version>
+		</dependency>
+
 		<!-- Security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
