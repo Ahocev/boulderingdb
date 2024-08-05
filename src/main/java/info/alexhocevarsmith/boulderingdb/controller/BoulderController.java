@@ -61,16 +61,17 @@ public class BoulderController {
 
     @GetMapping("/search")
     public ModelAndView search(@RequestParam(required = false) String search) {
-        // this page is for another page of the website which is express as "/page-url"
         ModelAndView response = new ModelAndView("boulder/search");
 
         log.debug("The user searched for the term: " + search);
 
-
         response.addObject("search", search);
 
-//        List<BoulderProblem> boulderProblems = boulderProblemDAO.findById(search);
-//        response.addObject("boulderProblems", boulderProblems);
+        List<BoulderProblem> boulderProblems = null;
+        if (search != null && !search.isEmpty()) {
+            boulderProblems = boulderProblemDAO.findAllByBoulderProblemNameContainingIgnoreCase(search);
+        }
+        response.addObject("boulderProblems", boulderProblems);
 
         return response;
     }
