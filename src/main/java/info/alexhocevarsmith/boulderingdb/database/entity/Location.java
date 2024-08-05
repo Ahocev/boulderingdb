@@ -30,13 +30,14 @@ public class Location {
     @Column(name = "state")
     private String state;
 
-//    @Column(name = "latitude", precision = 9, scale = 6)
-//    private Double latitude;
-//
-//    @Column(name = "longitude", precision = 9, scale = 6)
-//    private Double longitude;
-
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     private List<BoulderProblem> boulderProblems = new ArrayList<>();
+
+    @Transient
+    private Map<String, List<BoulderProblem>> zoneMap = new HashMap<>();
+
+    public void setZoneMap(Map<String, List<BoulderProblem>> zoneMap) {
+        this.zoneMap = zoneMap;
+    }
 
 }
