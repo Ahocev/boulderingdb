@@ -8,6 +8,7 @@ import info.alexhocevarsmith.boulderingdb.database.entity.Location;
 import info.alexhocevarsmith.boulderingdb.database.entity.User;
 import info.alexhocevarsmith.boulderingdb.form.AddBoulderFormBean;
 import info.alexhocevarsmith.boulderingdb.form.RegisterAccountFormBean;
+import info.alexhocevarsmith.boulderingdb.helper.BoulderProblemHelper;
 import info.alexhocevarsmith.boulderingdb.service.BoulderService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -44,6 +45,7 @@ public class BoulderController {
     @Autowired
     private LocationDAO locationDAO;
 
+
     @GetMapping("/boulder-page")
     public ModelAndView boulderPage(@RequestParam("id") Long id) {
         ModelAndView response = new ModelAndView("boulder/boulder-page");
@@ -59,10 +61,21 @@ public class BoulderController {
     }
 
     @GetMapping("/browse")
-    public ModelAndView browse() {
+    public ModelAndView browsePage() {
+        ModelAndView response = new ModelAndView("boulder/browse");
 
-        return new ModelAndView("boulder/browse");
+        List<Location> locations = locationDAO.findAll();
+        for (Location location : locations) {
+            BoulderProblemHelper helper = new BoulderProblemHelper();
+            for (BoulderProblem boulderProblem : location.getBoulderProblems()) {
+                helper.addBoulderProblem(boulderProblem);
+            }
+            location.setZoneMap(helper.getZoneMap());
+        }
 
+        response.addObject("locations", locations);
+
+        return response;
     }
 
     @GetMapping("/search")
