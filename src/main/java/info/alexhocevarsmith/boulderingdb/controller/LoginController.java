@@ -125,10 +125,10 @@ public class LoginController {
     }
 
     @GetMapping("/profile")
-    public ModelAndView profilePage(@RequestParam("id") Long id) {
+    public ModelAndView profilePage() {
         ModelAndView response = new ModelAndView("auth/profile");
 
-        User user = userDao.findById(id).orElse(null);
+        User user = authenticatedUserUtilities.getCurrentUser();
         if (user == null) {
             response.setViewName("redirect:/account/register");
             return response;
