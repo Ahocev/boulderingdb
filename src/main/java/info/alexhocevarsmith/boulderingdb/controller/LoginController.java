@@ -1,6 +1,7 @@
 package info.alexhocevarsmith.boulderingdb.controller;
 
 import info.alexhocevarsmith.boulderingdb.database.dao.UserDAO;
+import info.alexhocevarsmith.boulderingdb.database.entity.BoulderProblem;
 import info.alexhocevarsmith.boulderingdb.database.entity.User;
 import info.alexhocevarsmith.boulderingdb.form.RegisterAccountFormBean;
 import info.alexhocevarsmith.boulderingdb.security.AuthenticatedUserUtilities;
@@ -107,22 +108,34 @@ public class LoginController {
             form.setProfileImgUrl(url);
 
         }
-
+        // save user to database
         User user = userService.createUser(form);
+
+        // save user role to DB
         userService.createUserRole(user, "USER");
 
+        // authenticate new user before redirecting
         authenticatedUserUtilities.manualAuthentication(session, form.getEmail(), form.getPassword());
-        response.setViewName("redirect:/");
+
+        // redirect to new profile page
+        response.setViewName("redirect:/account/profile?id=" + user.getId());
 
         return response;
 
     }
 
     @GetMapping("/profile")
-    public ModelAndView boulderPage() {
+    public ModelAndView profilePage(@RequestParam("id") Long id) {
+        ModelAndView response = new ModelAndView("auth/profile");
 
-        return new ModelAndView("auth/profile");
+        User user = userDao.findById(id).orElse(null);
+        if (user == null) {
+            response.setViewName("redirect:/account/register");
+            return response;
+        }
 
+        response.addObject("user", user);
+        return response;
     }
 
 
