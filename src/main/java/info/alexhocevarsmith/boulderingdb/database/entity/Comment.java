@@ -1,10 +1,7 @@
 package info.alexhocevarsmith.boulderingdb.database.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.*;
 
@@ -21,13 +18,21 @@ public class Comment {
     @Column(name = "id")
     private Integer id;
 
+    @ToString.Exclude
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Column(name = "user_id", insertable = false, updatable = false)
+    private Integer userId;
+
+    @ToString.Exclude
     @ManyToOne
-    @JoinColumn(name = "boulder_problem_id")
+    @JoinColumn(name = "boulder_problem_id", nullable = false)
     private BoulderProblem boulderProblem;
+
+    @Column(name = "boulder_problem_id", insertable = false, updatable = false)
+    private Integer boulderProblemId;
 
     @Column(name = "comment", length = 2000)
     private String comment;
@@ -41,4 +46,5 @@ public class Comment {
 
     @Column(name = "dislikes")
     private Integer dislikes;
+
 }

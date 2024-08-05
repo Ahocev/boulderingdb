@@ -1,10 +1,7 @@
 package info.alexhocevarsmith.boulderingdb.database.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.*;
 
@@ -56,6 +53,12 @@ public class BoulderProblem {
     @Column(name = "showcase_img_url")
     private String showcaseImgUrl;
 
-    @OneToMany(mappedBy = "boulderProblem", cascade = CascadeType.ALL)
-    private List<Comment> comments = new ArrayList<>();
+    @Column(name = "comment_id", insertable = false, updatable = false)
+    private Integer commentId;
+
+    @ToString.Exclude
+    @ManyToOne
+    @JoinColumn(name = "comment_id", nullable = false)
+    private Comment comment;
+
 }
