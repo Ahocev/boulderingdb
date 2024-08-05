@@ -140,7 +140,7 @@
     <div class="row">
         <!-- Left column with the large image and placeholder images -->
         <div class="col-md-6 d-flex flex-column">
-            <img id="mainImage" src="/pub/media/TheMandala.jpeg" alt="The Mandala" class="img-fluid boulder-image mb-4">
+            <img id="showcaseImgUrl" src="${boulderProblem.showcaseImgUrl}" alt="${boulderProblem.boulderProblemName}" class="img-fluid boulder-image mb-4">
             <div id="placeholderContainer" class="d-flex position-relative" style="overflow: visible;">
                 <div class="scroll-button left" onclick="scrollLeftCustom()">&#9664;</div>
                 <div class="boulder-placeholder-container">
@@ -156,15 +156,16 @@
         </div>
         <!-- Right column with the boulder details and BETA section -->
         <div class="col-md-6 d-flex flex-column">
-            <h2 class="boulder-name">The Mandala</h2>
-            <p class="boulder-grade text-muted">v12</p>
+            <h2 class="boulder-problem-name">${boulderProblem.boulderProblemName}</h2>
+            <p class="grade text-muted">${boulderProblem.grade}</p>
+            <p class="boulder-name">${boulderProblem.boulderName}</p>
+            <p class="rating">${boulderProblem.rating} stars</p>
+            <p class="repeated">${boulderProblem.repeated ? 'Yes' : 'No'}</p>
+            <p class="first-ascensionist">${boulderProblem.firstAscensionist}</p>
             <div class="divider"></div>
             <div class="boulder-details mb-4">
                 <p>
-                    Stats and names and stuff about it. First ascensionist, boulder history, and other things you might want to know about a big ol' rock.
-                </p>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus imperdiet, nulla et dictum interdum, nisi lorem egestas odio.
+                    ${boulderProblem.history}
                 </p>
             </div>
             <div class="divider"></div>
@@ -191,7 +192,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         adjustPlaceholderDisplay();
-        document.getElementById('mainImage').addEventListener('click', function() {
+        document.getElementById('showcaseImgUrl').addEventListener('click', function() {
             showOverlay(this.src);
         });
     });
@@ -223,9 +224,9 @@
     }
 
     function swapImages(placeholder) {
-        var mainImage = document.getElementById('mainImage');
-        var tempSrc = mainImage.src;
-        mainImage.src = placeholder.src;
+        var showcaseImgUrl = document.getElementById('showcaseImgUrl');
+        var tempSrc = showcaseImgUrl.src;
+        showcaseImgUrl.src = placeholder.src;
         placeholder.src = tempSrc;
     }
 
