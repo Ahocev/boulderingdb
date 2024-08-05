@@ -44,6 +44,7 @@ public class BoulderService {
         boulderProblem.setShowcaseImgUrl(form.getShowcaseImgUrl());
         boulderProblem.setZoneName(form.getZoneName());
         boulderProblem.setBoulderName(form.getBoulderName());
+        boulderProblem.setLocation(location);
 
         // Save the BoulderProblem
         return boulderProblemDAO.save(boulderProblem);
