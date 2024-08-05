@@ -9,6 +9,10 @@ public interface BoulderProblemDAO extends JpaRepository<BoulderProblem, Long> {
 
     BoulderProblem findByBoulderProblemNameIgnoreCase(String boulderProblemName);
 
+    List<BoulderProblem> findAllByBoulderProblemNameContainingIgnoreCase(String boulderProblemName);
+
+    BoulderProblem findById(Integer id);
+
     List<BoulderProblem> findByLocationId(Integer locationId);
 
     List<BoulderProblem> findByZoneName(String zoneName);
@@ -17,5 +21,4 @@ public interface BoulderProblemDAO extends JpaRepository<BoulderProblem, Long> {
 
     List<BoulderProblem> findByPostedById(Integer userId);
 
-    BoulderProblem findById(Integer id);
 }
