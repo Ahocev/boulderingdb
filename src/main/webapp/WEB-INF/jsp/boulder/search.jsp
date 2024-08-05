@@ -32,13 +32,11 @@
     .form-outline {
         width: 1000px; /* Widen the input field */
     }
-
 </style>
 
 <section>
     <div class="container">
-            <h1 class="text-center mt-4">Search the Database</h1>
-        </div>
+        <h1 class="text-center mt-4">Search the Database</h1>
     </div>
 </section>
 
@@ -47,8 +45,8 @@
     <div class="container">
         <div class="row justify-content-center pt-5 pb-3">
             <div class="col-8 text-center">
-                <form action="/search" class="search-form">
-                    <input type="search" id="search" class="form-control form-outline search-input" placeholder="" aria-label="Search" />
+                <form action="/boulder/search" class="search-form">
+                    <input type="search" id="search" name="search" class="form-control form-outline search-input" value="${search}" placeholder="Enter search term" aria-label="Search" />
                     <button type="submit" class="btn search-button">Search</button>
                 </form>
             </div>
@@ -56,36 +54,38 @@
     </div>
 </section>
 
-<section>
-    <div class="container">
-        <div class="row pt-5">
-            <div class="col-12">
-                <h2 class="text-center">Boulders Found</h2>
+<c:if test="${not empty boulderProblems}">
+    <section>
+        <div class="container">
+            <div class="row pt-5">
+                <div class="col-12">
+                    <h2 class="text-center">Boulders Found (${boulderProblems.size()})</h2>
+                </div>
+            </div>
+            <div class="row pt-3">
+                <div class="col-12">
+                    <table class="table">
+                        <tr>
+                            <th>ZONE</th>
+                            <th>BOULDER PROBLEM</th>
+                            <th>LOCATED ON</th>
+                            <th>RATING</th>
+                            <th>FIRST ASCENSIONIST</th>
+                        </tr>
+                        <c:forEach items="${boulderProblems}" var="boulderProblem">
+                            <tr>
+                                <td>${boulderProblem.zoneName}</td>
+                                <td><a href="/boulder/boulder-page?id=${boulderProblem.id}">${boulderProblem.boulderProblemName}</a></td>
+                                <td>${boulderProblem.boulderName}</td>
+                                <td>${boulderProblem.rating}</td>
+                                <td>${boulderProblem.firstAscensionist}</td>
+                            </tr>
+                        </c:forEach>
+                    </table>
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-12">
-                <table class="table">
-                    <tr>
-                        <th>ZONE</th>
-                        <th>BOULDER PROBLEM</th>
-                        <th>LOCATED ON</th>
-                        <th>RATING</th>
-                        <th>FIRST ASCENSIONIST</th>
-
-                    </tr>
-<%--                    <c:forEach items="${products}" var="product">--%>
-<%--                        <tr>--%>
-<%--                            <td><a href="/?id=${product.id}">${product.id}</a></td>--%>
-<%--                            <td>${product.productCode}</td>--%>
-<%--                            <td>${product.productName}</td>--%>
-<%--                            <td>${product.productDescription}</td>--%>
-<%--                        </tr>--%>
-<%--                    </c:forEach>--%>
-                </table>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
+</c:if>
 
 <jsp:include page="../include/footer.jsp" />
