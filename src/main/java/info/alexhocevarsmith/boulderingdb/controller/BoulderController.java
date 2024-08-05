@@ -39,10 +39,17 @@ public class BoulderController {
     private LocationDAO locationDAO;
 
     @GetMapping("/boulder-page")
-    public ModelAndView boulderPage() {
+    public ModelAndView boulderPage(@RequestParam("id") Long id) {
+        ModelAndView response = new ModelAndView("boulder/boulder-page");
 
-        return new ModelAndView("boulder/boulder-page");
+        BoulderProblem boulderProblem = boulderProblemDAO.findById(id).orElse(null);
+        if (boulderProblem == null) {
+            response.setViewName("redirect:/boulder/boulder-input");
+            return response;
+        }
 
+        response.addObject("boulderProblem", boulderProblem);
+        return response;
     }
 
     @GetMapping("/browse")
