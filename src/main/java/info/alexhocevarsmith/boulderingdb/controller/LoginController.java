@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -125,13 +126,22 @@ public class LoginController {
     }
 
     @GetMapping("/profile")
-    public ModelAndView profilePage() {
+    public ModelAndView profilePage(@RequestParam(value = "id", required = false) Integer id) {
         ModelAndView response = new ModelAndView("auth/profile");
 
-        User user = authenticatedUserUtilities.getCurrentUser();
-        if (user == null) {
-            response.setViewName("redirect:/account/register");
-            return response;
+        User user;
+        if (id == null) {
+            user = authenticatedUserUtilities.getCurrentUser();
+            if (user == null) {
+                response.setViewName("redirect:/account/register");
+                return response;
+            }
+        } else {
+            user = userDao.findById(id);
+            if (user == null) {
+                response.setViewName("redirect:/account/register");
+                return response;
+            }
         }
 
         response.addObject("user", user);
