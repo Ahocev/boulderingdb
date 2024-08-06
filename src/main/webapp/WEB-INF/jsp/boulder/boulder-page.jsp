@@ -134,6 +134,45 @@
         overflow: visible; /* Ensure parent container allows overflow */
     }
 
+    .comments-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .comments-table th, .comments-table td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    .comments-table th {
+        background-color: #f2f2f2;
+    }
+
+    .comments-table thead th {
+        text-align: center;
+        padding: 10px;
+    }
+
+    .comments-table td {
+        text-align: center;
+    }
+
+    .comment-form {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end; /* Align items to the right */
+    }
+
+    .button-wrapper {
+        margin-top: 10px; /* Add some space between the textarea and the button */
+    }
+
+    .button-wrapper .btn {
+        justify-content: end;
+    }
+
 </style>
 
 <div class="container my-4 boulder-profile" style="max-width: 90%;">
@@ -175,36 +214,38 @@
                 </button>
                 <div class="collapse" id="betaContent">
                     <div class="comment-section">
-                        <h3>Leave a Comment</h3>
+                        <h3 class="mt-4">Leave a Comment</h3>
                         <form action="${pageContext.request.contextPath}/boulder/addComment" method="post">
+                            <input type="hidden" name="boulderProblemId" value="${boulderProblem.id}">
+                            <input type="hidden" name="userId" value="${session.user.id}">
                             <div class="mb-3">
-                                <label for="comment" class="form-label">Comment</label>
-                                <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+                                <textarea class="form-control mt-4" id="comment" name="comment" rows="3" required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-black">Submit</button>
+                            <div class="button-wrapper">
+                                <button type="submit" class="btn btn-black">Submit</button>
+                            </div>
                         </form>
-                        <div class="divider"></div>
-                        <h3>Comments</h3>
+
+                        <h3 class="mt-4">Comments</h3>
                         <table class="comments-table">
                             <thead>
                             <tr>
-                                <th>Reviewer</th>
-                                <th>Rating</th>
-                                <th>Review Text</th>
-                                <th>Review Date</th>
+                                <th>User</th>
+                                <th>Comment Date</th>
+                                <th>Comment</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach var="comment" items="${comments}">
                                 <tr>
-                                    <td>${comment.user.email}</td>
-                                    <td>${comment.rating}/5</td>
-                                    <td>${comment.comment}</td>
+                                    <td>${comment.user.name}</td>
                                     <td>${comment.date}</td>
+                                    <td>${comment.comment}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
                         </table>
+                        <div class="divider"></div>
                     </div>
                 </div>
             </div>
