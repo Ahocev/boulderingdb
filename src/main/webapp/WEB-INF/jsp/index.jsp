@@ -3,7 +3,7 @@
 <img id="main-image" src="/pub/media/TheMandala.jpeg" alt="The Mandala" class="responsive-image" onclick="changeImage()">
 </div>
 <div class="popular-section">
-    <div class="popular-title">POPULAR NOW</div>
+    <div class="popular-title">FEATURED</div>
     <div class="row gx-3">
         <div class="col-md-3">
             <div class="flex-box">
