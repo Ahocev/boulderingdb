@@ -75,6 +75,16 @@ public class BoulderController {
         return response;
     }
 
+    @GetMapping("/featured")
+    public ModelAndView featuredBoulders() {
+        ModelAndView response = new ModelAndView("boulder/featured");
+
+        List<BoulderProblem> featuredBoulders = boulderProblemDAO.findRandomBoulders();
+        response.addObject("featuredBoulders", featuredBoulders);
+
+        return response;
+    }
+
     @PostMapping("/addComment")
     public String addComment(@Valid @ModelAttribute("commentForm") AddCommentFormBean form, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
