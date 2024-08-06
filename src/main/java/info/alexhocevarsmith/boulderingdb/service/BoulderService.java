@@ -57,6 +57,41 @@ public class BoulderService {
         return boulderProblemDAO.save(boulderProblem);
     }
 
+    public BoulderProblem editBoulderProblem(AddBoulderFormBean form) {
+        BoulderProblem boulderProblem = boulderProblemDAO.findById(form.getId());
+
+        if (boulderProblem == null) {
+            throw new IllegalArgumentException("Boulder problem not found");
+        }
+
+        // Check if the location already exists
+        Location location = locationDAO.findByCountryAndStateAndNearestCity(form.getCountry(), form.getState(), form.getNearestCity());
+
+        if (location == null) {
+            // Create a new location if it doesn't exist
+            location = new Location();
+            location.setCountry(form.getCountry());
+            location.setState(form.getState());
+            location.setNearestCity(form.getNearestCity());
+            locationDAO.save(location);
+        }
+
+        // Update the BoulderProblem fields
+        boulderProblem.setBoulderProblemName(form.getBoulderProblemName());
+        boulderProblem.setFirstAscensionist(form.getFirstAscensionist());
+        boulderProblem.setGrade(form.getGrade());
+        boulderProblem.setRating(form.getRating());
+        boulderProblem.setRepeated(form.getRepeated());
+        boulderProblem.setHistory(form.getHistory());
+        boulderProblem.setShowcaseImgUrl(form.getShowcaseImgUrl());
+        boulderProblem.setZoneName(form.getZoneName());
+        boulderProblem.setBoulderName(form.getBoulderName());
+        boulderProblem.setLocation(location);
+
+        // Save the updated BoulderProblem
+        return boulderProblemDAO.save(boulderProblem);
+    }
+
     public BoulderProblem getBoulderProblemById(Integer id) {
         return boulderProblemDAO.findById(id);
     }
