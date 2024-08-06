@@ -1,9 +1,11 @@
 package info.alexhocevarsmith.boulderingdb.controller;
 
 import info.alexhocevarsmith.boulderingdb.database.dao.BoulderProblemDAO;
+import info.alexhocevarsmith.boulderingdb.database.dao.CommentDAO;
 import info.alexhocevarsmith.boulderingdb.database.dao.LocationDAO;
 import info.alexhocevarsmith.boulderingdb.database.dao.UserDAO;
 import info.alexhocevarsmith.boulderingdb.database.entity.BoulderProblem;
+import info.alexhocevarsmith.boulderingdb.database.entity.Comment;
 import info.alexhocevarsmith.boulderingdb.database.entity.Location;
 import info.alexhocevarsmith.boulderingdb.database.entity.User;
 import info.alexhocevarsmith.boulderingdb.form.AddBoulderFormBean;
@@ -45,6 +47,9 @@ public class BoulderController {
     @Autowired
     private LocationDAO locationDAO;
 
+    @Autowired
+    private CommentDAO commentDAO;
+
 
     @GetMapping("/boulder-page")
     public ModelAndView boulderPage(@RequestParam("id") Long id) {
@@ -57,6 +62,8 @@ public class BoulderController {
         }
 
         response.addObject("boulderProblem", boulderProblem);
+        List<Comment> comments = commentDAO.findByBoulderProblemId(boulderProblem.getId());
+        response.addObject("comments", comments);
         return response;
     }
 
