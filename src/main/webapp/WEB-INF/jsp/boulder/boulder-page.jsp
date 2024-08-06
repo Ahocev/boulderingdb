@@ -166,6 +166,8 @@
     }
 
     .button-wrapper {
+        display: flex;
+        justify-content: flex-end;
         margin-top: 10px; /* Add some space between the textarea and the button */
     }
 
@@ -198,9 +200,10 @@
             <h2 class="boulder-problem-name">${boulderProblem.boulderProblemName}</h2>
             <p class="grade text-muted">${boulderProblem.grade}</p>
             <p class="boulder-name">${boulderProblem.boulderName}</p>
+            <p class="location-city">${boulderProblem.location.nearestCity}, ${boulderProblem.location.state}</p>
             <p class="rating">${boulderProblem.rating} stars</p>
-            <p class="repeated">${boulderProblem.repeated ? 'Yes' : 'No'}</p>
-            <p class="first-ascensionist">${boulderProblem.firstAscensionist}</p>
+            <p class="repeated">Repeated: ${boulderProblem.repeated ? 'Yes' : 'No'}</p>
+            <p class="first-ascensionist">FA: ${boulderProblem.firstAscensionist}</p>
             <div class="divider"></div>
             <div class="boulder-details mb-4">
                 <p>
@@ -222,7 +225,7 @@
                                 <textarea class="form-control mt-4" id="comment" name="comment" rows="3" required></textarea>
                             </div>
                             <div class="button-wrapper">
-                                <button type="submit" class="btn btn-black">Submit</button>
+                                <button type="submit" class="btn btn-black">submit</button>
                             </div>
                         </form>
 
@@ -252,6 +255,9 @@
         </div>
     </div>
 </div>
+<sec:authorize access="isAuthenticated()">
+    <a href="/boulder/edit-boulder?id=${boulderProblem.id}" class="justify-content-center">Edit</a>
+</sec:authorize>
 <div id="imageOverlay" class="overlay hidden">
     <span class="closebtn" onclick="closeOverlay()">&times;</span>
     <img class="overlay-content" id="overlayImage">
