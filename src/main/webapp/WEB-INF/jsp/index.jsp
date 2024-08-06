@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="include/header.jsp" />
 
 <img id="main-image" src="/pub/media/TheMandala.jpeg" alt="The Mandala" class="responsive-image" onclick="changeImage()">
@@ -5,46 +6,20 @@
 <div class="popular-section">
     <div class="popular-title">FEATURED</div>
     <div class="row gx-3">
-        <div class="col-md-3">
-            <div class="flex-box">
-                <a href="#mandala-details"></a>
-                <div class="flex-box-title">THE MANDALA</div>
-                <img src="/pub/media/TheMandala.jpeg" alt="The Mandala">
-                <div class="flex-box-subtitle">Bishop, CA</div>
-                <div class="flex-box-subtitle">V12</div>
-                <p class="boulderDetails">text goes here and here's what it says climb text goes here and here's what it says climb</p>
+        <c:forEach var="boulderProblem" items="${featuredBoulders}">
+            <div class="col-md-3">
+                <div class="flex-box">
+
+                    <a href="/boulder/boulder-page?id=${boulderProblem.id}"></a>
+                    <div class="flex-box-title">${boulderProblem.boulderProblemName}</div>
+                    <img src="${boulderProblem.showcaseImgUrl}" alt="${boulderProblem.boulderProblemName}">
+                    <div class="flex-box-subtitle">${boulderProblem.location.nearestCity}, ${boulderProblem.location.state}</div>
+                    <div class="flex-box-subtitle">${boulderProblem.grade}</div>
+                    <p class="boulderDetails">${boulderProblem.history}</p>
+
+                </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="flex-box">
-                <a href="#orb-details"></a>
-                <div class="flex-box-title">THE ORB</div>
-                <img src="/pub/media/TheMandala.jpeg" alt="The Orb">
-                <div class="flex-box-subtitle">Rocktown, Georgia</div>
-                <div class="flex-box-subtitle">V8</div>
-                <p class="boulderDetails">text goes here and here's what it says climb text goes here and here's what it says climb</p>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="flex-box">
-                <a href="#midnight-details"></a>
-                <div class="flex-box-title">MIDNIGHT</div>
-                <img src="/pub/media/TheMandala.jpeg" alt="Midnight">
-                <div class="flex-box-subtitle">Rocktown, Georgia</div>
-                <div class="flex-box-subtitle">V8</div>
-                <p class="boulderDetails">text goes here and here's what it says climb text goes here and here's what it says climb</p>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="flex-box">
-                <a href="#meadowlark-details"></a>
-                <div class="flex-box-title">MEADOWLARK</div>
-                <img src="/pub/media/TheMandala.jpeg" alt="Meadowlark">
-                <div class="flex-box-subtitle">Rocktown, Georgia</div>
-                <div class="flex-box-subtitle">V8</div>
-                <p class="boulderDetails">text goes here and here's what it says climb text goes here and here's what it says climb</p>
-            </div>
-        </div>
+        </c:forEach>
     </div>
 </div>
 <script>
