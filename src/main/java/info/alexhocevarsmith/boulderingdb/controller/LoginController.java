@@ -130,6 +130,8 @@ public class LoginController {
         ModelAndView response = new ModelAndView("auth/profile");
 
         User user;
+
+        // if there is no user id when the user clicks on the profile page, then show current user's profile
         if (id == null) {
             user = authenticatedUserUtilities.getCurrentUser();
             if (user == null) {
@@ -137,6 +139,7 @@ public class LoginController {
                 return response;
             }
         } else {
+            // if there is an id param on the profile url, show that user id's profile
             user = userDao.findById(id);
             if (user == null) {
                 response.setViewName("redirect:/account/register");
