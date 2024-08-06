@@ -1,13 +1,17 @@
 package info.alexhocevarsmith.boulderingdb.service;
 
 import info.alexhocevarsmith.boulderingdb.database.dao.BoulderProblemDAO;
+import info.alexhocevarsmith.boulderingdb.database.dao.CommentDAO;
 import info.alexhocevarsmith.boulderingdb.database.dao.LocationDAO;
 import info.alexhocevarsmith.boulderingdb.database.entity.BoulderProblem;
+import info.alexhocevarsmith.boulderingdb.database.entity.Comment;
 import info.alexhocevarsmith.boulderingdb.database.entity.Location;
 import info.alexhocevarsmith.boulderingdb.form.AddBoulderFormBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -18,6 +22,9 @@ public class BoulderService {
 
     @Autowired
     private BoulderProblemDAO boulderProblemDAO;
+
+    @Autowired
+    private CommentDAO commentDAO;
 
     public BoulderProblem addBoulderProblem(AddBoulderFormBean form) {
 
@@ -48,5 +55,13 @@ public class BoulderService {
 
         // Save the BoulderProblem
         return boulderProblemDAO.save(boulderProblem);
+    }
+
+    public void saveComment(Comment comment) {
+        commentDAO.save(comment);
+    }
+
+    public List<Comment> getCommentsByBoulderProblemId(Integer boulderProblemId) {
+        return commentDAO.findByBoulderProblemId(boulderProblemId);
     }
 }
