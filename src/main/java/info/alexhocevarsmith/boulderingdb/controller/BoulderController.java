@@ -69,6 +69,7 @@ public class BoulderController {
         }
 
         response.addObject("boulderProblem", boulderProblem);
+        response.addObject("location", boulderProblem.getLocation());
         List<Comment> comments = commentDAO.findByBoulderProblemId(boulderProblem.getId());
         response.addObject("comments", comments);
         return response;
@@ -182,6 +183,88 @@ public class BoulderController {
         // Save the form data using BoulderService
         BoulderProblem boulderProblem = boulderService.addBoulderProblem(form);
         response.setViewName("redirect:/boulder/boulder-page?id=" + boulderProblem.getId());
+        return response;
+    }
+
+    @GetMapping("/edit-boulder")
+    public ModelAndView editBoulder(@RequestParam(required = false) Integer id) {
+        ModelAndView response = new ModelAndView("boulder/boulder-input");
+
+        if (id != null) {
+            BoulderProblem boulderProblem = boulderService.getBoulderProblemById(id);
+
+            if (boulderProblem != null) {
+                AddBoulderFormBean form = new AddBoulderFormBean();
+                form.setId(boulderProblem.getId());
+                form.setBoulderProblemName(boulderProblem.getBoulderProblemName());
+                form.setFirstAscensionist(boulderProblem.getFirstAscensionist());
+                form.setGrade(boulderProblem.getGrade());
+                form.setRating(boulderProblem.getRating());
+                form.setRepeated(boulderProblem.getRepeated());
+                form.setHistory(boulderProblem.getHistory());
+                form.setShowcaseImgUrl(boulderProblem.getShowcaseImgUrl());
+                form.setCountry(boulderProblem.getLocation().getCountry());
+                form.setState(boulderProblem.getLocation().getState());
+                form.setNearestCity(boulderProblem.getLocation().getNearestCity());
+                form.setZoneName(boulderProblem.getZoneName());
+                form.setBoulderName(boulderProblem.getBoulderName());
+
+                response.addObject("form", form);
+            } else {
+                response.setViewName("redirect:/boulder/boulder-input");
+            }
+        } else {
+            response.addObject("form", new AddBoulderFormBean());
+        }
+
+        return response;
+    }
+
+    @PostMapping("/submit-edit")
+    public ModelAndView submitEditBoulderProblem(@Valid AddBoulderFormBean form, BindingResult bindingResult) {
+        ModelAndView response = new ModelAndView();
+
+        if (bindingResult.hasErrors()) {
+            for (ObjectError error : bindingResult.getAllErrors()) {
+                log.debug("Validation error : " + ((FieldError) error).getField() + " = " + error.getDefaultMessage());
+            }
+
+            response.addObject("bindingResult", bindingResult);
+            response.setViewName("boulder/boulder-input");
+            response.addObject("form", form);
+            return response;
+        }
+
+        // Handle the file upload first
+        if (!form.getShowcaseImg().isEmpty()) {
+            log.debug(form.getShowcaseImg().getOriginalFilename());
+            log.debug("The file size is: " + form.getShowcaseImg().getSize());
+            log.debug(form.getShowcaseImg().getContentType());
+
+            String savedFilename = "./src/main/webapp/pub/media/" + form.getShowcaseImg().getOriginalFilename();
+
+            try {
+                Files.copy(form.getShowcaseImg().getInputStream(), Paths.get(savedFilename), StandardCopyOption.REPLACE_EXISTING);
+            } catch (Exception e) {
+                log.error("Unable to finish reading file", e);
+            }
+
+            String url = "/pub/media/" + form.getShowcaseImg().getOriginalFilename();
+            form.setShowcaseImgUrl(url);
+        }
+
+        // Update the BoulderProblem
+        try {
+            boulderService.editBoulderProblem(form);
+        } catch (IllegalArgumentException e) {
+            bindingResult.rejectValue("id", "id", e.getMessage());
+            response.addObject("bindingResult", bindingResult);
+            response.setViewName("boulder/boulder-input");
+            response.addObject("form", form);
+            return response;
+        }
+
+        response.setViewName("redirect:/boulder-page?id=" + form.getId());
         return response;
     }
 
