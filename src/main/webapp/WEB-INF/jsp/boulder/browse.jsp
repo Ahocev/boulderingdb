@@ -47,4 +47,6 @@
 
     .zone {
         margin-left: 20px;
-        margin-bottom: ​⬤
+        margin-bottom: 20px;
+    }
+</style>
