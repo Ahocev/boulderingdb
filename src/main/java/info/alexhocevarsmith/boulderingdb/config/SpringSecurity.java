@@ -24,6 +24,7 @@ public class SpringSecurity {
                 .requestMatchers(
                         new AntPathRequestMatcher("/admin/**"),
                         new AntPathRequestMatcher("/profile/**"),
+                        new AntPathRequestMatcher("/boulder/edit-boulder"),
                         new AntPathRequestMatcher("/account/profile"),
                         new AntPathRequestMatcher("/user/**")).authenticated()
                 .anyRequest().permitAll();
