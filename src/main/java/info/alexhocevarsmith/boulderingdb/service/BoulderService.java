@@ -57,6 +57,11 @@ public class BoulderService {
         return boulderProblemDAO.save(boulderProblem);
     }
 
+    public BoulderProblem getBoulderProblemById(Integer id) {
+        return boulderProblemDAO.findById(id);
+    }
+
+
     public void saveComment(Comment comment) {
         commentDAO.save(comment);
     }
