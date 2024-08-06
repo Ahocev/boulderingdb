@@ -9,13 +9,16 @@ import info.alexhocevarsmith.boulderingdb.database.entity.Comment;
 import info.alexhocevarsmith.boulderingdb.database.entity.Location;
 import info.alexhocevarsmith.boulderingdb.database.entity.User;
 import info.alexhocevarsmith.boulderingdb.form.AddBoulderFormBean;
+import info.alexhocevarsmith.boulderingdb.form.AddCommentFormBean;
 import info.alexhocevarsmith.boulderingdb.form.RegisterAccountFormBean;
 import info.alexhocevarsmith.boulderingdb.helper.BoulderProblemHelper;
+import info.alexhocevarsmith.boulderingdb.security.AuthenticatedUserUtilities;
 import info.alexhocevarsmith.boulderingdb.service.BoulderService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -28,6 +31,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -50,12 +54,15 @@ public class BoulderController {
     @Autowired
     private CommentDAO commentDAO;
 
+    @Autowired
+    private AuthenticatedUserUtilities authenticatedUserUtilities;
+
 
     @GetMapping("/boulder-page")
-    public ModelAndView boulderPage(@RequestParam("id") Long id) {
+    public ModelAndView boulderPage(@RequestParam("id") Integer id) {
         ModelAndView response = new ModelAndView("boulder/boulder-page");
 
-        BoulderProblem boulderProblem = boulderProblemDAO.findById(id).orElse(null);
+        BoulderProblem boulderProblem = boulderProblemDAO.findById(id);
         if (boulderProblem == null) {
             response.setViewName("redirect:/boulder/boulder-input");
             return response;
@@ -65,6 +72,24 @@ public class BoulderController {
         List<Comment> comments = commentDAO.findByBoulderProblemId(boulderProblem.getId());
         response.addObject("comments", comments);
         return response;
+    }
+
+    @PostMapping("/addComment")
+    public String addComment(@Valid @ModelAttribute("commentForm") AddCommentFormBean form, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "redirect:/boulder/boulder-page?id=" + form.getBoulderProblemId();
+        }
+
+        User user = authenticatedUserUtilities.getCurrentUser();
+
+        Comment comment = new Comment();
+        comment.setComment(form.getComment());
+        comment.setDate(new Date());
+        comment.setUser(user);
+        comment.setBoulderProblem(boulderService.getBoulderProblemById(form.getBoulderProblemId()));
+        boulderService.saveComment(comment);
+
+        return "redirect:/boulder/boulder-page?id=" + form.getBoulderProblemId();
     }
 
     @GetMapping("/browse")
