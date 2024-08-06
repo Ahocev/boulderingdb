@@ -13,7 +13,7 @@
                     <a href="/boulder/boulder-page?id=${boulderProblem.id}"></a>
                     <div class="flex-box-title">${boulderProblem.boulderProblemName}</div>
                     <img src="${boulderProblem.showcaseImgUrl}" alt="${boulderProblem.boulderProblemName}">
-                    <div class="flex-box-subtitle">${boulderProblem.location.nearestCity}, ${boulderProblem.location.state}</div>
+                    <div class="flex-box-subtitle">${boulderProblem.location.nearestCity} ${boulderProblem.location.state}</div>
                     <div class="flex-box-subtitle">${boulderProblem.grade}</div>
                     <p class="boulderDetails">${boulderProblem.history}</p>
 
