@@ -74,6 +74,12 @@ public class BoulderService {
             location.setState(form.getState());
             location.setNearestCity(form.getNearestCity());
             locationDAO.save(location);
+        } else {
+            // Update the existing location if necessary
+            location.setCountry(form.getCountry());
+            location.setState(form.getState());
+            location.setNearestCity(form.getNearestCity());
+            locationDAO.save(location);
         }
 
         // Update the BoulderProblem fields
