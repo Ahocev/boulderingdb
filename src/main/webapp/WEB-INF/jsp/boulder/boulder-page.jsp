@@ -174,9 +174,38 @@
                     BETA
                 </button>
                 <div class="collapse" id="betaContent">
-                    <p class="mt-3">Detailed beta information goes here...</p>
-                    <p class="mt-3">Additional beta information...</p>
-                    <p class="mt-3">Even more beta information...</p>
+                    <div class="comment-section">
+                        <h3>Leave a Comment</h3>
+                        <form action="${pageContext.request.contextPath}/boulder/addComment" method="post">
+                            <div class="mb-3">
+                                <label for="comment" class="form-label">Comment</label>
+                                <textarea class="form-control" id="comment" name="comment" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-black">Submit</button>
+                        </form>
+                        <div class="divider"></div>
+                        <h3>Comments</h3>
+                        <table class="comments-table">
+                            <thead>
+                            <tr>
+                                <th>Reviewer</th>
+                                <th>Rating</th>
+                                <th>Review Text</th>
+                                <th>Review Date</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach var="comment" items="${comments}">
+                                <tr>
+                                    <td>${comment.user.email}</td>
+                                    <td>${comment.rating}/5</td>
+                                    <td>${comment.comment}</td>
+                                    <td>${comment.date}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
