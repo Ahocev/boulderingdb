@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 @ToString
 public class AddBoulderFormBean {
 
+    private Integer id;
+
     @NotEmpty(message = "Boulder Problem Name is required.")
     private String boulderProblemName;
 
