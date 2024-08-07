@@ -12,6 +12,10 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
     <link href="/pub/css/global.css" rel="stylesheet">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -20,6 +24,7 @@
     <style>
         body {
             font-family: "Helvetica";
+            color: black;
             margin: 0;
             padding: 20px 20px 20px 20px;
             display: flex;
@@ -33,21 +38,30 @@
             justify-content: flex-end;
             align-items: center;
             padding: 10px 20px;
+            margin: -10px;
         }
         .nav-links {
             display: flex;
             gap: 20px;
+            font-family: "Anonymous Pro";
+            letter-spacing: 0.1em;
         }
         .nav-links a {
             text-decoration: none;
             color: black;
             font-size: 1rem;
         }
+
+        .dropdown-item{
+            font-family: "Anonymous Pro";
+            letter-spacing: 0.1em;
+        }
+
         .pageTitle {
-            font-size: 11vw;
+            font-size: 11.5vw;
             font-weight: 500;
             text-align: center;
-            margin: 0;
+            margin: -20px;
         }
         .divider {
             width: 90%;
@@ -55,8 +69,9 @@
             background-color: black;
             margin: 10px 0;
         }
+
         .titleContainer {
-            width: 100%;
+            width: 112%;
             display: flex;
             justify-content: center;
             align-items: center;
