@@ -11,14 +11,34 @@
     }
 
     .popular-section {
+        width: 98%;
         display: flex;
         flex-direction: column;
         align-items: start;
     }
 
+    .popular-title {
+        font-family: "Anonymous Pro";
+        font-size: larger;
+        font-weight: normal;
+        letter-spacing: 0.1em;
+    }
+
+    .flex-box-subtitle-location {
+        margin-bottom: 5px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .flex-box-subtitle {
+        margin-bottom: 5px;
+        position: relative;
+        z-index: 2;
+    }
+
 </style>
 
-<img id="main-image" src="/pub/media/TheMandala.jpeg" alt="The Mandala" class="responsive-image" onclick="changeImage()">
+<img id="main-image" src="/pub/media/Swarm.jpeg" alt="The Swarm" class="responsive-image" onclick="changeImage()">
 </div>
 <div class="popular-section">
     <div class="popular-title">FEATURED</div>
@@ -28,9 +48,9 @@
                 <div class="flex-box">
 
                     <a href="/boulder/boulder-page?id=${boulderProblem.id}"></a>
-                    <div class="flex-box-title">${boulderProblem.boulderProblemName}</div>
+                    <div class="flex-box-title" style="font-weight: normal; text-transform: uppercase;">${boulderProblem.boulderProblemName}</div>
                     <img src="${boulderProblem.showcaseImgUrl}" alt="${boulderProblem.boulderProblemName}">
-                    <div class="flex-box-subtitle">${boulderProblem.location.nearestCity} ${boulderProblem.location.state}</div>
+                    <div class="flex-box-subtitle-location">${boulderProblem.location.nearestCity} ${boulderProblem.location.state}</div>
                     <div class="flex-box-subtitle">${boulderProblem.grade}</div>
                     <p class="boulderDetails">${boulderProblem.history}</p>
 
