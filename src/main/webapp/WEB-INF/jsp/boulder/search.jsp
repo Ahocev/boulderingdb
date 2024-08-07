@@ -23,6 +23,8 @@
         color: white; /* White text */
         height: 46px; /* Match the height of the input field */
         padding: 10px 20px; /* Add padding */
+        font-family: "Anonymous Pro";
+        letter-spacing: 0.1em;
     }
 
     .search-button:hover {
@@ -41,11 +43,16 @@
     .table th, .table td {
         text-align: center; /* Center align table content */
     }
+
+    .search-title {
+        font-family: "Anonymous Pro";
+        letter-spacing: 0.1em;
+    }
 </style>
 
 <section>
     <div class="container">
-        <h1 class="text-center mt-4">Search the Database</h1>
+        <h1 class="text-center mt-4 mb-0 search-title">SEARCH THE DATABASE</h1>
     </div>
 </section>
 
@@ -56,7 +63,7 @@
             <div class="col-8 text-center">
                 <form action="/boulder/search" class="search-form">
                     <input type="search" id="search" name="search" class="form-control form-outline search-input" value="${search}" placeholder="search for a boulder problem or user by name" aria-label="Search" />
-                    <button type="submit" class="btn search-button">Search</button>
+                    <button type="submit" class="btn search-button">SEARCH</button>
                 </form>
             </div>
         </div>
