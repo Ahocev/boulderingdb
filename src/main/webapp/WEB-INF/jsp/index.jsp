@@ -1,6 +1,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="include/header.jsp" />
 
+<style>
+    .boulderDetails {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 8; /* Change this to the desired number of lines */
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+
 <img id="main-image" src="/pub/media/TheMandala.jpeg" alt="The Mandala" class="responsive-image" onclick="changeImage()">
 </div>
 <div class="popular-section">
