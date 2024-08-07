@@ -122,6 +122,10 @@ public class BoulderController {
         List<BoulderProblem> boulderProblems = new ArrayList<>();
         List<User> users = new ArrayList<>();
 
+        boulderProblems.stream().forEach(boulderProblem -> {
+            log.debug("Product: " + boulderProblem.getBoulderProblemName());
+        });
+
         if (search != null && !search.isEmpty()) {
             boulderProblems = boulderProblemDAO.findAllByBoulderProblemNameContainingIgnoreCase(search);
             users = userDAO.findAllByNameContainingIgnoreCase(search);
