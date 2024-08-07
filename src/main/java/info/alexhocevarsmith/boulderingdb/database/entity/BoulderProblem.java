@@ -53,12 +53,8 @@ public class BoulderProblem {
     @Column(name = "showcase_img_url")
     private String showcaseImgUrl;
 
-    @Column(name = "comment_id", insertable = false, updatable = false)
-    private Integer commentId;
-
     @ToString.Exclude
-    @ManyToOne
-    @JoinColumn(name = "comment_id", nullable = false)
-    private Comment comment;
+    @OneToMany(mappedBy = "boulderProblem", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Comment> comments;
 
 }
