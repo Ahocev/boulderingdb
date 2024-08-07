@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../include/header.jsp" />
 
-<h1>Admin Dashboard</h1>
+<h1 class="mt-4">Admin Dashboard</h1>
 
 <style>
     table {
