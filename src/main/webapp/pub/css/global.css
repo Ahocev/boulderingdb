@@ -28,6 +28,8 @@ body {
     padding: 10px;
     margin: 10px 0;
     position: relative;
+    height: 550px;
+    overflow: hidden;
 }
 .flex-box a {
     display: block;
