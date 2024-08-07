@@ -87,7 +87,8 @@
         color: white !important;
         border: none !important;
         border-radius: 0 !important; /* 90-degree corners */
-        font-family: Helvetica !important; /* Helvetica font */
+        font-family: "Anonymous Pro"; !important;
+        letter-spacing: 0.1em; !important;
         font-size: 1.25rem !important; /* Same size as <h3> */
         padding: 0.25rem 0.75rem !important; /* Padding for the button */
     }
@@ -176,6 +177,13 @@
         justify-content: end;
     }
 
+    .boulder-problem-name {
+        text-transform: uppercase;
+        font-family: "Anonymous Pro";
+        letter-spacing: 0.1em;
+    }
+
+
 </style>
 
 <div class="container my-4 boulder-profile" style="max-width: 90%;">
@@ -219,7 +227,7 @@
                 <div class="collapse" id="betaContent">
                     <sec:authorize access="isAuthenticated()">
                     <div class="comment-section">
-                        <h3 class="mt-4">Leave a Comment</h3>
+                        <h4 class="mt-4 comment-title">LEAVE A COMMENT</h4>
                         <form action="${pageContext.request.contextPath}/boulder/addComment" method="post">
                             <input type="hidden" name="boulderProblemId" value="${boulderProblem.id}">
                             <input type="hidden" name="userId" value="${session.user.id}">
@@ -227,11 +235,11 @@
                                 <textarea class="form-control mt-4" id="comment" name="comment" rows="3" required></textarea>
                             </div>
                             <div class="button-wrapper">
-                                <button type="submit" class="btn btn-black">submit</button>
+                                <button type="submit" class="btn btn-black">SUBMIT</button>
                             </div>
                         </form>
                         </sec:authorize>
-                        <h3 class="mt-4">Comments</h3>
+                        <h4 class="mt-4">COMMENTS</h4>
                         <table class="comments-table">
                             <thead>
                             <tr>
@@ -256,6 +264,7 @@
             </div>
         </div>
     </div>
+</div>
 </div>
 <sec:authorize access="isAuthenticated()">
     <a href="/boulder/edit-boulder?id=${boulderProblem.id}" class="justify-content-center">Edit</a>
