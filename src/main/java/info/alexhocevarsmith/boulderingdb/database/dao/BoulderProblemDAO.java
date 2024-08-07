@@ -14,17 +14,8 @@ public interface BoulderProblemDAO extends JpaRepository<BoulderProblem, Long> {
 
     BoulderProblem findById(Integer id);
 
-    BoulderProblem deleteById(Integer id);
-
     @Query(value = "SELECT DISTINCT * FROM boulder_problems ORDER BY RAND() LIMIT 4", nativeQuery = true)
     List<BoulderProblem> findRandomBoulders();
 
-    List<BoulderProblem> findByLocationId(Integer locationId);
-
-    List<BoulderProblem> findByZoneName(String zoneName);
-
-    List<BoulderProblem> findByBoulderName(String boulderName);
-
-    List<BoulderProblem> findByPostedById(Integer userId);
 
 }
