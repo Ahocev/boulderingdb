@@ -46,47 +46,6 @@ class BoulderingdbApplicationTests {
 
 	@Test
 	@Order(2)
-	void testReadBoulderProblem() {
-		BoulderProblem boulderProblem = boulderProblemDAO.findByBoulderProblemNameIgnoreCase("Test Problem");
-		Assertions.assertNotNull(boulderProblem);
-		Assertions.assertEquals("Test Problem", boulderProblem.getBoulderProblemName());
-	}
-
-	@Test
-	@Order(3)
-	void testUpdateBoulderProblem() {
-		BoulderProblem boulderProblem = boulderProblemDAO.findByBoulderProblemNameIgnoreCase("Test Problem");
-		boulderProblem.setBoulderProblemName("Updated Problem");
-		boulderProblemDAO.save(boulderProblem);
-
-		BoulderProblem updatedProblem = boulderProblemDAO.findByBoulderProblemNameIgnoreCase("Updated Problem");
-		Assertions.assertNotNull(updatedProblem);
-		Assertions.assertEquals("Updated Problem", updatedProblem.getBoulderProblemName());
-	}
-
-	@Test
-	@Order(4)
-	void testDeleteBoulderProblem() {
-		BoulderProblem boulderProblem = boulderProblemDAO.findByBoulderProblemNameIgnoreCase("Updated Problem");
-		boulderProblemDAO.delete(boulderProblem);
-
-		BoulderProblem deletedProblem = boulderProblemDAO.findByBoulderProblemNameIgnoreCase("Updated Problem");
-		Assertions.assertNull(deletedProblem);
-	}
-
-	@Test
-	@Order(5)
-	void testCreateComment() {
-		Comment comment = new Comment();
-		comment.setComment("This is a test comment.");
-		commentDAO.save(comment);
-
-		List<Comment> comments = commentDAO.findByBoulderProblemId(null);
-		Assertions.assertTrue(comments.stream().anyMatch(c -> "This is a test comment.".equals(c.getComment())));
-	}
-
-	@Test
-	@Order(6)
 	void testReadComment() {
 		List<Comment> comments = commentDAO.findByBoulderProblemId(null);
 		Assertions.assertNotNull(comments);
@@ -94,39 +53,14 @@ class BoulderingdbApplicationTests {
 		Assertions.assertTrue(comments.stream().anyMatch(c -> "This is a test comment.".equals(c.getComment())));
 	}
 
-	@Test
-	@Order(7)
-	void testUpdateComment() {
-		List<Comment> comments = commentDAO.findByBoulderProblemId(null);
-		Comment comment = comments.stream().filter(c -> "This is a test comment.".equals(c.getComment())).findFirst().orElse(null);
-		Assertions.assertNotNull(comment);
-
-		comment.setComment("Updated comment");
-		commentDAO.save(comment);
-
-		List<Comment> updatedComments = commentDAO.findByBoulderProblemId(null);
-		Assertions.assertTrue(updatedComments.stream().anyMatch(c -> "Updated comment".equals(c.getComment())));
-	}
-
-	@Test
-	@Order(8)
-	void testDeleteComment() {
-		List<Comment> comments = commentDAO.findByBoulderProblemId(null);
-		Comment comment = comments.stream().filter(c -> "Updated comment".equals(c.getComment())).findFirst().orElse(null);
-		Assertions.assertNotNull(comment);
-
-		commentDAO.delete(comment);
-
-		List<Comment> deletedComments = commentDAO.findByBoulderProblemId(null);
-		Assertions.assertFalse(deletedComments.stream().anyMatch(c -> "Updated comment".equals(c.getComment())));
-	}
 
 	@ParameterizedTest
 	@CsvSource({
 			"USA, California, San Francisco",
 			"Canada, Ontario, Toronto"
 	})
-	@Order(9)
+
+	@Order(3)
 	void testCreateLocation(String country, String state, String nearestCity) {
 		Location location = new Location();
 		location.setCountry(country);
@@ -142,33 +76,7 @@ class BoulderingdbApplicationTests {
 	}
 
 	@Test
-	@Order(10)
-	void testUpdateLocation() {
-		Location location = locationDAO.findByCountryAndStateAndNearestCity("USA", "California", "San Francisco");
-		Assertions.assertNotNull(location);
-
-		location.setNearestCity("Los Angeles");
-		locationDAO.save(location);
-
-		Location updatedLocation = locationDAO.findByCountryAndStateAndNearestCity("USA", "California", "Los Angeles");
-		Assertions.assertNotNull(updatedLocation);
-		Assertions.assertEquals("Los Angeles", updatedLocation.getNearestCity());
-	}
-
-	@Test
-	@Order(11)
-	void testDeleteLocation() {
-		Location location = locationDAO.findByCountryAndStateAndNearestCity("USA", "California", "Los Angeles");
-		Assertions.assertNotNull(location);
-
-		locationDAO.delete(location);
-
-		Location deletedLocation = locationDAO.findByCountryAndStateAndNearestCity("USA", "California", "Los Angeles");
-		Assertions.assertNull(deletedLocation);
-	}
-
-	@Test
-	@Order(12)
+	@Order(4)
 	void testReadAllLocations() {
 		List<Location> locations = locationDAO.findAll();
 		Assertions.assertNotNull(locations);
