@@ -217,6 +217,7 @@
                     BETA
                 </button>
                 <div class="collapse" id="betaContent">
+                    <sec:authorize access="isAuthenticated()">
                     <div class="comment-section">
                         <h3 class="mt-4">Leave a Comment</h3>
                         <form action="${pageContext.request.contextPath}/boulder/addComment" method="post">
@@ -229,7 +230,7 @@
                                 <button type="submit" class="btn btn-black">submit</button>
                             </div>
                         </form>
-
+                        </sec:authorize>
                         <h3 class="mt-4">Comments</h3>
                         <table class="comments-table">
                             <thead>
