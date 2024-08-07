@@ -9,6 +9,13 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    .popular-section {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
 </style>
 
 <img id="main-image" src="/pub/media/TheMandala.jpeg" alt="The Mandala" class="responsive-image" onclick="changeImage()">
