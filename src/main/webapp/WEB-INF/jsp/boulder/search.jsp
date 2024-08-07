@@ -86,7 +86,7 @@
                                 <td>${boulderProblem.zoneName}</td>
                                 <td><a href="/boulder/boulder-page?id=${boulderProblem.id}">${boulderProblem.boulderProblemName}</a></td>
                                 <td>${boulderProblem.boulderName}</td>
-                                <td>${boulderProblem.rating}</td>
+                                <td>${boulderProblem.rating} stars</td>
                                 <td>${boulderProblem.firstAscensionist}</td>
                             </tr>
                         </c:forEach>
