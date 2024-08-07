@@ -27,7 +27,7 @@ public class Comment {
     private Integer userId;
 
     @ToString.Exclude
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "boulder_problem_id", nullable = false)
     private BoulderProblem boulderProblem;
 
