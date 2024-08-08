@@ -267,7 +267,7 @@
 </div>
 </div>
 
-<a href="/boulder/edit-boulder?id=${boulderProblem.id}" class="justify-content-center">EDIT</a>
+<a href="/boulder/boulder-input?id=${boulderProblem.id}" class="justify-content-center">EDIT</a>
 
 <div id="imageOverlay" class="overlay hidden">
     <span class="closebtn" onclick="closeOverlay()">&times;</span>
