@@ -63,8 +63,9 @@
             text-align: center;
             margin: -20px;
         }
+
         .divider {
-            width: 90%;
+            width: 100%;
             height: 2px;
             background-color: black;
             margin: 10px 0;
@@ -125,9 +126,11 @@
         </div>
     </div>
 </header>
+
+<div class="divider"></div>
 <div class="titleContainer">
-    <div class="divider"></div>
     <a href="/" class="title-link">
         <h1 class="pageTitle">BOULDERING DB</h1>
     </a>
-    <div class="divider"></div>
+</div>
+<div class="divider"></div>
