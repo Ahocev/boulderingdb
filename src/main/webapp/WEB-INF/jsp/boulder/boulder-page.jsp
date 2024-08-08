@@ -243,9 +243,9 @@
                         <table class="comments-table">
                             <thead>
                             <tr>
-                                <th>User</th>
-                                <th>Comment Date</th>
-                                <th>Comment</th>
+                                <th>USER</th>
+                                <th>COMMENT DATE</th>
+                                <th>COMMENT</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -266,9 +266,9 @@
     </div>
 </div>
 </div>
-<sec:authorize access="isAuthenticated()">
-    <a href="/boulder/edit-boulder?id=${boulderProblem.id}" class="justify-content-center">Edit</a>
-</sec:authorize>
+
+<a href="/boulder/edit-boulder?id=${boulderProblem.id}" class="justify-content-center">EDIT</a>
+
 <div id="imageOverlay" class="overlay hidden">
     <span class="closebtn" onclick="closeOverlay()">&times;</span>
     <img class="overlay-content" id="overlayImage">
