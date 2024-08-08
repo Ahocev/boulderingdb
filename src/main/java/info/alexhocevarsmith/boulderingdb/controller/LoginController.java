@@ -151,5 +151,39 @@ public class LoginController {
         return response;
     }
 
+    @GetMapping("/edit-profile")
+    public ModelAndView editProfile(@RequestParam(required = false) Integer id) {
+        ModelAndView response = new ModelAndView("auth/edit-profile");
+
+        if (id != null) {
+            User user = userDao.findById(id);
+
+            if (user != null) {
+                RegisterAccountFormBean form = new RegisterAccountFormBean();
+                form.setUserId(user.getId());
+                form.setEmail(user.getEmail());
+                form.setPassword(""); // Leave password empty for security reasons
+                form.setName(user.getName());
+                form.setAge(user.getAge());
+                form.setApeIndex(user.getApeIndex());
+                form.setHeight(user.getHeight());
+                form.setGender(user.getGender());
+                form.setAbout(user.getAbout());
+                form.setProfileImgUrl(user.getProfileImgUrl());
+                form.setStyle(user.getStyle());
+                form.setFavoriteArea(user.getFavoriteArea());
+                form.setFavoriteBoulderProblem(user.getFavoriteBoulderProblem());
+
+                response.addObject("form", form);
+            } else {
+                response.setViewName("redirect:/account/profile");
+            }
+        } else {
+            response.addObject("form", new RegisterAccountFormBean());
+        }
+
+        return response;
+    }
+
 
 }
