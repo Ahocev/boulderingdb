@@ -152,17 +152,16 @@ public class LoginController {
     }
 
     @GetMapping("/edit-profile")
-    public ModelAndView editProfile(@RequestParam(required = false) Integer id) {
-        ModelAndView response = new ModelAndView("auth/edit-profile");
+    public ModelAndView editProfile() {
+        ModelAndView response = new ModelAndView("auth/register");
 
-        if (id != null) {
-            User user = userDao.findById(id);
+            User user = authenticatedUserUtilities.getCurrentUser();
 
             if (user != null) {
                 RegisterAccountFormBean form = new RegisterAccountFormBean();
                 form.setUserId(user.getId());
                 form.setEmail(user.getEmail());
-                form.setPassword(""); // Leave password empty for security reasons
+                form.setPassword("");
                 form.setName(user.getName());
                 form.setAge(user.getAge());
                 form.setApeIndex(user.getApeIndex());
@@ -178,9 +177,6 @@ public class LoginController {
             } else {
                 response.setViewName("redirect:/account/profile");
             }
-        } else {
-            response.addObject("form", new RegisterAccountFormBean());
-        }
 
         return response;
     }
