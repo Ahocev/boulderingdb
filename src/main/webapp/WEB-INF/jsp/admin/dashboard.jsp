@@ -47,4 +47,58 @@
     </tbody>
 </table>
 
+<table class="col-4 mt-4 mb-4">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Country</th>
+        <th>State</th>
+        <th>Nearest City</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="location" items="${locations}">
+        <tr>
+            <td>${location.id}</td>
+            <td>${location.country}</td>
+            <td>${location.state}</td>
+            <td>${location.nearestCity}</td>
+            <td>
+                <form action="${pageContext.request.contextPath}/admin/deleteLocation" method="post">
+                    <input type="hidden" name="id" value="${location.id}" />
+                    <input type="submit" value="Delete" />
+                </form>
+            </td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+
+<table class="col-4 mt-4 mb-4">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="user" items="${users}">
+        <tr>
+            <td>${user.id}</td>
+            <td>${user.name}</td>
+            <td>${user.email}</td>
+            <td>
+                <form action="${pageContext.request.contextPath}/admin/deleteUser" method="post">
+                    <input type="hidden" name="id" value="${user.id}" />
+                    <input type="submit" value="Delete" />
+                </form>
+            </td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+
 <jsp:include page="../include/footer.jsp" />
