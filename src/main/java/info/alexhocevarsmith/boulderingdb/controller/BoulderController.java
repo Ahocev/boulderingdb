@@ -224,52 +224,52 @@ public class BoulderController {
         return response;
     }
 
-    @PostMapping("/submit-edit")
-    public ModelAndView submitEditBoulderProblem(@Valid AddBoulderFormBean form, BindingResult bindingResult) {
-        ModelAndView response = new ModelAndView();
-
-        if (bindingResult.hasErrors()) {
-            for (ObjectError error : bindingResult.getAllErrors()) {
-                log.debug("Validation error : " + ((FieldError) error).getField() + " = " + error.getDefaultMessage());
-            }
-
-            response.addObject("bindingResult", bindingResult);
-            response.setViewName("boulder/boulder-input");
-            response.addObject("form", form);
-            return response;
-        }
-
-        // Handle the file upload first
-        if (!form.getShowcaseImg().isEmpty()) {
-            log.debug(form.getShowcaseImg().getOriginalFilename());
-            log.debug("The file size is: " + form.getShowcaseImg().getSize());
-            log.debug(form.getShowcaseImg().getContentType());
-
-            String savedFilename = "./src/main/webapp/pub/media/" + form.getShowcaseImg().getOriginalFilename();
-
-            try {
-                Files.copy(form.getShowcaseImg().getInputStream(), Paths.get(savedFilename), StandardCopyOption.REPLACE_EXISTING);
-            } catch (Exception e) {
-                log.error("Unable to finish reading file", e);
-            }
-
-            String url = "/pub/media/" + form.getShowcaseImg().getOriginalFilename();
-            form.setShowcaseImgUrl(url);
-        }
-
-        // Update the BoulderProblem
-        try {
-            boulderService.editBoulderProblem(form);
-        } catch (IllegalArgumentException e) {
-            bindingResult.rejectValue("id", "id", e.getMessage());
-            response.addObject("bindingResult", bindingResult);
-            response.setViewName("boulder/boulder-input");
-            response.addObject("form", form);
-            return response;
-        }
-
-        response.setViewName("redirect:/boulder-page?id=" + form.getId());
-        return response;
-    }
+//    @PostMapping("/submit-edit")
+//    public ModelAndView submitEditBoulderProblem(@Valid AddBoulderFormBean form, BindingResult bindingResult) {
+//        ModelAndView response = new ModelAndView();
+//
+//        if (bindingResult.hasErrors()) {
+//            for (ObjectError error : bindingResult.getAllErrors()) {
+//                log.debug("Validation error : " + ((FieldError) error).getField() + " = " + error.getDefaultMessage());
+//            }
+//
+//            response.addObject("bindingResult", bindingResult);
+//            response.setViewName("boulder/boulder-input");
+//            response.addObject("form", form);
+//            return response;
+//        }
+//
+//        // Handle the file upload first
+//        if (!form.getShowcaseImg().isEmpty()) {
+//            log.debug(form.getShowcaseImg().getOriginalFilename());
+//            log.debug("The file size is: " + form.getShowcaseImg().getSize());
+//            log.debug(form.getShowcaseImg().getContentType());
+//
+//            String savedFilename = "./src/main/webapp/pub/media/" + form.getShowcaseImg().getOriginalFilename();
+//
+//            try {
+//                Files.copy(form.getShowcaseImg().getInputStream(), Paths.get(savedFilename), StandardCopyOption.REPLACE_EXISTING);
+//            } catch (Exception e) {
+//                log.error("Unable to finish reading file", e);
+//            }
+//
+//            String url = "/pub/media/" + form.getShowcaseImg().getOriginalFilename();
+//            form.setShowcaseImgUrl(url);
+//        }
+//
+//        // Update the BoulderProblem
+//        try {
+//            boulderService.editBoulderProblem(form);
+//        } catch (IllegalArgumentException e) {
+//            bindingResult.rejectValue("id", "id", e.getMessage());
+//            response.addObject("bindingResult", bindingResult);
+//            response.setViewName("boulder/boulder-input");
+//            response.addObject("form", form);
+//            return response;
+//        }
+//
+//        response.setViewName("redirect:/boulder-page?id=" + form.getId());
+//        return response;
+//    }
 
 }
