@@ -40,18 +40,22 @@ public class BoulderService {
             locationDAO.save(location);
         }
 
-        // Create a new BoulderProblem and set its fields
-        BoulderProblem boulderProblem = new BoulderProblem();
-        boulderProblem.setBoulderProblemName(form.getBoulderProblemName());
-        boulderProblem.setFirstAscensionist(form.getFirstAscensionist());
-        boulderProblem.setGrade(form.getGrade());
-        boulderProblem.setRating(form.getRating());
-        boulderProblem.setRepeated(form.getRepeated());
-        boulderProblem.setHistory(form.getHistory());
-        boulderProblem.setShowcaseImgUrl(form.getShowcaseImgUrl());
-        boulderProblem.setZoneName(form.getZoneName());
-        boulderProblem.setBoulderName(form.getBoulderName());
-        boulderProblem.setLocation(location);
+        BoulderProblem boulderProblem = boulderProblemDAO.findById(form.getId());
+        if ( boulderProblem == null ) {
+            // Create a new BoulderProblem and set its fields
+            boulderProblem = new BoulderProblem();
+        }
+
+            boulderProblem.setBoulderProblemName(form.getBoulderProblemName());
+            boulderProblem.setFirstAscensionist(form.getFirstAscensionist());
+            boulderProblem.setGrade(form.getGrade());
+            boulderProblem.setRating(form.getRating());
+            boulderProblem.setRepeated(form.getRepeated());
+            boulderProblem.setHistory(form.getHistory());
+            boulderProblem.setShowcaseImgUrl(form.getShowcaseImgUrl());
+            boulderProblem.setZoneName(form.getZoneName());
+            boulderProblem.setBoulderName(form.getBoulderName());
+            boulderProblem.setLocation(location);
 
         // Save the BoulderProblem
         return boulderProblemDAO.save(boulderProblem);
