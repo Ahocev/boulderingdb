@@ -204,7 +204,7 @@
     </div>
 </div>
 
-<a href="/account/edit-profile?id=${user.id}" class="justify-content-center">EDIT</a>
+<a href="/account/edit-profile" class="justify-content-center">EDIT</a>
 
 <div id="imageOverlay" class="overlay hidden">
     <span class="closebtn" onclick="closeOverlay()">&times;</span>
