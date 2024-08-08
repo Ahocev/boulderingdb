@@ -38,8 +38,30 @@ public class LoginController {
 
     @GetMapping("/register")
     public ModelAndView createAccount() {
-        log.debug("register");
         ModelAndView response = new ModelAndView("auth/register");
+
+        User user = authenticatedUserUtilities.getCurrentUser();
+
+        if (user != null) {
+            RegisterAccountFormBean form = new RegisterAccountFormBean();
+            form.setUserId(user.getId());
+            form.setEmail(user.getEmail());
+            form.setPassword("");
+            form.setName(user.getName());
+            form.setAge(user.getAge());
+            form.setApeIndex(user.getApeIndex());
+            form.setHeight(user.getHeight());
+            form.setGender(user.getGender());
+            form.setAbout(user.getAbout());
+            form.setProfileImgUrl(user.getProfileImgUrl());
+            form.setStyle(user.getStyle());
+            form.setFavoriteArea(user.getFavoriteArea());
+            form.setFavoriteBoulderProblem(user.getFavoriteBoulderProblem());
+
+            response.addObject("form", form);
+        } else {
+            response.setViewName("redirect:/account/profile");
+        }
 
         return response;
     }
@@ -151,35 +173,35 @@ public class LoginController {
         return response;
     }
 
-    @GetMapping("/edit-profile")
-    public ModelAndView editProfile() {
-        ModelAndView response = new ModelAndView("auth/register");
-
-            User user = authenticatedUserUtilities.getCurrentUser();
-
-            if (user != null) {
-                RegisterAccountFormBean form = new RegisterAccountFormBean();
-                form.setUserId(user.getId());
-                form.setEmail(user.getEmail());
-                form.setPassword("");
-                form.setName(user.getName());
-                form.setAge(user.getAge());
-                form.setApeIndex(user.getApeIndex());
-                form.setHeight(user.getHeight());
-                form.setGender(user.getGender());
-                form.setAbout(user.getAbout());
-                form.setProfileImgUrl(user.getProfileImgUrl());
-                form.setStyle(user.getStyle());
-                form.setFavoriteArea(user.getFavoriteArea());
-                form.setFavoriteBoulderProblem(user.getFavoriteBoulderProblem());
-
-                response.addObject("form", form);
-            } else {
-                response.setViewName("redirect:/account/profile");
-            }
-
-        return response;
-    }
+//    @GetMapping("/edit-profile")
+//    public ModelAndView editProfile() {
+//        ModelAndView response = new ModelAndView("auth/register");
+//
+//            User user = authenticatedUserUtilities.getCurrentUser();
+//
+//            if (user != null) {
+//                RegisterAccountFormBean form = new RegisterAccountFormBean();
+//                form.setUserId(user.getId());
+//                form.setEmail(user.getEmail());
+//                form.setPassword("");
+//                form.setName(user.getName());
+//                form.setAge(user.getAge());
+//                form.setApeIndex(user.getApeIndex());
+//                form.setHeight(user.getHeight());
+//                form.setGender(user.getGender());
+//                form.setAbout(user.getAbout());
+//                form.setProfileImgUrl(user.getProfileImgUrl());
+//                form.setStyle(user.getStyle());
+//                form.setFavoriteArea(user.getFavoriteArea());
+//                form.setFavoriteBoulderProblem(user.getFavoriteBoulderProblem());
+//
+//                response.addObject("form", form);
+//            } else {
+//                response.setViewName("redirect:/account/profile");
+//            }
+//
+//        return response;
+//    }
 
 
 }
