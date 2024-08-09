@@ -160,7 +160,7 @@
             <!-- Height -->
             <div class="col-md-6 mb-3">
                 <label for="height" class="form-label">Height</label>
-                <input type="number" id="height" name="height" min="1"
+                <input type="number" id="height" name="height" min="1" step=".01"
                        class="form-control <c:if test="${bindingResult.hasFieldErrors('height')}">is-invalid</c:if>"
                        value="${form.height}">
                 <c:if test="${bindingResult.hasFieldErrors('height')}">
