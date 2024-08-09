@@ -27,7 +27,7 @@ public class UserService {
 
     public User createUser(RegisterAccountFormBean form) {
 
-        User user = userDao.findById(form.getUserId());
+        User user = userDao.findById(form.getId());
         if (user == null) {
             user = new User();
         }
@@ -49,9 +49,8 @@ public class UserService {
         user.setFavoriteArea(form.getFavoriteArea());
         user.setFavoriteBoulderProblem(form.getFavoriteBoulderProblem());
 
-        userDao.save(user);
+        return userDao.save(user);
 
-        return user;
     }
 
     public UserRole createUserRole(User user, String roleName) {
