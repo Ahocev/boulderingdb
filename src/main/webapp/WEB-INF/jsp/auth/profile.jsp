@@ -226,7 +226,9 @@
     </div>
 </div>
 
-<a href="/account/register" class="justify-content-center">EDIT</a>
+<c:if test="${user.id == currentUserId}">
+    <a href="/account/register" class="justify-content-center">EDIT</a>
+</c:if>
 
 <div id="imageOverlay" class="overlay hidden">
     <span class="closebtn" onclick="closeOverlay()">&times;</span>
