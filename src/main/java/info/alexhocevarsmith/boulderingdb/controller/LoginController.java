@@ -44,7 +44,7 @@ public class LoginController {
 
         if (user != null) {
             RegisterAccountFormBean form = new RegisterAccountFormBean();
-            form.setUserId(user.getId());
+            form.setId(user.getId());
             form.setEmail(user.getEmail());
             form.setPassword("");
             form.setName(user.getName());
@@ -96,7 +96,8 @@ public class LoginController {
     public ModelAndView createAccountSubmit(@Valid RegisterAccountFormBean form, BindingResult bindingResult, HttpSession session) {
         ModelAndView response = new ModelAndView("auth/register");
 
-        if (form.getUserId() == null) {
+        // checking if the email is in use before creating a new account
+        if (form.getId() == null) {
             User u = userDao.findByEmailIgnoreCase(form.getEmail());
             if (u != null) {
                 bindingResult.rejectValue("email", "email", "This email is already in use.");
@@ -140,6 +141,8 @@ public class LoginController {
         // authenticate new user before redirecting
         authenticatedUserUtilities.manualAuthentication(session, form.getEmail(), form.getPassword());
 
+        form.setId(user.getId());
+
         // redirect to new profile page
         response.setViewName("redirect:/account/profile?id=" + user.getId());
 
@@ -172,36 +175,6 @@ public class LoginController {
         response.addObject("user", user);
         return response;
     }
-
-//    @GetMapping("/edit-profile")
-//    public ModelAndView editProfile() {
-//        ModelAndView response = new ModelAndView("auth/register");
-//
-//            User user = authenticatedUserUtilities.getCurrentUser();
-//
-//            if (user != null) {
-//                RegisterAccountFormBean form = new RegisterAccountFormBean();
-//                form.setUserId(user.getId());
-//                form.setEmail(user.getEmail());
-//                form.setPassword("");
-//                form.setName(user.getName());
-//                form.setAge(user.getAge());
-//                form.setApeIndex(user.getApeIndex());
-//                form.setHeight(user.getHeight());
-//                form.setGender(user.getGender());
-//                form.setAbout(user.getAbout());
-//                form.setProfileImgUrl(user.getProfileImgUrl());
-//                form.setStyle(user.getStyle());
-//                form.setFavoriteArea(user.getFavoriteArea());
-//                form.setFavoriteBoulderProblem(user.getFavoriteBoulderProblem());
-//
-//                response.addObject("form", form);
-//            } else {
-//                response.setViewName("redirect:/account/profile");
-//            }
-//
-//        return response;
-//    }
 
 
 }
