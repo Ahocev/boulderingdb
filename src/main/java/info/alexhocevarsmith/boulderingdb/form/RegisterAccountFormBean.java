@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Setter
 public class RegisterAccountFormBean {
 
-    private Integer userId;
+    private Integer id;
 
     @Length(max = 150, message = "Email must be less than 150 characters.")
     @NotEmpty(message = "Email is required.")
