@@ -51,21 +51,6 @@
         display: none;
     }
 
-    .overlay {
-        position: fixed;
-        display: none;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: rgba(0, 0, 0, 0.9);
-        z-index: 1000;
-        justify-content: center;
-        align-items: center;
-    }
-
     #placeholderContainer {
         overflow: visible; /* Allow content to bleed out */
         display: flex;
@@ -79,21 +64,6 @@
         width: 100%;
         margin-left: auto;
         margin-right: auto;
-    }
-
-    .btn-black {
-        background-color: black !important;
-        color: white !important;
-        border: none !important;
-        border-radius: 0 !important; /* 90-degree corners */
-        font-family: Helvetica !important; /* Helvetica font */
-        font-size: 1.25rem !important; /* Same size as <h3> */
-        padding: 0.25rem 0.75rem !important; /* Padding for the button */
-    }
-
-    .btn-black:hover {
-        background-color: #333 !important;
-        color: white !important;
     }
 
     .boulder-image {
@@ -114,13 +84,6 @@
         margin-right: auto;
     }
 
-    .overlay-content {
-        max-width: 90%;
-        max-height: 90%;
-        margin: auto;
-        display: block;
-    }
-
     .closebtn {
         position: absolute;
         top: 20px;
@@ -134,14 +97,71 @@
         overflow: visible; /* Ensure parent container allows overflow */
     }
 
-    .circular-border {
+    .circular-overlay {
+        width: 100%;
+        height: 100%;
         border-radius: 50%;
-        overflow: hidden;
+        overflow: hidden; /* Ensures that the image fits within the circular shape */
+        position: relative;
+        max-width: 90vw;  /* Constrain the overlay to 90% of the viewport width */
+        max-height: 90vh; /* Constrain the overlay to 90% of the viewport height */
     }
 
-    .circular-overlay {
-        border-radius: 50%;
+    .circular-overlay img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
+
+    .img-fluid {
+        width: 100%;
+        height: auto;
+        object-fit: cover; /* Ensures the image covers the area within the circular shape */
+    }
+
+    .circular-image {
+        width: 100%;
+        height: 0;
+        padding-bottom: 100%; /* Makes the height equal to the width to create a square */
+        border-radius: 50%;
+        overflow: hidden; /* Ensures that the image fits within the circular shape */
+        position: relative;
+    }
+
+    .circular-image img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .overlay-content {
+        width: 90vw;  /* Scale relative to viewport width */
+        height: 90vh; /* Scale relative to viewport height */
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .overlay {
+        position: fixed;
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+    }
+
 
 </style>
 
@@ -149,8 +169,10 @@
     <div class="row">
         <!-- Left column with the large image and placeholder images -->
         <div class="col-md-6 d-flex flex-column">
+            <div class ="circular-image">
             <img id="profileImgUrl" src="${user.profileImgUrl}" alt="${user.name}"
-                 class="img-fluid boulder-image mb-4 circular-border">
+                 class="img-fluid boulder-image mb-4">
+            </div>
             <div id="placeholderContainer" class="d-flex position-relative" style="overflow: visible;">
                 <div class="scroll-button left" onclick="scrollLeftCustom()">&#9664;</div>
                 <div class="boulder-placeholder-container">
@@ -208,7 +230,11 @@
 
 <div id="imageOverlay" class="overlay hidden">
     <span class="closebtn" onclick="closeOverlay()">&times;</span>
-    <img class="overlay-content circular-overlay" id="overlayImage">
+    <div class="overlay-content">
+        <div class="circular-overlay">
+        <img id="overlayImage" src="" alt="" class="img-fluid">
+        </div>
+    </div>
 </div>
 
 <jsp:include page="../include/footer.jsp"/>
