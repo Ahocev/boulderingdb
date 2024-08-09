@@ -198,7 +198,7 @@
                     Age: ${user.age}
                 </p>
                 <p class="height">
-                    Height: ${user.height}
+                    Height: ${user.height}'
                 </p>
                 <p class="gender">
                     Gender: ${user.gender}
