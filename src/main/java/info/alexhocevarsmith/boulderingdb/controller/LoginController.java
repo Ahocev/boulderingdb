@@ -155,10 +155,11 @@ public class LoginController {
         ModelAndView response = new ModelAndView("auth/profile");
 
         User user;
+        User currentUser = authenticatedUserUtilities.getCurrentUser();
 
         // if there is no user id when the user clicks on the profile page, then show current user's profile
         if (id == null) {
-            user = authenticatedUserUtilities.getCurrentUser();
+            user = currentUser;
             if (user == null) {
                 response.setViewName("redirect:/account/register");
                 return response;
@@ -173,8 +174,8 @@ public class LoginController {
         }
 
         response.addObject("user", user);
+        response.addObject("currentUserId", currentUser != null ? currentUser.getId() : null);
         return response;
     }
-
 
 }
