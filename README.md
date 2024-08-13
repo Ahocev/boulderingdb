@@ -56,7 +56,7 @@ Once boulder problems are submitted to the database, users can view them here an
 
 ## About
 
-Bouldering DB was born out of a desire for a more streamlined and boulder-problem focused experience than other current online climbing databases. It is a community-driven, UX-focused platform dedicated specifically to the world of bouldering. Bouldering DB focuses on beautiful bouldering experiences through showcasing the aesthetics and movement of a boulder problem, and collecting the appropriate data that best communicates these experiences to other passionate boulderers. Unlike databases like 8a.nu and mountainproject.com, bouldering db strives to display database information as cleanly as possible, and minimize ego-driven ticklisting and grade-chasing, instead re-focusing on the fundamentals--the rock and the climbing. 
+Bouldering DB was born out of a desire for a more streamlined and boulder-problem focused experience than other current online climbing databases. It is a community-driven, UX-centered platform dedicated specifically to the world of bouldering. Bouldering DB focuses on beautiful bouldering experiences through showcasing the aesthetics and movement of a boulder problem, and collecting the appropriate data that best communicates these experiences to other passionate boulderers. Unlike databases like 8a.nu and mountainproject.com, bouldering db strives to display database information as cleanly as possible, and minimize ego-driven ticklisting and grade-chasing, instead re-focusing on the fundamentals: the rock, the area, and the climbing experience. 
 
 ## Contact
 
