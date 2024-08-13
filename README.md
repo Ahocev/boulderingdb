@@ -52,7 +52,7 @@ This page allows users to contribute to the Bouldering DB by adding new boulder 
 
 ![Boulder Page](src/main/webapp/pub/media/readme/BoulderPage.jpeg)
 
-Once boulder problems are submitted to the database, users can view them here and see all database information displayed cleanly and concisely.
+Once boulder problems are submitted to the database, users can view them here and see all database information displayed cleanly and concisely. Beta (comments, etc.) is hidden by default in order to protect climbers who want an onsite experience. Only registered/logged-in (authorized) users can edit a boulder page.
 
 ## About
 
