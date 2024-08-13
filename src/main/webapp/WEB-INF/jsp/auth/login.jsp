@@ -15,7 +15,7 @@
     <div class="form-container">
         <form action="/account/loginProcessingURL" method="post">
             <div class="formTag">
-                <h1>Login</h1>
+                <h1 class="form-title">Login</h1>
             </div>
 
             <!--Email-->

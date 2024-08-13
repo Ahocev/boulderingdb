@@ -162,6 +162,12 @@
         align-items: center;
     }
 
+    .name {
+        text-transform: uppercase;
+        font-family: "Anonymous Pro";
+        letter-spacing: 0.1em;
+    }
+
 
 </style>
 

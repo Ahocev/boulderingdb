@@ -98,6 +98,9 @@ body {
     background-color: black; /* Black background for the submit button */
     border: none;
     border-radius: 0; /* 90-degree corners */
+    text-transform: uppercase;
+    font-family: "Anonymous Pro";
+    letter-spacing: 0.1em;
 }
 
 .btn-primary:hover {
@@ -132,4 +135,10 @@ body {
     margin-top: -8px;
     margin-bottom: 0;
     padding: 0;
+}
+
+.form-title{
+    text-transform: uppercase;
+    font-family: "Anonymous Pro";
+    letter-spacing: 0.1em;
 }

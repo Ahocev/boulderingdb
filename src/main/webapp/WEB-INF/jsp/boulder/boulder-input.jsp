@@ -44,7 +44,7 @@
         <input type="hidden" name="id" value="${form.id}">
 
         <div class="formTag">
-            <h1>Add Boulder Problem</h1>
+            <h1 class="form-title">Add Boulder Problem</h1>
             <h6 class="text-muted">Please enter as much info as possible so that we can create a great database
                 together.</h6>
         </div>
