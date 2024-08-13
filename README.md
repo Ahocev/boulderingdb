@@ -10,6 +10,7 @@ Welcome to the Bouldering DB project! This web application is designed to help c
 - [Register Page](#register-page)
 - [Profile Page](#profile-page)
 - [Add Boulder Problem Page](#add-boulder-problem-page)
+- [Boulder Page](#boulder-page)
 
 ## Homepage
 
@@ -19,13 +20,13 @@ The homepage of Bouldering DB features a selection of highlighted boulder proble
 
 ## Search Page
 
-![Search Page](src/main/webapp/pub/media/readme/Search.png)
+![Search Page](src/main/webapp/pub/media/readme/Search.jpeg)
 
 The search page allows users to search for boulder problems or other users by name. Simply enter a search term in the input field and press the "SEARCH" button to view results.
 
 ## Login Page
 
-![Login Page](src/main/webapp/pub/media/readme/Login.png)
+![Login Page](src/main/webapp/pub/media/readme/Login.jpeg)
 
 Users can log in to their Bouldering DB account through this page. Enter your registered email and password to gain access to your profile and other features of the site. If you don't have an account, a link is provided to register.
 
@@ -37,7 +38,7 @@ New users can sign up for Bouldering DB on this page. You'll be asked to provide
 
 ## Profile Page
 
-![Profile Page](src/main/webapp/pub/media/readme/Profile.png)
+![Profile Page](src/main/webapp/pub/media/readme/Profile.jpeg)
 
 The profile page displays user information such as name, age, height, climbing style, and favorite bouldering locations. Users can also edit their profile details here.
 
@@ -49,7 +50,7 @@ This page allows users to contribute to the Bouldering DB by adding new boulder 
 
 ## Boulder Page
 
-![Boulder Page](src/main/webapp/pub/media/readme/BoulderPage.png)
+![Boulder Page](src/main/webapp/pub/media/readme/BoulderPage.jpeg)
 
 Once boulder problems are submitted to the database, users can view them here and see all database information displayed cleanly and concisely.
 
