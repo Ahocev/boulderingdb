@@ -35,7 +35,7 @@
 </style>
 
 <div class="form-container">
-    <form action="/account/register" method="post" enctype="multipart/form-data">
+    <form action="/account/registerSubmit" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="${form.id}">
         <div class="formTag">
             <h1>Register</h1>
