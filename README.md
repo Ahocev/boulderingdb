@@ -14,7 +14,7 @@ Welcome to the Bouldering DB project! This web application is designed to help c
 
 ## Homepage
 
-![Homepage](src/main/webapp/pub/media/readme/BoulderingDBIndex.png)
+![Homepage](src/main/webapp/pub/media/readme/Index.png)
 
 The homepage of Bouldering DB features a selection of highlighted boulder problems from various locations. Users can access the main functions of the site, including search, login, and registration, from this page.
 
