@@ -52,13 +52,13 @@
             <c:forEach var="location" items="${locations}" varStatus="status">
                 <div class="column">
                     <div class="location">
-                        <h2 class="collapsible-header" style="text-transform: uppercase;">${location.country}</h2>
+                        <h3 class="collapsible-header" style="text-transform: uppercase;">${location.country}</h3>
                         <div class="collapsible-content">
-                            <h3 class="nearest-city collapsible-header" style="text-transform: uppercase;">${location.nearestCity}</h3>
+                            <h4 class="nearest-city collapsible-header" style="text-transform: uppercase;">${location.nearestCity}</h4>
                             <div class="collapsible-content">
                                 <c:forEach var="zoneEntry" items="${location.zoneMap.entrySet()}">
                                     <div class="zone">
-                                        <h4 class="collapsible-header" style="text-transform: uppercase;">${zoneEntry.key}</h4>
+                                        <h5 class="collapsible-header" style="text-transform: uppercase;">${zoneEntry.key}</h5>
                                         <div class="collapsible-content">
                                             <ul>
                                                 <c:forEach var="bp" items="${zoneEntry.value}">
