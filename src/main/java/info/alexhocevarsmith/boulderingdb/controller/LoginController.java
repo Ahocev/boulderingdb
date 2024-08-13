@@ -36,35 +36,7 @@ public class LoginController {
     @Autowired
     private AuthenticatedUserUtilities authenticatedUserUtilities;
 
-    @GetMapping("/register")
-    public ModelAndView createAccount() {
-        ModelAndView response = new ModelAndView("auth/register");
 
-        User user = authenticatedUserUtilities.getCurrentUser();
-
-        if (user != null) {
-            RegisterAccountFormBean form = new RegisterAccountFormBean();
-            form.setId(user.getId());
-            form.setEmail(user.getEmail());
-            form.setPassword("");
-            form.setName(user.getName());
-            form.setAge(user.getAge());
-            form.setApeIndex(user.getApeIndex());
-            form.setHeight(user.getHeight());
-            form.setGender(user.getGender());
-            form.setAbout(user.getAbout());
-            form.setProfileImgUrl(user.getProfileImgUrl());
-            form.setStyle(user.getStyle());
-            form.setFavoriteArea(user.getFavoriteArea());
-            form.setFavoriteBoulderProblem(user.getFavoriteBoulderProblem());
-
-            response.addObject("form", form);
-        } else {
-            response.setViewName("redirect:/account/profile");
-        }
-
-        return response;
-    }
 
     @GetMapping("/login")
     public ModelAndView login() {
@@ -92,7 +64,36 @@ public class LoginController {
         return response;
     }
 
-    @PostMapping("/register")
+    @GetMapping("/register")
+    public ModelAndView createAccount() {
+        ModelAndView response = new ModelAndView("auth/register");
+
+        User user = authenticatedUserUtilities.getCurrentUser();
+
+        if (user != null) {
+            RegisterAccountFormBean form = new RegisterAccountFormBean();
+            form.setId(user.getId());
+            form.setEmail(user.getEmail());
+            form.setPassword("");
+            form.setName(user.getName());
+            form.setAge(user.getAge());
+            form.setApeIndex(user.getApeIndex());
+            form.setHeight(user.getHeight());
+            form.setGender(user.getGender());
+            form.setAbout(user.getAbout());
+            form.setProfileImgUrl(user.getProfileImgUrl());
+            form.setStyle(user.getStyle());
+            form.setFavoriteArea(user.getFavoriteArea());
+            form.setFavoriteBoulderProblem(user.getFavoriteBoulderProblem());
+
+            response.addObject("form", form);
+
+        }
+
+        return response;
+    }
+
+    @PostMapping("/registerSubmit")
     public ModelAndView createAccountSubmit(@Valid RegisterAccountFormBean form, BindingResult bindingResult, HttpSession session) {
         ModelAndView response = new ModelAndView("auth/register");
 
