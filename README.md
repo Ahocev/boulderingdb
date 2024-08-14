@@ -28,39 +28,39 @@ The search page allows users to search for boulder problems or other users by na
 
 ![Login Page](src/main/webapp/pub/media/readme/Login.png)
 
-Users can log in to their Bouldering DB account through this page. Enter your registered email and password to gain access to your profile and other features of the site. If you don't have an account, a link is provided to register.
+Users can log in to their Bouldering DB account through this page. Enter your registered email and password to gain access to your profile and the ability to add or edit boulders in the database. If you don't have an account, a link is provided to register.
 
 ## Register Page
 
 ![Register Page](src/main/webapp/pub/media/readme/Register.png)
 
-New users can sign up for Bouldering DB on this page. You'll be asked to provide information such as your name, email, and password. Additional optional fields allow you to share more details about yourself, which will be displayed on your profile.
+New users can sign up for Bouldering DB on this page. You'll be asked to provide information such as your name, email, and password. Additional optional fields allow you to share more data to the database. The more users share, the more robust a database can be built which will ultimately help users find more boulder problems that suit their style, strengths, preferences, etc.
 
 ## Profile Page
 
 ![Profile Page](src/main/webapp/pub/media/readme/Profile.png)
 
-The profile page displays user information such as name, age, height, climbing style, and favorite bouldering locations. Users can also edit their profile details here.
+The profile page displays user information such as name, age, height, climbing style, and favorite bouldering locations. Users can also edit their profile details here. By providing detailed information, other users will be able to track climbers with similar styles, and preferences in order to more effectively discover compatible boulder problems.
 
 ## Add Boulder Problem Page
 
 ![Add Boulder Problem Page](src/main/webapp/pub/media/readme/BoulderInput.png)
 
-This page allows users to contribute to the Bouldering DB by adding new boulder problems. Provide details such as the problem's name, location, first ascensionist, grade, and history. Users can also upload an image to showcase the problem.
+This page allows users to contribute to the Bouldering DB by adding new boulder problems. Users can provide details such as the problem's name, location, first ascensionist, grade, and history. Users greatly encouraged to upload high-quality, well-framed images of boulder problems in order to showcase the experience for other climbers in the best light possible. The form input fields have been painstakingly refined to attempt to collect and provide as concise and informative data to prospective climbers, allowing users to have a more personalized, deeper experience with the database. While grades can be helpful for gauging the challenge of a boulder problem, they are arguably the most insignificant part of the whole story. Thus, on Bouldering DB grades are "proposed" and will be averaged over time based on user input. There is no such thing as a V15. There is only a subjective experience that is being forcefully translated into an arbitrary number. While helpful for gauging challenges, attachment to this arbitrary number can severely limit our climbing experiences and thus this database will not display them as prominent, static information.
 
 ## Boulder Page
 
 ![Boulder Page](src/main/webapp/pub/media/readme/BoulderPage.png)
 
-Once boulder problems are submitted to the database, users can view them here and see all database information displayed cleanly and concisely. Beta (comments, etc.) is hidden by default in order to protect climbers who want an onsight experience. Only registered/logged-in (authorized) users can edit a boulder page.
+Once boulder problems are submitted to the database, users can view them here and see all database information displayed cleanly and concisely. Beta (comments, videos, etc.) is hidden by default in order to protect climbers who want an onsight experience. Only registered/logged-in (authorized) users can edit a boulder page. A location feature is currently in development which will allow users to see GPS coordinates on a map and send a link of the map to themselves in preparation for trips or on the fly (with an internet connection).
 
 ## About
 
-Bouldering DB was born out of a desire for a more streamlined and boulder-problem focused experience than other current online climbing databases. It is a community-driven, UX-centered platform dedicated specifically to the world of bouldering. Bouldering DB focuses on beautiful bouldering experiences through showcasing the aesthetics and movement of a boulder problem, and collecting the appropriate data that best communicates these experiences to other passionate boulderers. Unlike databases like 8a.nu and mountainproject.com, bouldering db strives to display database information as cleanly as possible, and minimize ego-driven ticklisting and grade-chasing, instead re-focusing on the fundamentals: the rock, the area, and the climbing experience. 
+Bouldering DB was born out of a desire for a more streamlined and holistic boulder-problem focused experience than other current online climbing databases. It is a community-driven, UX-centered platform dedicated specifically to the world of bouldering. Bouldering DB focuses on beautiful bouldering experiences through showcasing the aesthetics and movement of a boulder problem, and collecting the appropriate data that best communicates these experiences to other passionate boulderers. Unlike databases like 8a.nu and mountainproject.com, bouldering db strives to display database information as cleanly as possible, and minimize ego-driven ticklisting and grade-chasing, instead re-focusing on the fundamentals of the climbing experience: the rock, the area, and the movement. 
 
 ## Contact
 
-For any inquiries, please contact us at [ahocev@gmail.com](mailto:ahocev@gmail.com).
+For any inquiries, please contact me at [ahocev@gmail.com](mailto:ahocev@gmail.com).
 
 ---
 
