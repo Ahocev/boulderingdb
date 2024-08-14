@@ -20,13 +20,13 @@ The homepage of Bouldering DB features a selection of highlighted boulder proble
 
 ## Search Page
 
-![Search Page](src/main/webapp/pub/media/readme/Search.jpeg)
+![Search Page](src/main/webapp/pub/media/readme/Search.png)
 
 The search page allows users to search for boulder problems or other users by name. Simply enter a search term in the input field and press the "SEARCH" button to view results.
 
 ## Login Page
 
-![Login Page](src/main/webapp/pub/media/readme/Login.jpeg)
+![Login Page](src/main/webapp/pub/media/readme/Login.png)
 
 Users can log in to their Bouldering DB account through this page. Enter your registered email and password to gain access to your profile and other features of the site. If you don't have an account, a link is provided to register.
 
@@ -38,19 +38,19 @@ New users can sign up for Bouldering DB on this page. You'll be asked to provide
 
 ## Profile Page
 
-![Profile Page](src/main/webapp/pub/media/readme/Profile.jpeg)
+![Profile Page](src/main/webapp/pub/media/readme/Profile.png)
 
 The profile page displays user information such as name, age, height, climbing style, and favorite bouldering locations. Users can also edit their profile details here.
 
 ## Add Boulder Problem Page
 
-![Add Boulder Problem Page](src/main/webapp/pub/media/readme/AddBoulder.png)
+![Add Boulder Problem Page](src/main/webapp/pub/media/readme/BoulderInput.png)
 
 This page allows users to contribute to the Bouldering DB by adding new boulder problems. Provide details such as the problem's name, location, first ascensionist, grade, and history. Users can also upload an image to showcase the problem.
 
 ## Boulder Page
 
-![Boulder Page](src/main/webapp/pub/media/readme/BoulderPage.jpeg)
+![Boulder Page](src/main/webapp/pub/media/readme/BoulderPage.png)
 
 Once boulder problems are submitted to the database, users can view them here and see all database information displayed cleanly and concisely. Beta (comments, etc.) is hidden by default in order to protect climbers who want an onsight experience. Only registered/logged-in (authorized) users can edit a boulder page.
 
