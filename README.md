@@ -31,8 +31,8 @@ The search page allows users to search for boulder problems or other users by na
 ## Login Page
 
 ![Login Page](src/main/webapp/pub/media/readme/Login.png)
-![Login Page](src/main/webapp/pub/media/readme/LoggedOut.png)
 ![Login Page](src/main/webapp/pub/media/readme/LoggedIn.png)
+![Login Page](src/main/webapp/pub/media/readme/LoggedOut.png)
 
 Users can log in to their Bouldering DB account through this page. Once logged in, users gain access to their profile and the ability to add or edit boulders in the database via a dropdown Midnight Lightning symbol. If you don't have an account, a link is provided to register.
 
