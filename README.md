@@ -71,7 +71,7 @@ The site admin can view and delete all database entries on a single page. As the
 
 ![Database Schema](src/main/webapp/pub/media/readme/ERDiagram.png)
 
-The preliminary database schema shows entity relationships. Future development will add a one-to-many boulder-problems and users to ratings and grades tables to allow these metrics to be averaged over time and allow all users to add their input to these data points.
+The preliminary database schema shows entity relationships. Future development will add a one-to-many relationships from boulder-problems/users to ratings and grades tables to allow all users to add their input and these metrics to be averaged over time.
 
 ## About
 
