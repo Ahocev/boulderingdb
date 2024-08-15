@@ -12,6 +12,7 @@ Welcome to the Bouldering DB project! This web application is designed to help c
 - [Add Boulder Problem Page](#add-boulder-problem-page)
 - [Boulder Page](#boulder-page)
 - [Preliminary Database Schema](#preliminary-database-schema)
+- [Admin Dashboard](#admin-dashboard)
 
 ## Homepage
 
@@ -58,6 +59,12 @@ This page allows users to contribute to the Bouldering DB by adding new boulder 
 <img src="src/main/webapp/pub/media/readme/Comments.png" alt="drawing" width="350"/>
 
 Once boulder problems are submitted to the database, users can view them here and see all database information displayed cleanly and concisely. Beta (comments, videos, etc.) is hidden by default in order to protect climbers who want an onsight experience. Only registered/logged-in (authorized) users can edit a boulder page or add a comment. A location feature is currently in development which will allow users to see GPS coordinates on a map and send a link of the map to themselves in preparation for trips or on the fly (with an internet connection).
+
+## Admin Dashboard
+
+![Admin Dashboard](src/main/webapp/pub/media/readme/AdminDashboard.png)
+
+The site admin can view and delete all database entries on a single page. As the database grows, this dashboard will evolve for greater efficiency.
 
 ## Preliminary Database Schema
 

@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../include/header.jsp" />
 
-<h1 class="mt-4">Admin Dashboard</h1>
+<h1 class="admin-title mt-4">Admin Dashboard</h1>
 
 <style>
     table {
@@ -18,6 +18,11 @@
     }
     th, td {
         padding: 15px;
+    }
+    .admin-title {
+        text-transform: uppercase;
+        font-family: "Anonymous Pro";
+        letter-spacing: 0.1em;
     }
 </style>
 
