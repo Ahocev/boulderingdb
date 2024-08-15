@@ -182,7 +182,9 @@
         font-family: "Anonymous Pro";
         letter-spacing: 0.1em;
     }
-
+    .primary-img {
+        cursor: zoom-in;
+    }
 
 </style>
 
@@ -190,8 +192,10 @@
     <div class="row">
         <!-- Left column with the large image and placeholder images -->
         <div class="col-md-6 d-flex flex-column">
+            <div class="primary-img">
             <img id="showcaseImgUrl" src="${boulderProblem.showcaseImgUrl}" alt="${boulderProblem.boulderProblemName}" class="img-fluid boulder-image mb-4">
-            <div id="placeholderContainer" class="d-flex position-relative" style="overflow: visible;">
+            </div>
+            <div id="placeholderContainer" class="d-flex placeholder-cursor position-relative" style="overflow: visible;">
                 <div class="scroll-button left" onclick="scrollLeftCustom()">&#9664;</div>
                 <div class="boulder-placeholder-container">
                     <img src="/pub/media/HighPlains.jpeg" alt="Placeholder 1" class="img-fluid boulder-placeholder" onclick="swapImages(this)">

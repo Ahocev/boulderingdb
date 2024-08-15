@@ -167,6 +167,9 @@
         font-family: "Anonymous Pro";
         letter-spacing: 0.1em;
     }
+    .circular-image {
+        cursor: zoom-in;
+    }
 
 
 </style>
@@ -179,7 +182,7 @@
             <img id="profileImgUrl" src="${user.profileImgUrl}" alt="${user.name}"
                  class="img-fluid boulder-image mb-4">
             </div>
-            <div id="placeholderContainer" class="d-flex position-relative" style="overflow: visible;">
+            <div id="placeholderContainer" class="d-flex placeholder-cursor position-relative" style="overflow: visible;">
                 <div class="scroll-button left" onclick="scrollLeftCustom()">&#9664;</div>
                 <div class="boulder-placeholder-container">
                     <img src="/pub/media/josh-climbing1.jpeg" alt="Placeholder 1" class="img-fluid boulder-placeholder"

@@ -12,6 +12,7 @@ body {
     width: 100%;
     height: auto;
     margin-top: 10px;
+    cursor: pointer;
 }
 .popular-section {
     width: 90%;
@@ -142,3 +143,8 @@ body {
     font-family: "Anonymous Pro";
     letter-spacing: 0.1em;
 }
+
+.placeholder-cursor {
+    cursor: pointer;
+}
+
