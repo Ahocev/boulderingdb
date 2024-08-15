@@ -16,8 +16,9 @@ Welcome to the Bouldering DB project! This web application is designed to help c
 ## Homepage
 
 ![Homepage](src/main/webapp/pub/media/readme/Index.png)
+<img src="src/main/webapp/pub/media/readme/IndexHoverDemo.png" alt="drawing" width="500"/>
 
-The homepage of Bouldering DB features a selection of highlighted boulder problems from various locations. Users can access the main functions of the site, including search, login, and registration, from this page. Users can also click through featured main images to see different "magazine covers", and greyed out featured boulder problems below will colorize on hover.
+The homepage of Bouldering DB features a selection of highlighted boulder problems from various locations. Users can access the main functions of the site, including search, login, and registration, from this page. Users can also click through featured main images to see different "magazine covers", and greyed out featured boulder problems (which are randomized from the database pool on page load) below will colorize on hover and take users to relevant boulder page on click.
 
 ## Search Page
 
