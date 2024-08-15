@@ -11,8 +11,9 @@ Welcome to the Bouldering DB project! This web application is designed to help c
 - [Profile Page](#profile-page)
 - [Add Boulder Problem Page](#add-boulder-problem-page)
 - [Boulder Page](#boulder-page)
-- [Preliminary Database Schema](#preliminary-database-schema)
 - [Admin Dashboard](#admin-dashboard)
+- [Preliminary Database Schema](#preliminary-database-schema)
+
 
 ## Homepage
 
