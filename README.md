@@ -11,12 +11,13 @@ Welcome to the Bouldering DB project! This web application is designed to help c
 - [Profile Page](#profile-page)
 - [Add Boulder Problem Page](#add-boulder-problem-page)
 - [Boulder Page](#boulder-page)
+- [Preliminary Database Schema](#preliminary-database-schema)
 
 ## Homepage
 
 ![Homepage](src/main/webapp/pub/media/readme/Index.png)
 
-The homepage of Bouldering DB features a selection of highlighted boulder problems from various locations. Users can access the main functions of the site, including search, login, and registration, from this page.
+The homepage of Bouldering DB features a selection of highlighted boulder problems from various locations. Users can access the main functions of the site, including search, login, and registration, from this page. Users can also click through featured main images to see different "magazine covers", and greyed out featured boulder problems below will colorize on hover.
 
 ## Search Page
 
@@ -27,8 +28,10 @@ The search page allows users to search for boulder problems or other users by na
 ## Login Page
 
 ![Login Page](src/main/webapp/pub/media/readme/Login.png)
+![Login Page](src/main/webapp/pub/media/readme/LoggedOut.png)
+![Login Page](src/main/webapp/pub/media/readme/LoggedIn.png)
 
-Users can log in to their Bouldering DB account through this page. Enter your registered email and password to gain access to your profile and the ability to add or edit boulders in the database. If you don't have an account, a link is provided to register.
+Users can log in to their Bouldering DB account through this page. Once logged in, users gain access to their profile and the ability to add or edit boulders in the database via a dropdown Midnight Lightning symbol. If you don't have an account, a link is provided to register.
 
 ## Register Page
 
@@ -51,8 +54,15 @@ This page allows users to contribute to the Bouldering DB by adding new boulder 
 ## Boulder Page
 
 ![Boulder Page](src/main/webapp/pub/media/readme/BoulderPage.png)
+<img src="src/main/webapp/pub/media/readme/Comments.png" alt="drawing" width="350"/>
 
-Once boulder problems are submitted to the database, users can view them here and see all database information displayed cleanly and concisely. Beta (comments, videos, etc.) is hidden by default in order to protect climbers who want an onsight experience. Only registered/logged-in (authorized) users can edit a boulder page. A location feature is currently in development which will allow users to see GPS coordinates on a map and send a link of the map to themselves in preparation for trips or on the fly (with an internet connection).
+Once boulder problems are submitted to the database, users can view them here and see all database information displayed cleanly and concisely. Beta (comments, videos, etc.) is hidden by default in order to protect climbers who want an onsight experience. Only registered/logged-in (authorized) users can edit a boulder page or add a comment. A location feature is currently in development which will allow users to see GPS coordinates on a map and send a link of the map to themselves in preparation for trips or on the fly (with an internet connection).
+
+## Preliminary Database Schema
+
+![Database Schema](src/main/webapp/pub/media/readme/ERDiagram.png)
+
+The preliminary database schema shows entity relationships. Future development will add a one-to-many boulder-problems and users to ratings and grades tables to allow these metrics to be averaged over time and allow all users to add their input to these data points.
 
 ## About
 
