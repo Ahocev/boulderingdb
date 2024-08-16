@@ -18,7 +18,6 @@ Welcome to the Bouldering DB project! This web application is designed to help c
 ## Homepage
 
 ![Homepage](src/main/webapp/pub/media/readme/Index.png)
-<img src="src/main/webapp/pub/media/readme/IndexHoverDemo.png" alt="drawing" width="500"/>
 
 Inspired by early Alpinist Magazine covers, the homepage of Bouldering DB features a selection of highlighted boulder problems from various locations. Users can access the main functions of the site, including search, login, and registration, from this page. Users can also click through featured main images to see different "magazine covers", and greyed out featured boulder problems (which are randomized from the database pool on page load) below will colorize on hover and take users to relevant boulder page on click.
 
@@ -71,7 +70,7 @@ The site admin can view and delete all database entries on a single page. As the
 
 ![Database Schema](src/main/webapp/pub/media/readme/ERDiagram.png)
 
-The preliminary database schema shows entity relationships. Future development will add a one-to-many relationships from boulder-problems/users to ratings and grades tables to allow all users to add their input and these metrics to be averaged over time.
+The preliminary database schema shows entity relationships. Future development will add one-to-many relationships from boulder-problems/users to ratings and grades tables to allow all users to add their input and these metrics to be averaged over time. There will also be an additional_photos table added to allow users to upload multiple images for one boulder problem.
 
 ## About
 
