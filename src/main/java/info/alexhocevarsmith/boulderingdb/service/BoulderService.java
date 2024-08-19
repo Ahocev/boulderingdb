@@ -6,7 +6,9 @@ import info.alexhocevarsmith.boulderingdb.database.dao.LocationDAO;
 import info.alexhocevarsmith.boulderingdb.database.entity.BoulderProblem;
 import info.alexhocevarsmith.boulderingdb.database.entity.Comment;
 import info.alexhocevarsmith.boulderingdb.database.entity.Location;
+import info.alexhocevarsmith.boulderingdb.database.entity.User;
 import info.alexhocevarsmith.boulderingdb.form.AddBoulderFormBean;
+import info.alexhocevarsmith.boulderingdb.security.AuthenticatedUserUtilities;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,9 @@ public class BoulderService {
     @Autowired
     private CommentDAO commentDAO;
 
+    @Autowired
+    private AuthenticatedUserUtilities authenticatedUserUtilities;
+
     public BoulderProblem addBoulderProblem(AddBoulderFormBean form) {
 
         // Check if the location already exists
@@ -39,6 +44,8 @@ public class BoulderService {
             location.setNearestCity(form.getNearestCity());
             locationDAO.save(location);
         }
+
+        User user = authenticatedUserUtilities.getCurrentUser();
 
         BoulderProblem boulderProblem = boulderProblemDAO.findById(form.getId());
         if ( boulderProblem == null ) {
@@ -56,6 +63,7 @@ public class BoulderService {
             boulderProblem.setZoneName(form.getZoneName());
             boulderProblem.setBoulderName(form.getBoulderName());
             boulderProblem.setLocation(location);
+            boulderProblem.setPostedBy(user);
 
         // Save the BoulderProblem
         return boulderProblemDAO.save(boulderProblem);
