@@ -46,12 +46,12 @@ public class BoulderProblem {
     @Column(name = "first_ascensionist")
     private String firstAscensionist;
 
+    @Column(name = "showcase_img_url")
+    private String showcaseImgUrl;
+
     @ManyToOne
     @JoinColumn(name = "posted_by")
     private User postedBy;
-
-    @Column(name = "showcase_img_url")
-    private String showcaseImgUrl;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "boulderProblem", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
