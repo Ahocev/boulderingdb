@@ -1,10 +1,7 @@
 package info.alexhocevarsmith.boulderingdb.database.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.*;
 
@@ -60,6 +57,10 @@ public class User {
 
     @Column(name = "favorite_boulder_problem")
     private String favoriteBoulderProblem;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "postedBy", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<BoulderProblem> boulderProblems = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>();
