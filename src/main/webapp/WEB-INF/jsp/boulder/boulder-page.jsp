@@ -186,6 +186,87 @@
         cursor: zoom-in;
     }
 
+    .edit-popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.75);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1001;
+    }
+
+    .edit-popup {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        width: 300px;
+        max-width: 90%;
+    }
+
+    .edit-popup h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .edit-popup button {
+        margin: 10px 0;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .close-popup {
+        cursor: pointer;
+        color: #000;
+        font-size: 20px;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+    }
+
+    .add-img-popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.75);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1002;
+    }
+
+    .add-img-popup {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        width: 600px;
+        max-width: 90%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .add-img-form {
+        width: 100%;
+    }
+
+    .add-img-form .form-control {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .add-img-form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
 </style>
 
 <div class="container my-4 boulder-profile" style="max-width: 90%;">
@@ -271,7 +352,62 @@
 </div>
 </div>
 
-<a href="/boulder/boulder-input?id=${boulderProblem.id}" class="justify-content-center">EDIT</a>
+<a href="javascript:void(0);" class="justify-content-center" onclick="openEditPopup()">EDIT</a>
+
+<!-- Edit Popup Overlay -->
+<div id="editPopupOverlay" class="edit-popup-overlay">
+    <div class="edit-popup">
+        <span class="close-popup" onclick="closeEditPopup()">&times;</span>
+        <div id="editPopupContent">
+            <button onclick="openAddImgPopup()" class="btn btn-primary">Add Photos</button>
+            <button onclick="window.location.href='/boulder/boulder-input?id=${boulderProblem.id}'" class="btn btn-primary">Update Boulder Data</button>
+        </div>
+    </div>
+</div>
+
+<!-- Add Image Popup Overlay -->
+<div id="addImgPopupOverlay" class="add-img-popup-overlay">
+    <div class="add-img-popup">
+        <span class="close-popup" onclick="closeAddImgPopup()">&times;</span>
+        <div class="add-img-form">
+            <form action="/boulder/addImgSubmit" method="post" enctype="multipart/form-data">
+                <h2 class="boulder-problem-name">Add Photos</h2>
+                <!-- File Upload Fields -->
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <input type="file" id="fileUpload1" name="fileUpload1" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <input type="file" id="fileUpload2" name="fileUpload2" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <input type="file" id="fileUpload3" name="fileUpload3" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <input type="file" id="fileUpload4" name="fileUpload4" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <input type="file" id="fileUpload5" name="fileUpload5" class="form-control">
+                    </div>
+                </div>
+                <!-- Submit Button -->
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center mb-2">
+                        <button type="submit" class="btn btn-primary col-md-12">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div id="imageOverlay" class="overlay hidden">
     <span class="closebtn" onclick="closeOverlay()">&times;</span>
@@ -281,12 +417,51 @@
 <jsp:include page="../include/footer.jsp" />
 
 <script>
+
+    <!--Edit and Add Img Overlays-->
+
+    function openEditPopup() {
+        document.getElementById('editPopupOverlay').style.display = 'flex';
+        document.getElementById('addImgPopupOverlay').style.display = 'none'; // Ensure the add image overlay is closed
+    }
+
+    function closeEditPopup() {
+        document.getElementById('editPopupOverlay').style.display = 'none';
+    }
+
+    function openAddImgPopup() {
+        document.getElementById('editPopupOverlay').style.display = 'none'; // Hide the edit popup
+        document.getElementById('addImgPopupOverlay').style.display = 'flex';
+    }
+
+    function closeAddImgPopup() {
+        document.getElementById('addImgPopupOverlay').style.display = 'none';
+    }
+
+    // Close the popup if the user clicks outside of it
+    document.addEventListener('click', function(event) {
+        const editOverlay = document.getElementById('editPopupOverlay');
+        const addImgOverlay = document.getElementById('addImgPopupOverlay');
+
+        if (event.target === editOverlay) {
+            closeEditPopup();
+        }
+
+        if (event.target === addImgOverlay) {
+            closeAddImgPopup();
+        }
+    });
+
+    <!--Showcase Overlay-->
+
     document.addEventListener('DOMContentLoaded', function() {
         adjustPlaceholderDisplay();
         document.getElementById('showcaseImgUrl').addEventListener('click', function() {
             showOverlay(this.src);
         });
     });
+
+    <!--Additional Image Sorting-->
 
     function adjustPlaceholderDisplay() {
         var placeholders = document.querySelectorAll('.boulder-placeholder');
@@ -314,12 +489,16 @@
         });
     }
 
+    <!--Swap Add Images with Showcase Overlay-->
+
     function swapImages(placeholder) {
         var showcaseImgUrl = document.getElementById('showcaseImgUrl');
         var tempSrc = showcaseImgUrl.src;
         showcaseImgUrl.src = placeholder.src;
         placeholder.src = tempSrc;
     }
+
+    <!--Scroll Through Additional Images-->
 
     function scrollLeftCustom() {
         var container = document.getElementById('placeholderContainer');
@@ -336,6 +515,8 @@
         }
     }
 
+    <!--Show Showcase Overlay-->
+
     function showOverlay(src) {
         var overlay = document.getElementById('imageOverlay');
         var overlayImage = document.getElementById('overlayImage');
@@ -343,6 +524,8 @@
         overlay.classList.remove('hidden');
         overlay.style.display = 'flex';
     }
+
+    <!--Close Showcase Overlay-->
 
     function closeOverlay() {
         var overlay = document.getElementById('imageOverlay');
