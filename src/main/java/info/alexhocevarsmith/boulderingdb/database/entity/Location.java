@@ -1,10 +1,7 @@
 package info.alexhocevarsmith.boulderingdb.database.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.*;
 
@@ -30,7 +27,8 @@ public class Location {
     @Column(name = "state")
     private String state;
 
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+    @ToString.Exclude
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<BoulderProblem> boulderProblems = new ArrayList<>();
 
     @Transient

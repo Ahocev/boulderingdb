@@ -54,7 +54,19 @@ public class BoulderProblem {
     private User postedBy;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "boulderProblem", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "boulderProblem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Comment> comments;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "boulderProblem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Rating> ratings = new ArrayList<>();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "boulderProblem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Grade> grades = new ArrayList<>();
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "boulderProblem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<AdditionalImage> additionalImages = new ArrayList<>();
 
 }
