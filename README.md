@@ -2,6 +2,7 @@
 
 Welcome to the Bouldering DB project! This web application is designed to help climbers share and discover boulder problems from around the world. The platform allows users to create profiles, log boulder problems, search for climbs, and connect with other climbers.
 
+
 ## Table of Contents
 
 - [Homepage](#homepage)
