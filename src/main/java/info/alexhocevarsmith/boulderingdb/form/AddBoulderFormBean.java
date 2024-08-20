@@ -1,8 +1,6 @@
 package info.alexhocevarsmith.boulderingdb.form;
 
-import info.alexhocevarsmith.boulderingdb.database.entity.Location;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Getter;
@@ -46,5 +44,6 @@ public class AddBoulderFormBean {
     private String zoneName;
 
     private String boulderName;
+
 
 }
