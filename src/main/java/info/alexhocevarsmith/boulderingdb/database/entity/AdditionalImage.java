@@ -1,10 +1,7 @@
 package info.alexhocevarsmith.boulderingdb.database.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Setter
 @Getter
@@ -19,9 +16,21 @@ public class AdditionalImage {
     @Column(name = "id")
     private Integer id;
 
+    @Column(name = "boulder_problem_id", insertable = false, updatable = false)
+    private Integer boulderProblemId;
+
+    @ToString.Exclude
     @ManyToOne
-    @JoinColumn(name = "boulder_problem_id")
+    @JoinColumn(name = "boulder_problem_id", nullable = false)
     private BoulderProblem boulderProblem;
+
+    @ToString.Exclude
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @Column(name = "user_id", insertable = false, updatable = false)
+    private Integer userId;
 
     @Column(name = "image_url", length = 500)
     private String imageUrl;
