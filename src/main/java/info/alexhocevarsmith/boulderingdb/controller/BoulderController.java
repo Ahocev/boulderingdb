@@ -1,9 +1,6 @@
 package info.alexhocevarsmith.boulderingdb.controller;
 
-import info.alexhocevarsmith.boulderingdb.database.dao.BoulderProblemDAO;
-import info.alexhocevarsmith.boulderingdb.database.dao.CommentDAO;
-import info.alexhocevarsmith.boulderingdb.database.dao.LocationDAO;
-import info.alexhocevarsmith.boulderingdb.database.dao.UserDAO;
+import info.alexhocevarsmith.boulderingdb.database.dao.*;
 import info.alexhocevarsmith.boulderingdb.database.entity.*;
 import info.alexhocevarsmith.boulderingdb.form.AddBoulderFormBean;
 import info.alexhocevarsmith.boulderingdb.form.AddCommentFormBean;
@@ -55,21 +52,32 @@ public class BoulderController {
     @Autowired
     private AuthenticatedUserUtilities authenticatedUserUtilities;
 
+    @Autowired
+    private AdditionalImageDAO additionalImageDAO;
+
 
     @GetMapping("/boulder-page")
     public ModelAndView boulderPage(@RequestParam("id") Integer id) {
         ModelAndView response = new ModelAndView("boulder/boulder-page");
 
         BoulderProblem boulderProblem = boulderProblemDAO.findById(id);
+
+        List<AdditionalImage> additionalImages = additionalImageDAO.findByBoulderProblemId(id);
+
         if (boulderProblem == null) {
             response.setViewName("redirect:/boulder/boulder-input");
             return response;
         }
 
+        response.addObject("additionalImages", additionalImages);
+
         response.addObject("boulderProblem", boulderProblem);
+
         response.addObject("location", boulderProblem.getLocation());
+
         List<Comment> comments = commentDAO.findByBoulderProblemId(boulderProblem.getId());
         response.addObject("comments", comments);
+
         return response;
     }
 
