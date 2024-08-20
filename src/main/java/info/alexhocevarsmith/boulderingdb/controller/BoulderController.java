@@ -4,12 +4,10 @@ import info.alexhocevarsmith.boulderingdb.database.dao.BoulderProblemDAO;
 import info.alexhocevarsmith.boulderingdb.database.dao.CommentDAO;
 import info.alexhocevarsmith.boulderingdb.database.dao.LocationDAO;
 import info.alexhocevarsmith.boulderingdb.database.dao.UserDAO;
-import info.alexhocevarsmith.boulderingdb.database.entity.BoulderProblem;
-import info.alexhocevarsmith.boulderingdb.database.entity.Comment;
-import info.alexhocevarsmith.boulderingdb.database.entity.Location;
-import info.alexhocevarsmith.boulderingdb.database.entity.User;
+import info.alexhocevarsmith.boulderingdb.database.entity.*;
 import info.alexhocevarsmith.boulderingdb.form.AddBoulderFormBean;
 import info.alexhocevarsmith.boulderingdb.form.AddCommentFormBean;
+import info.alexhocevarsmith.boulderingdb.form.AddImgFormBean;
 import info.alexhocevarsmith.boulderingdb.form.RegisterAccountFormBean;
 import info.alexhocevarsmith.boulderingdb.helper.BoulderProblemHelper;
 import info.alexhocevarsmith.boulderingdb.security.AuthenticatedUserUtilities;
@@ -211,6 +209,37 @@ public class BoulderController {
 
         response.setViewName("redirect:/boulder/boulder-page?id=" + boulderProblem.getId());
         return response;
+    }
+
+    @PostMapping("/addImgSubmit")
+    public ModelAndView addImgSubmit(@Valid AddImgFormBean form) {
+
+        if (form.getImages() != null) {  // Check for null
+            for (MultipartFile image : form.getImages()) {
+                if (!image.isEmpty()) {
+                    log.debug(image.getOriginalFilename());
+                    log.debug("The file size is: " + image.getSize());
+                    log.debug(image.getContentType());
+
+                    String savedFilename = "./src/main/webapp/pub/media/" + image.getOriginalFilename();
+
+                    try {
+                        Files.copy(image.getInputStream(), Paths.get(savedFilename), StandardCopyOption.REPLACE_EXISTING);
+                    } catch (Exception e) {
+                        log.error("Unable to finish reading file", e);
+                    }
+
+                    String url = "/pub/media/" + image.getOriginalFilename();
+                    form.setImageUrl(url);
+
+                    AdditionalImage additionalImage = boulderService.addImg(form);
+                    form.setId(additionalImage.getId());
+                }
+            }
+        }
+
+        return new ModelAndView("redirect:/boulder/boulder-page?id=" + form.getBoulderProblemId());
+
     }
 
 }
