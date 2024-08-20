@@ -371,31 +371,32 @@
         <span class="close-popup" onclick="closeAddImgPopup()">&times;</span>
         <div class="add-img-form">
             <form action="/boulder/addImgSubmit" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="boulderProblemId" value="${boulderProblem.id}" />
                 <h2 class="boulder-problem-name">Add Photos</h2>
                 <!-- File Upload Fields -->
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <input type="file" id="fileUpload1" name="fileUpload1" class="form-control">
+                        <input type="file" id="image1" name="images" class="form-control">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <input type="file" id="fileUpload2" name="fileUpload2" class="form-control">
+                        <input type="file" id="image2" name="images" class="form-control">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <input type="file" id="fileUpload3" name="fileUpload3" class="form-control">
+                        <input type="file" id="image3" name="images" class="form-control">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <input type="file" id="fileUpload4" name="fileUpload4" class="form-control">
+                        <input type="file" id="image4" name="images" class="form-control">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <input type="file" id="fileUpload5" name="fileUpload5" class="form-control">
+                        <input type="file" id="image5" name="images" class="form-control">
                     </div>
                 </div>
                 <!-- Submit Button -->
