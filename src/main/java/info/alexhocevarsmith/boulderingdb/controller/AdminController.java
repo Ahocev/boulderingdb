@@ -1,13 +1,7 @@
 package info.alexhocevarsmith.boulderingdb.controller;
 
-import info.alexhocevarsmith.boulderingdb.database.dao.BoulderProblemDAO;
-import info.alexhocevarsmith.boulderingdb.database.dao.CommentDAO;
-import info.alexhocevarsmith.boulderingdb.database.dao.LocationDAO;
-import info.alexhocevarsmith.boulderingdb.database.dao.UserDAO;
-import info.alexhocevarsmith.boulderingdb.database.entity.BoulderProblem;
-import info.alexhocevarsmith.boulderingdb.database.entity.Comment;
-import info.alexhocevarsmith.boulderingdb.database.entity.Location;
-import info.alexhocevarsmith.boulderingdb.database.entity.User;
+import info.alexhocevarsmith.boulderingdb.database.dao.*;
+import info.alexhocevarsmith.boulderingdb.database.entity.*;
 import info.alexhocevarsmith.boulderingdb.security.AuthenticatedUserUtilities;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.Comments;
@@ -44,6 +38,9 @@ public class AdminController {
     @Autowired
     private UserDAO userDAO;
 
+    @Autowired
+    private AdditionalImageDAO additionalImageDAO;
+
     @GetMapping("/dashboard")
     public ModelAndView dashboard() {
         ModelAndView response = new ModelAndView("admin/dashboard");
@@ -59,6 +56,9 @@ public class AdminController {
 
         List<User> users = userDAO.findAll();
         response.addObject("users", users);
+
+        List<AdditionalImage> additionalImages = additionalImageDAO.findAll();
+        response.addObject("additionalImages", additionalImages);
 
         return response;
     }
@@ -101,6 +101,18 @@ public class AdminController {
         User user = userDAO.findById(id);
         if (user != null ) {
             userDAO.delete(user);
+        }
+        response.setViewName("redirect:/admin/dashboard");
+        return response;
+    }
+
+    @PostMapping("/deleteAdditionalImages")
+    public ModelAndView deleteAdditionalImage(@RequestParam Integer id) {
+        ModelAndView response = new ModelAndView();
+
+        AdditionalImage additionalImage = additionalImageDAO.findById(id);
+        if (additionalImage != null ) {
+            additionalImageDAO.delete(additionalImage);
         }
         response.setViewName("redirect:/admin/dashboard");
         return response;
