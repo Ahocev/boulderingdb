@@ -278,15 +278,11 @@
             </div>
             <div id="placeholderContainer" class="d-flex placeholder-cursor position-relative" style="overflow: visible;">
                 <div class="scroll-button left" onclick="scrollLeftCustom()">&#9664;</div>
-                <div class="boulder-placeholder-container">
-                    <img src="/pub/media/HighPlains.jpeg" alt="Placeholder 1" class="img-fluid boulder-placeholder" onclick="swapImages(this)">
-                </div>
-                <div class="boulder-placeholder-container">
-                    <img src="/pub/media/Queen.jpeg" alt="Placeholder 2" class="img-fluid boulder-placeholder" onclick="swapImages(this)">
-                </div>
-                <div class="boulder-placeholder-container hidden">
-                    <img src="/pub/media/Swarm.jpeg" alt="Placeholder 3" class="img-fluid boulder-placeholder" onclick="swapImages(this)">
-                </div>
+                <c:forEach var="image" items="${additionalImages}">
+                    <div class="boulder-placeholder-container">
+                        <img src="${image.imageUrl}" alt="${boulderProblem.boulderProblemName}" class="img-fluid boulder-placeholder" onclick="swapImages(this)">
+                    </div>
+                </c:forEach>
             </div>
         </div>
         <!-- Right column with the boulder details and BETA section -->
