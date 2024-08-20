@@ -1,13 +1,12 @@
 package info.alexhocevarsmith.boulderingdb.service;
 
+import info.alexhocevarsmith.boulderingdb.database.dao.AdditionalImageDAO;
 import info.alexhocevarsmith.boulderingdb.database.dao.BoulderProblemDAO;
 import info.alexhocevarsmith.boulderingdb.database.dao.CommentDAO;
 import info.alexhocevarsmith.boulderingdb.database.dao.LocationDAO;
-import info.alexhocevarsmith.boulderingdb.database.entity.BoulderProblem;
-import info.alexhocevarsmith.boulderingdb.database.entity.Comment;
-import info.alexhocevarsmith.boulderingdb.database.entity.Location;
-import info.alexhocevarsmith.boulderingdb.database.entity.User;
+import info.alexhocevarsmith.boulderingdb.database.entity.*;
 import info.alexhocevarsmith.boulderingdb.form.AddBoulderFormBean;
+import info.alexhocevarsmith.boulderingdb.form.AddImgFormBean;
 import info.alexhocevarsmith.boulderingdb.security.AuthenticatedUserUtilities;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +29,9 @@ public class BoulderService {
 
     @Autowired
     private AuthenticatedUserUtilities authenticatedUserUtilities;
+
+    @Autowired
+    private AdditionalImageDAO additionalImageDAO;
 
     public BoulderProblem addBoulderProblem(AddBoulderFormBean form) {
 
@@ -108,6 +110,36 @@ public class BoulderService {
 
         // Save the updated BoulderProblem
         return boulderProblemDAO.save(boulderProblem);
+    }
+
+    public AdditionalImage addImg(AddImgFormBean form) {
+
+        User user = authenticatedUserUtilities.getCurrentUser();
+
+        BoulderProblem boulderProblem = boulderProblemDAO.findById(form.getBoulderProblemId());
+
+        if (boulderProblem == null) {
+            throw new RuntimeException("BoulderProblem not found for id: " + form.getBoulderProblemId());
+        }
+
+        log.debug("BoulderProblem ID: " + boulderProblem.getId());
+        log.debug("Image URL: " + form.getImageUrl());
+
+        // check if image already exists
+        AdditionalImage additionalImage = additionalImageDAO.findByImageUrl(form.getImageUrl());
+
+        if ( additionalImage == null ) {
+
+            additionalImage = new AdditionalImage();
+            additionalImage.setImageUrl(form.getImageUrl());
+            additionalImage.setUser(user);
+            additionalImage.setBoulderProblem(getBoulderProblemById(form.getBoulderProblemId()));
+            additionalImage.setDescription(form.getDescription());
+
+        }
+
+        return additionalImageDAO.save(additionalImage);
+
     }
 
     public BoulderProblem getBoulderProblemById(Integer id) {
