@@ -106,4 +106,33 @@
     </tbody>
 </table>
 
+<table class="col-4 mt-4 mb-4">
+    <thead>
+    <tr>
+        <th>Image Id</th>
+        <th>Boulder Problem Id</th>
+        <th>Image URL</th>
+        <th>User Id</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <c:forEach var="additionalImage" items="${additionalImages}">
+        <tr>
+            <td>${additionalImage.id}</td>
+            <td>${additionalImage.boulderProblemId}</td>
+            <td>${additionalImage.imageUrl}</td>
+            <td>${additionalImage.userId}</td>
+
+            <td>
+                <form action="${pageContext.request.contextPath}/admin/deleteAdditionalImages" method="post">
+                    <input type="hidden" name="id" value="${additionalImage.id}" />
+                    <input type="submit" value="Delete" />
+                </form>
+            </td>
+        </tr>
+    </c:forEach>
+    </tbody>
+</table>
+
 <jsp:include page="../include/footer.jsp" />
