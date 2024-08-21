@@ -167,11 +167,17 @@ public class LoginController {
         // save user to database
         User user = userService.createUser(form);
 
-        // save user role to DB
-        userService.createUserRole(user, "USER");
+        // Assign user role and authenticate if it's a new user
+        if (form.getId() == null) {
+            userService.createUserRole(user, "USER");
 
-        // authenticate new user before redirecting
-        authenticatedUserUtilities.manualAuthentication(session, form.getEmail(), form.getPassword());
+            // Authenticate the new user
+            authenticatedUserUtilities.manualAuthentication(session, form.getEmail(), form.getPassword());
+        } else {
+            // No action needed if the user is being edited (i.e., admin editing another user's profile)
+            // This keeps the admin logged in as themselves when editing another user's profile
+        }
+
 
         form.setId(user.getId());
 
