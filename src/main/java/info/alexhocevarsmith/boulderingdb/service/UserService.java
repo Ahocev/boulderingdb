@@ -41,14 +41,17 @@ public class UserService {
         User user = userDao.findById(form.getId());
         if (user == null) {
             user = new User();
+            user.setCreateDate(new Date());
         }
 
         user.setEmail(form.getEmail());
 
-        String encryptedPassword = passwordEncoder.encode(form.getPassword());
-        user.setPassword(encryptedPassword);
+        if (form.getPassword() != null && !form.getPassword().isEmpty()) {
+            // Only encode and set the password if it is provided
+            String encryptedPassword = passwordEncoder.encode(form.getPassword());
+            user.setPassword(encryptedPassword);
+        }
 
-        user.setCreateDate(new Date());
         user.setName(form.getName());
         user.setAge(form.getAge());
         user.setApeIndex(form.getApeIndex());
