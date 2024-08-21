@@ -1,8 +1,11 @@
 package info.alexhocevarsmith.boulderingdb.controller;
 
+import info.alexhocevarsmith.boulderingdb.database.dao.AdditionalImageDAO;
 import info.alexhocevarsmith.boulderingdb.database.dao.UserDAO;
+import info.alexhocevarsmith.boulderingdb.database.entity.AdditionalImage;
 import info.alexhocevarsmith.boulderingdb.database.entity.BoulderProblem;
 import info.alexhocevarsmith.boulderingdb.database.entity.User;
+import info.alexhocevarsmith.boulderingdb.form.AddImgFormBean;
 import info.alexhocevarsmith.boulderingdb.form.RegisterAccountFormBean;
 import info.alexhocevarsmith.boulderingdb.security.AuthenticatedUserUtilities;
 import info.alexhocevarsmith.boulderingdb.service.UserService;
@@ -15,11 +18,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -36,7 +41,8 @@ public class LoginController {
     @Autowired
     private AuthenticatedUserUtilities authenticatedUserUtilities;
 
-
+    @Autowired
+    private AdditionalImageDAO additionalImageDAO;
 
     @GetMapping("/login")
     public ModelAndView login() {
@@ -158,6 +164,8 @@ public class LoginController {
         User user;
         User currentUser = authenticatedUserUtilities.getCurrentUser();
 
+        List<AdditionalImage> additionalImages = additionalImageDAO.findByUserIdAndBoulderProblemIsNull(currentUser.getId());
+
         // if there is no user id when the user clicks on the profile page, then show current user's profile
         if (id == null) {
             user = currentUser;
@@ -174,9 +182,41 @@ public class LoginController {
             }
         }
 
+        response.addObject("additionalImages", additionalImages);
         response.addObject("user", user);
         response.addObject("currentUserId", currentUser != null ? currentUser.getId() : null);
         return response;
+    }
+
+    @PostMapping("/addImgSubmit")
+    public ModelAndView addImgSubmit(@Valid AddImgFormBean form) {
+
+        if (form.getImages() != null) {  // Check for null
+            for (MultipartFile image : form.getImages()) {
+                if (!image.isEmpty()) {
+                    log.debug(image.getOriginalFilename());
+                    log.debug("The file size is: " + image.getSize());
+                    log.debug(image.getContentType());
+
+                    String savedFilename = "./src/main/webapp/pub/media/" + image.getOriginalFilename();
+
+                    try {
+                        Files.copy(image.getInputStream(), Paths.get(savedFilename), StandardCopyOption.REPLACE_EXISTING);
+                    } catch (Exception e) {
+                        log.error("Unable to finish reading file", e);
+                    }
+
+                    String url = "/pub/media/" + image.getOriginalFilename();
+                    form.setImageUrl(url);
+
+                    AdditionalImage additionalImage = userService.addImg(form);
+                    form.setId(additionalImage.getId());
+                }
+            }
+        }
+
+        return new ModelAndView("redirect:/account/profile");
+
     }
 
 }
