@@ -309,7 +309,7 @@
     </div>
 </div>
 
-<c:if test="${user.id == currentUserId}">
+<c:if test="${user.id == currentUserId || isAdmin}">
     <a href="javascript:void(0);" class="justify-content-center" onclick="openEditPopup()">EDIT</a>
 </c:if>
 
@@ -319,7 +319,7 @@
         <span class="close-popup" onclick="closeEditPopup()">&times;</span>
         <div id="editPopupContent">
             <button onclick="openAddImgPopup()" class="btn btn-primary">Add Photos</button>
-            <button onclick="window.location.href='/account/register'" class="btn btn-primary">Update Profile Data</button>
+            <button onclick="window.location.href='/account/register?id=${user.id}'" class="btn btn-primary">Update Profile Data</button>
         </div>
     </div>
 </div>
