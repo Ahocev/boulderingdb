@@ -24,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -161,30 +162,38 @@ public class LoginController {
     public ModelAndView profilePage(@RequestParam(value = "id", required = false) Integer id) {
         ModelAndView response = new ModelAndView("auth/profile");
 
-        User user;
+        // initial value of the user object as null, before passing through controller logic
+        User user = null;
+
+        // new array list of additional images is initialized with no value before passing through controller logic
+        List<AdditionalImage> additionalImages = new ArrayList<>();
+
+        // capturing current userId if the user is logged in
         User currentUser = authenticatedUserUtilities.getCurrentUser();
 
-        List<AdditionalImage> additionalImages = additionalImageDAO.findByUserIdAndBoulderProblemIsNull(currentUser.getId());
-
-        // if there is no user id when the user clicks on the profile page, then show current user's profile
         if (id == null) {
-            user = currentUser;
-            if (user == null) {
-                response.setViewName("redirect:/account/register");
-                return response;
+            // If no id is provided and the user is logged in, show their profile
+            if (currentUser != null) {
+                user = currentUser;
+                additionalImages = additionalImageDAO.findByUserIdAndBoulderProblemIsNull(currentUser.getId());
             }
         } else {
-            // if there is an id param on the profile url, show that user id's profile
+            // If an id is provided, show the profile of the user with that id
             user = userDao.findById(id);
-            if (user == null) {
-                response.setViewName("redirect:/account/register");
-                return response;
+            if (user != null) {
+                additionalImages = additionalImageDAO.findByUserIdAndBoulderProblemIsNull(user.getId());
             }
         }
 
-        response.addObject("additionalImages", additionalImages);
-        response.addObject("user", user);
-        response.addObject("currentUserId", currentUser != null ? currentUser.getId() : null);
+        if (user == null) {
+            // If no user is found and no one is logged in
+            response.setViewName("auth/profile-not-found");
+        } else {
+            response.addObject("user", user);
+            response.addObject("additionalImages", additionalImages);
+            response.addObject("currentUserId", currentUser != null ? currentUser.getId() : null);
+        }
+
         return response;
     }
 
