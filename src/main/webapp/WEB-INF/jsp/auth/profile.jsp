@@ -171,6 +171,87 @@
         cursor: zoom-in;
     }
 
+    .edit-popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.75);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1001;
+    }
+
+    .edit-popup {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        width: 300px;
+        max-width: 90%;
+    }
+
+    .edit-popup h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .edit-popup button {
+        margin: 10px 0;
+        width: 100%;
+        padding: 10px;
+    }
+
+    .close-popup {
+        cursor: pointer;
+        color: #000;
+        font-size: 20px;
+        position: absolute;
+        top: 10px;
+        right: 15px;
+    }
+
+    .add-img-popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.75);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1002;
+    }
+
+    .add-img-popup {
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        width: 600px;
+        max-width: 90%;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .add-img-form {
+        width: 100%;
+    }
+
+    .add-img-form .form-control {
+        width: 100%;
+        margin-bottom: 15px;
+    }
+
+    .add-img-form h2 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
 
 </style>
 
@@ -184,18 +265,11 @@
             </div>
             <div id="placeholderContainer" class="d-flex placeholder-cursor position-relative" style="overflow: visible;">
                 <div class="scroll-button left" onclick="scrollLeftCustom()">&#9664;</div>
-                <div class="boulder-placeholder-container">
-                    <img src="/pub/media/josh-climbing1.jpeg" alt="Placeholder 1" class="img-fluid boulder-placeholder"
-                         onclick="swapImages(this)">
-                </div>
-                <div class="boulder-placeholder-container">
-                    <img src="/pub/media/Queen.jpeg" alt="Placeholder 2" class="img-fluid boulder-placeholder"
-                         onclick="swapImages(this)">
-                </div>
-                <div class="boulder-placeholder-container hidden">
-                    <img src="/pub/media/Swarm.jpeg" alt="Placeholder 3" class="img-fluid boulder-placeholder"
-                         onclick="swapImages(this)">
-                </div>
+                <c:forEach var="image" items="${additionalImages}">
+                    <div class="boulder-placeholder-container">
+                        <img src="${image.imageUrl}" alt="${user.name}" class="img-fluid boulder-placeholder" onclick="swapImages(this)">
+                    </div>
+                </c:forEach>
             </div>
         </div>
         <!-- Right column with the boulder details and BETA section -->
@@ -236,8 +310,65 @@
 </div>
 
 <c:if test="${user.id == currentUserId}">
-    <a href="/account/register" class="justify-content-center">EDIT</a>
+    <a href="javascript:void(0);" class="justify-content-center" onclick="openEditPopup()">EDIT</a>
 </c:if>
+
+<!-- Edit Popup Overlay -->
+<div id="editPopupOverlay" class="edit-popup-overlay">
+    <div class="edit-popup">
+        <span class="close-popup" onclick="closeEditPopup()">&times;</span>
+        <div id="editPopupContent">
+            <button onclick="openAddImgPopup()" class="btn btn-primary">Add Photos</button>
+            <button onclick="window.location.href='/account/register'" class="btn btn-primary">Update Profile Data</button>
+        </div>
+    </div>
+</div>
+
+<!-- Add Image Popup Overlay -->
+<div id="addImgPopupOverlay" class="add-img-popup-overlay">
+    <div class="add-img-popup">
+        <span class="close-popup" onclick="closeAddImgPopup()">&times;</span>
+        <div class="add-img-form">
+            <form action="/account/addImgSubmit" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="userId" value="${currentUserId}" />
+                <h2 class="boulder-problem-name">Add Photos</h2>
+                <!-- File Upload Fields -->
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <input type="file" id="image1" name="images" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <input type="file" id="image2" name="images" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <input type="file" id="image3" name="images" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <input type="file" id="image4" name="images" class="form-control">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <input type="file" id="image5" name="images" class="form-control">
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center mb-2">
+                        <button type="submit" class="btn btn-primary col-md-12">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <div id="imageOverlay" class="overlay hidden">
     <span class="closebtn" onclick="closeOverlay()">&times;</span>
@@ -251,6 +382,42 @@
 <jsp:include page="../include/footer.jsp"/>
 
 <script>
+
+    <!--Edit and Add Img Overlays-->
+
+    function openEditPopup() {
+        document.getElementById('editPopupOverlay').style.display = 'flex';
+        document.getElementById('addImgPopupOverlay').style.display = 'none'; // Ensure the add image overlay is closed
+    }
+
+    function closeEditPopup() {
+        document.getElementById('editPopupOverlay').style.display = 'none';
+    }
+
+    function openAddImgPopup() {
+        document.getElementById('editPopupOverlay').style.display = 'none'; // Hide the edit popup
+        document.getElementById('addImgPopupOverlay').style.display = 'flex';
+    }
+
+    function closeAddImgPopup() {
+        document.getElementById('addImgPopupOverlay').style.display = 'none';
+    }
+
+    // Close the popup if the user clicks outside of it
+    document.addEventListener('click', function(event) {
+        const editOverlay = document.getElementById('editPopupOverlay');
+        const addImgOverlay = document.getElementById('addImgPopupOverlay');
+
+        if (event.target === editOverlay) {
+            closeEditPopup();
+        }
+
+        if (event.target === addImgOverlay) {
+            closeAddImgPopup();
+        }
+    });
+
+
     document.addEventListener('DOMContentLoaded', function () {
         adjustPlaceholderDisplay();
         document.getElementById('profileImgUrl').addEventListener('click', function () {
