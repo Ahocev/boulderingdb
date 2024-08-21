@@ -13,4 +13,6 @@ public interface AdditionalImageDAO extends JpaRepository<AdditionalImage, Long>
 
     List<AdditionalImage> findByBoulderProblemId(Integer boulderProblemId);
 
+    List<AdditionalImage> findByUserIdAndBoulderProblemIsNull(Integer id);
+
 }
