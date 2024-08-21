@@ -1,10 +1,15 @@
 package info.alexhocevarsmith.boulderingdb.service;
 
+import info.alexhocevarsmith.boulderingdb.database.dao.AdditionalImageDAO;
 import info.alexhocevarsmith.boulderingdb.database.dao.UserDAO;
 import info.alexhocevarsmith.boulderingdb.database.dao.UserRoleDAO;
+import info.alexhocevarsmith.boulderingdb.database.entity.AdditionalImage;
+import info.alexhocevarsmith.boulderingdb.database.entity.BoulderProblem;
 import info.alexhocevarsmith.boulderingdb.database.entity.User;
 import info.alexhocevarsmith.boulderingdb.database.entity.UserRole;
+import info.alexhocevarsmith.boulderingdb.form.AddImgFormBean;
 import info.alexhocevarsmith.boulderingdb.form.RegisterAccountFormBean;
+import info.alexhocevarsmith.boulderingdb.security.AuthenticatedUserUtilities;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,6 +29,12 @@ public class UserService {
 
     @Autowired
     private UserRoleDAO userRoleDao;
+
+    @Autowired
+    private AdditionalImageDAO additionalImageDAO;
+
+    @Autowired
+    private AuthenticatedUserUtilities authenticatedUserUtilities;
 
     public User createUser(RegisterAccountFormBean form) {
 
@@ -62,5 +73,25 @@ public class UserService {
 
         userRoleDao.save(userRole);
         return userRole;
+    }
+
+    public AdditionalImage addImg(AddImgFormBean form) {
+
+        User user = authenticatedUserUtilities.getCurrentUser();
+
+        // check if image already exists
+        AdditionalImage additionalImage = additionalImageDAO.findByImageUrl(form.getImageUrl());
+
+        if ( additionalImage == null ) {
+
+            additionalImage = new AdditionalImage();
+            additionalImage.setImageUrl(form.getImageUrl());
+            additionalImage.setUser(user);
+            additionalImage.setDescription(form.getDescription());
+
+        }
+
+        return additionalImageDAO.save(additionalImage);
+
     }
 }
