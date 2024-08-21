@@ -23,10 +23,10 @@ public class SpringSecurity {
         http.authorizeRequests()
                 .requestMatchers(
                         new AntPathRequestMatcher("/admin/**"),
-                        new AntPathRequestMatcher("/profile/**"),
-                        new AntPathRequestMatcher("/account/profile"),
                         new AntPathRequestMatcher("/boulder/boulder-input"),
                         new AntPathRequestMatcher("/user/**")).authenticated()
+                .requestMatchers(new AntPathRequestMatcher("/profile/**")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/account/profile")).permitAll()
                 .anyRequest().permitAll();
 
         http.formLogin(formLogin -> formLogin
