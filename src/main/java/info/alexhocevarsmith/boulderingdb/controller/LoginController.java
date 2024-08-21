@@ -2,9 +2,11 @@ package info.alexhocevarsmith.boulderingdb.controller;
 
 import info.alexhocevarsmith.boulderingdb.database.dao.AdditionalImageDAO;
 import info.alexhocevarsmith.boulderingdb.database.dao.UserDAO;
+import info.alexhocevarsmith.boulderingdb.database.dao.UserRoleDAO;
 import info.alexhocevarsmith.boulderingdb.database.entity.AdditionalImage;
 import info.alexhocevarsmith.boulderingdb.database.entity.BoulderProblem;
 import info.alexhocevarsmith.boulderingdb.database.entity.User;
+import info.alexhocevarsmith.boulderingdb.database.entity.UserRole;
 import info.alexhocevarsmith.boulderingdb.form.AddImgFormBean;
 import info.alexhocevarsmith.boulderingdb.form.RegisterAccountFormBean;
 import info.alexhocevarsmith.boulderingdb.security.AuthenticatedUserUtilities;
@@ -45,6 +47,9 @@ public class LoginController {
     @Autowired
     private AdditionalImageDAO additionalImageDAO;
 
+    @Autowired
+    private UserRoleDAO userRoleDAO;
+
     @GetMapping("/login")
     public ModelAndView login() {
         log.debug("login");
@@ -72,10 +77,28 @@ public class LoginController {
     }
 
     @GetMapping("/register")
-    public ModelAndView createAccount() {
+    public ModelAndView createAccount(@RequestParam(value = "id", required = false) Integer id) {
         ModelAndView response = new ModelAndView("auth/register");
 
-        User user = authenticatedUserUtilities.getCurrentUser();
+        User user = null;
+        boolean isAdmin = false;
+
+        // Get the current user
+        User currentUser = authenticatedUserUtilities.getCurrentUser();
+
+        // Check if the current user has the "ADMIN" role
+        if (currentUser != null) {
+            List<UserRole> roles = userRoleDAO.findByUserId(currentUser.getId());
+            isAdmin = roles.stream().anyMatch(role -> "ADMIN".equals(role.getRoleName()));
+        }
+
+        // If an id is provided, load the user with that id
+        if (id != null) {
+            user = userDao.findById(id);
+        } else {
+            // If no id is provided, load the current user's data (could be the admin)
+            user = currentUser;
+        }
 
         if (user != null) {
             RegisterAccountFormBean form = new RegisterAccountFormBean();
@@ -97,6 +120,7 @@ public class LoginController {
 
         }
 
+        response.addObject("isAdmin", isAdmin); // Pass the admin status to the view
         return response;
     }
 
@@ -171,6 +195,14 @@ public class LoginController {
         // capturing current userId if the user is logged in
         User currentUser = authenticatedUserUtilities.getCurrentUser();
 
+        boolean isAdmin = false;
+
+        // Check if the current user has the "ADMIN" role
+        if (currentUser != null) {
+            List<UserRole> roles = userRoleDAO.findByUserId(currentUser.getId());
+            isAdmin = roles.stream().anyMatch(role -> "ADMIN".equals(role.getRoleName()));
+        }
+
         if (id == null) {
             // If no id is provided and the user is logged in, show their profile
             if (currentUser != null) {
@@ -192,6 +224,7 @@ public class LoginController {
             response.addObject("user", user);
             response.addObject("additionalImages", additionalImages);
             response.addObject("currentUserId", currentUser != null ? currentUser.getId() : null);
+            response.addObject("isAdmin", isAdmin);
         }
 
         return response;
