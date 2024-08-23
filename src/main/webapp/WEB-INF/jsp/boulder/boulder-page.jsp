@@ -269,6 +269,11 @@
 
 </style>
 
+<c:set var="isAuthenticated" value="${not empty currentUserId}" />
+<script>
+    var isAuthenticated = "${not empty currentUserId}";
+</script>
+
 <div class="container my-4 boulder-profile" style="max-width: 90%;">
     <div class="row">
         <!-- Left column with the large image and placeholder images -->
@@ -348,7 +353,9 @@
 </div>
 </div>
 
+
 <a href="javascript:void(0);" class="justify-content-center" onclick="openEditPopup()">EDIT</a>
+
 
 <!-- Edit Popup Overlay -->
 <div id="editPopupOverlay" class="edit-popup-overlay">
@@ -418,8 +425,13 @@
     <!--Edit and Add Img Overlays-->
 
     function openEditPopup() {
-        document.getElementById('editPopupOverlay').style.display = 'flex';
-        document.getElementById('addImgPopupOverlay').style.display = 'none'; // Ensure the add image overlay is closed
+
+        if (isAuthenticated === "true") {
+            document.getElementById('editPopupOverlay').style.display = 'flex';
+            document.getElementById('addImgPopupOverlay').style.display = 'none';
+        } else {
+            window.location.href = `/account/login?redirect=/boulder/boulder-page?id=${boulderProblem.id}`;
+        }
     }
 
     function closeEditPopup() {
