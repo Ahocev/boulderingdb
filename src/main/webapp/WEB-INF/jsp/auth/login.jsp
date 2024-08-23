@@ -14,6 +14,7 @@
 
     <div class="form-container">
         <form action="/account/loginProcessingURL" method="post">
+            <input type="hidden" name="redirect" value="${param.redirect}" />
             <div class="formTag">
                 <h1 class="form-title">Login</h1>
             </div>
