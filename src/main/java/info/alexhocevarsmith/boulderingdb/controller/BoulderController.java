@@ -69,6 +69,11 @@ public class BoulderController {
             return response;
         }
 
+        User currentUser = authenticatedUserUtilities.getCurrentUser();
+        if (currentUser != null) {
+            response.addObject("currentUserId", currentUser.getId());
+        }
+
         response.addObject("additionalImages", additionalImages);
 
         response.addObject("boulderProblem", boulderProblem);
