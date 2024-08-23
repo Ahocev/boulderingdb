@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../include/header.jsp"/>
 
@@ -309,9 +310,11 @@
     </div>
 </div>
 
+<sec:authorize access="isAuthenticated()">
 <c:if test="${user.id == currentUserId || isAdmin}">
     <a href="javascript:void(0);" class="justify-content-center" onclick="openEditPopup()">EDIT</a>
 </c:if>
+</sec:authorize>
 
 <!-- Edit Popup Overlay -->
 <div id="editPopupOverlay" class="edit-popup-overlay">
